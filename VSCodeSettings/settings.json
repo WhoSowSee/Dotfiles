@@ -1,0 +1,320 @@
+{
+	"workbench.productIconTheme": "fluent-icons",
+	"workbench.iconTheme": "city-lights-icons-vsc",
+	"editor.minimap.renderCharacters": false, // рендер миникарты
+	"editor.minimap.enabled": false, // отключение миникарты
+	"editor.wordWrap": "bounded", // включить длина строки
+	"editor.padding.top": 15, // отступ от хлебных крошек сверху
+	"editor.wordWrapColumn": 100,
+	"workbench.layoutControl.enabled": false,
+	"window.commandCenter": false, // компактные активные вкладки
+	"editor.folding": false, // сворачивание фрагментов кода (убирает отступ после номера строки)
+	"editor.glyphMargin": false, // расположение сайдбара с инструментами
+	"workbench.editor.tabSizing": "shrink", // уменьшает активные вкладки, если места недостаточно
+	"workbench.tips.enabled": false, // скрыть подсказки сочетаний клавиш на начальном экране
+	"workbench.startupEditor": "none", // Отключить начальный экран
+	// "workbench.editor.showTabs": "single", // Отображать только одну вкладку
+
+	// </Appearance>
+
+	// <Explorer>
+
+	// Скрыть отображение папок из проводника
+	"files.exclude": {
+		"**/.idea": true,
+		"**/.vscode": true,
+		"**/__pycache__": true,
+		"**/.venv": true,
+	},
+
+	"workbench.tree.renderIndentGuides": "onHover", // показывать линии вложенности в проводнике только при наведении
+	"explorer.confirmDelete": false, // подтверждение удаления
+	"workbench.tree.indent": 15, // отступ файлов в папках в проводнике
+	"symbols.hidesExplorerArrows": true, // скрыть стрелочки рядом с папками (расширение symbols)
+
+	// </Explorer>
+
+	// <ScrollBar>
+
+	"editor.overviewRulerBorder": false, // убрать контур скроллбара
+	// "editor.scrollbar.vertical": "hidden",   // скрыть вертикальный скроллбар
+	// "editor.scrollbar.horizontal": "hidden",   // скрыть горизонтальный скроллбар
+	"editor.scrollbar.horizontalScrollbarSize": 8, // размер горизонтального скроллбара
+	"editor.scrollbar.verticalScrollbarSize": 8, // размер вертикального скроллбара
+
+	// </ScrollBar>
+
+	// <Apc>
+
+	"apc.listRow": {
+		"lists": [
+			"customview-tree",
+			"results",
+			"open-editors",
+			"explorer-folders-view",
+			"outline-tree",
+			"scm-view",
+			"debug-view-content",
+			"debug-breakpoints",
+			"tree",
+			"quick-input-list"
+		],
+		"height": 26,
+		"fontSize": 14
+	},
+
+	// </Apc>
+
+	// <Terminal>
+
+	"terminal.integrated.tabs.enabled": true, // позволяет скрыть вкладки терминала в меню
+	"terminal.integrated.lineHeight": 1.3,
+	"terminal.integrated.cursorBlinking": true,
+	"terminal.integrated.cursorStyleInactive": "underline",
+	"terminal.integrated.enableImages": true,
+	"terminal.integrated.persistentSessionReviveProcess": "never", // Не восстанавливать процессы в терминале после закрытия программы
+	"terminal.integrated.defaultProfile.windows": "PowerShell",
+
+	// </Terminal>
+
+	// <Font>
+
+	"editor.fontSize": 18, // 17/18 Jet, 20 Iosevka
+	"chat.editor.fontSize": 16,
+	"terminal.integrated.fontSize": 16,
+	"editor.lineHeight": 1.7,
+	"editor.fontLigatures": true,
+	"editor.fontFamily": "JetBrainsMono Nerd Font, Iosevka, JetBrains Mono",
+	"terminal.integrated.fontFamily": "JetBrainsMono Nerd Font, JetBrains Mono, Iosevka",
+
+	// </Font>
+
+	// <CodeSpell Checker>
+
+	"cSpell.language": "en,ru",
+	"editor.unicodeHighlight.allowedCharacters": {
+		"а": true,
+		"с": true,
+		"Т": true,
+		"б": true,
+		"е": true,
+		",": true
+	},
+	"cSpell.userWords": [
+		"миникарты",
+		"скролл",
+		"скроллбар",
+		"скроллбара",
+		"табов",
+		"elif",
+		"esbenp",
+		"icecream",
+		"Iosevka",
+		"nums",
+		"Parens",
+		"stageline",
+		"tqdm",
+		"trange"
+	],
+
+	// </CodeSpell Checker>
+
+	// <Prettier>
+
+	"editor.formatOnPaste": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"prettier.useTabs": true,
+	"prettier.semi": false,
+	"prettier.jsxSingleQuote": true,
+	"prettier.singleQuote": true,
+	"prettier.arrowParens": "avoid",
+	"editor.formatOnSave": true,
+
+	// </Prettier>
+
+	// <Scroll>
+
+	"editor.smoothScrolling": true, // плавный скролл
+	"workbench.list.smoothScrolling": true, // плавный скролл
+	"terminal.integrated.smoothScrolling": true, // плавный скролл в терминале
+	"editor.scrollBeyondLastLine": true, // определяет, будет ли редактор прокручиваться за пределы последней строки.
+
+	// </Scroll>
+
+	// Удаление пробелов и лишних строк, а также добавление одной строки после сохранения
+	"files.insertFinalNewline": true,
+	"files.trimFinalNewlines": true,
+	"files.trimTrailingWhitespace": true,
+
+	// Python
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.black-formatter",
+		"editor.wordWrapColumn": 79, // перенос строки при такой длине
+		"editor.rulers": [79], // линия максимальной длины строки
+		"editor.codeActionsOnSave": {
+			// "source.fixAll": "explicit", // Фиксит все, в том числе удаляет неиспользуемые импорты
+			"source.organizeImports": "explicit" // Сортировка импортов
+		}
+	},
+
+	// <Ruff>
+
+	// "ruff.lint.run": "onSave",
+	// "ruff.format.args": [
+	// 	"--config=D:\\ProjectVsCode\\PythonLearning\\Ruff\\pyproject.toml"
+	// ],
+
+	// </Ruff>
+
+	// <Black-formatter>
+
+	"black-formatter.args": ["-S", "--line-length=79"], // заменить двойные кавычки на одинарные и формат длины строки 79 символов
+
+	// </Black-formatter>
+
+	"explorer.compactFolders": false, // подсветка табов и пробелов при выделении
+
+	// <HTML, CSS>
+
+	// Rename tags
+	"editor.linkedEditing": true,
+	// Auto closing tags
+	"html.autoClosingTags": true,
+	"javascript.autoClosingTags": true,
+	"typescript.autoClosingTags": true,
+	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+
+	// </HTML, CSS>
+
+	// <Cursor>
+	"editor.cursorSmoothCaretAnimation": "on", // плавная анимация перехода курсора
+	"editor.cursorBlinking": "expand",
+	"editor.cursorStyle": "line",
+	"terminal.integrated.cursorStyle": "line",
+
+	"emmet.triggerExpansionOnTab": true, // чтобы emmet срабатывал по tab
+
+	// </Cursor>
+
+	// <Python>
+
+	"python.analysis.autoFormatStrings": true, // если ввести в строке {}, сразу заменяется на f-строку
+	"python.terminal.focusAfterLaunch": true, // переключает фокус на терминал после запуска
+	"python.analysis.autoImportCompletions": true,
+	"python.analysis.addImport.exactMatchOnly": true,
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+	// </Python>
+
+	// <Markdown preview>
+
+	"markdown-preview-enhanced.previewTheme": "github-dark.css",
+	"markdown-preview-enhanced.codeBlockTheme": "github-dark.css",
+	"markdown-preview-enhanced.enablePreviewZenMode": false,
+	// "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true, // Автоматически открывать превью markdown
+
+	// </Markdown preview>
+
+	// <Animations extension>
+
+	"animations.Install-Method": "Apc Customize UI++",
+	"apc.imports": [
+		"file:///c:/Users/yanmi/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.2/dist/updateHandler.js"
+	],
+
+	// </Animations extension>
+
+	// <Code runner>
+
+	// 	"code-runner.clearPreviousOutput": true,
+	// 	"code-runner.showExecutionMessage": false,
+	// 	"code-runner.saveFileBeforeRun": true,
+	// 	"code-runner.runInTerminal": true
+
+	// </Code runner>
+
+	// <multi-command extension>
+
+	// Оборачивание строки в print()
+	"multiCommand.commands": [
+		{
+			"command": "multiCommand.printVariable",
+			"interval": 150,
+
+			"sequence": [
+				"cursorHomeSelect",
+				"editor.action.clipboardCutAction",
+				{
+					"command": "editor.action.insertSnippet",
+					"args": {
+						"snippet": "print($CLIPBOARD)"
+					}
+				}
+			]
+		}
+	],
+
+	// </multi-command extension>
+
+	// <Background extension>
+
+	"background.backgroundOpacity": [0.9, 0.9, 0.9, 0.9],
+	"background.windowBackgrounds": ["d:/Обои/lock_screen.png"],
+	"background.backgroundBlur": ["0", "0", "0", "0"],
+	"background.autoInstall": false,
+
+	// </Background extension>
+
+	// <Codesnap extension>
+
+	"codesnap.containerPadding": "0em",
+	"codesnap.showLineNumbers": false,
+	"codesnap.backgroundColor": "#00000",
+
+	// </Codesnap extension>
+
+	// <markdown-preview-enhanced extension>
+
+	"markdown-preview-enhanced.printBackground": true,
+	"markdown-preview-enhanced.revealjsTheme": "night.css",
+
+	// </markdown-preview-enhanced extension>
+
+	// <Other>
+
+	"files.defaultLanguage": "python", // Расширение нового файла
+	// "editor.quickSuggestionsDelay": 0, // задержка показа подсказок
+	"zenMode.hideStatusBar": false,
+	"editor.mouseWheelZoom": true,
+	"editor.hover.delay": 600, // Задержка показа подсказок при наведении
+	"editor.accessibilitySupport": "off", // Средство чтения с экрана выкл
+	"editor.parameterHints.enabled": true, // Подсказки при печати
+	"explorer.confirmDragAndDrop": false,
+	"todohighlight.include": [
+		"**/*.js",
+		"**/*.jsx",
+		"**/*.ts",
+		"**/*.tsx",
+		"**/*.html",
+		"**/*.css",
+		"**/*.scss",
+		"**/*.php",
+		"**/*.rb",
+		"**/*.txt",
+		"**/*.mdown",
+		"**/*.md",
+		"**/*.py"
+	],
+	"todohighlight.isEnable": false,
+	"animations.Enabled": true,
+	"animations.Scrolling": "None",
+	"markdown.preview.fontSize": 16,
+	"workbench.colorTheme": "Serendipity Midnight Minimal",
+	"markdown.extension.syntax.plainTheme": true,
+	"markdown.extension.completion.enabled": true,
+	"markdown.extension.print.theme": "dark",
+	"workbench.activityBar.location": "top",
+	"window.density.editorTabHeight": "compact"
+
+	// </Other>
+}

@@ -1,0 +1,101 @@
+[
+	// Запустить python файл
+	{
+		"key": "alt+D",
+		"command": "python.execInTerminal"
+	},
+
+	// Создать файл, когда фокус на проводнике
+	{
+		"key": "a",
+		"command": "explorer.newFile",
+		"when": "filesExplorerFocus && !inputFocus"
+	},
+
+	// Создать папку, когда фокус на проводнике
+	{
+		"key": "shift+a",
+		"command": "explorer.newFolder",
+		"when": "filesExplorerFocus && !inputFocus"
+	},
+
+	// Сменить фокус на проводник и обратно
+	{
+		"key": "alt+e",
+		"command": "-workbench.view.explorer",
+		"when": "viewContainer.workbench.view.explorer.enabled"
+	},
+	{
+		"key": "alt+e",
+		"command": "workbench.view.explorer"
+	},
+
+	// Переключение между вкладками
+	{
+		"key": "ctrl+tab",
+		"command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+		"when": "!activeEditorGroupEmpty"
+	},
+	{
+		"key": "ctrl+tab",
+		"command": "-workbench.action.quickOpenNavigateNextInEditorPicker",
+		"when": "inEditorsPicker && inQuickOpen"
+	},
+	{
+		"key": "ctrl+tab",
+		"command": "workbench.action.nextEditor"
+	},
+
+	// Удалить всю строку
+	{
+		"key": "delete delete",
+		"command": "editor.action.deleteLines",
+		"when": "textInputFocus && !editorReadonly"
+	},
+	// Сменить фокус на терминал и обратно
+	{
+		"key": "alt+t",
+		"command": "workbench.action.terminal.focus",
+		"when": "!terminalFocus"
+	},
+	{
+		"key": "alt+t",
+		"command": "workbench.action.focusActiveEditorGroup",
+		"when": "terminalFocus"
+	},
+
+	// Перезапустить активный процесс в терминале
+	{
+		"key": "ctrl+alt+x",
+		"command": "workbench.action.terminal.relaunch"
+	},
+
+	// Запуск CodeSnap
+	{
+		"key": "alt+'",
+		"command": "codesnap.start"
+	},
+
+	// Оборачивание строки в print(), расширение multi-command
+	{
+		"key": "alt+p",
+		"command": "multiCommand.printVariable",
+		"when": "editorFocus"
+	},
+	{
+		"key": "ctrl+k ctrl+y",
+		"command": "workbench.action.selectIconTheme"
+	},
+	{
+		"key": "alt+i",
+		"command": "markdown.extension.editing.toggleCodeBlock"
+	},
+	{
+		"key": "alt+q",
+		"command": "markdown.extension.editing.toggleCodeSpan"
+	},
+	{
+		"key": "alt+b",
+		"command": "markdown.preview.toggleLock"
+	}
+]
