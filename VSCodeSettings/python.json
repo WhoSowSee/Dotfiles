@@ -1,0 +1,26 @@
+{
+	"if_name_main": {
+		"scope": "python, md",
+		"prefix": "ifn",
+		"body": [
+			"if __name__ == \"__main__\":",
+			"\t$1"
+		],
+	},
+	"from_import": {
+		"scope": "python",
+		"prefix": "fi",
+		"body": [
+			"from $1 import $2"
+		],
+	},
+	"match_case": {
+		"scope": "python",
+		"prefix": "mc",
+		"body": [
+			"match $1:",
+			"\tcase $2:",
+			"\t$3"
+		]
+	},
+}
