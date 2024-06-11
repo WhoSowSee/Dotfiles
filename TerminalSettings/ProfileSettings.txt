@@ -1,0 +1,18 @@
+Set-Alias -Name tt -Value tree
+Set-Alias -Name g -Value git
+Set-Alias -Name p -Value python
+function ll {Get-ChildItem -fo}
+function cc {Set-Location ..}
+function rr ($command) {Remove-Item $command -Force -Recurse}
+function whereis ($command) {
+    Get-Command -Name $command -ErrorAction SilentlyContinue |
+    Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
+}
+
+Invoke-Expression (&starship init powershell)
+Import-Module Terminal-Icons
+Import-Module PSReadLine
+Set-PSReadLineKeyHandler -Key ~ -Function ClearScreen #Необязятельно
+Set-PSReadLineKeyHandler -Key Tab -Function Complete #Необязятельно
+Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -PredictionSource History #Необязятельно
