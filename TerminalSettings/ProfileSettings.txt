@@ -1,6 +1,7 @@
 Set-Alias -Name tt -Value tree
 Set-Alias -Name g -Value git
 Set-Alias -Name p -Value python
+Set-Alias -Name x -Value cls
 function ll {Get-ChildItem -fo}
 function cc {Set-Location ..}
 function rr ($command) {Remove-Item $command -Force -Recurse}

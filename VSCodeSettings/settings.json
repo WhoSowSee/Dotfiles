@@ -1,6 +1,4 @@
 {
-	"workbench.productIconTheme": "fluent-icons",
-	"workbench.iconTheme": "city-lights-icons-vsc",
 	"editor.minimap.renderCharacters": false, // рендер миникарты
 	"editor.minimap.enabled": false, // отключение миникарты
 	"editor.wordWrap": "bounded", // включить длина строки
@@ -25,6 +23,7 @@
 		"**/.vscode": true,
 		"**/__pycache__": true,
 		"**/.venv": true,
+		"**/venv": true
 	},
 
 	"workbench.tree.renderIndentGuides": "onHover", // показывать линии вложенности в проводнике только при наведении
@@ -105,7 +104,9 @@
 		"скролл",
 		"скроллбар",
 		"скроллбара",
+		"стекированной",
 		"табов",
+		"barh",
 		"elif",
 		"esbenp",
 		"icecream",
@@ -219,7 +220,7 @@
 
 	"animations.Install-Method": "Apc Customize UI++",
 	"apc.imports": [
-		"file:///c:/Users/yanmi/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.2/dist/updateHandler.js"
+		"file:///c:/Users/yanmi/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.3/dist/updateHandler.js"
 	],
 
 	// </Animations extension>
@@ -259,7 +260,9 @@
 	// <Background extension>
 
 	"background.backgroundOpacity": [0.9, 0.9, 0.9, 0.9],
-	"background.windowBackgrounds": ["d:/Обои/lock_screen.png"],
+	"background.windowBackgrounds": [
+		"c:/Users/yanmi/OneDrive/Документы/ShareX/Screenshots/2024-06/FwMcjcrZPM.png"
+	],
 	"background.backgroundBlur": ["0", "0", "0", "0"],
 	"background.autoInstall": false,
 
@@ -307,14 +310,20 @@
 	],
 	"todohighlight.isEnable": false,
 	"animations.Enabled": true,
-	"animations.Scrolling": "None",
 	"markdown.preview.fontSize": 16,
-	"workbench.colorTheme": "Serendipity Midnight Minimal",
 	"markdown.extension.syntax.plainTheme": true,
 	"markdown.extension.completion.enabled": true,
 	"markdown.extension.print.theme": "dark",
 	"workbench.activityBar.location": "top",
-	"window.density.editorTabHeight": "compact"
+	"window.density.editorTabHeight": "compact",
+	"workbench.productIconTheme": "fluent-icons",
+	"workbench.iconTheme": "city-lights-icons-vsc",
+	"workbench.colorTheme": "Ayu Dark",
+	"animations.Scrolling": "None",
+	"resmon.show.cpuusage": false,
+	"resmon.show.battery": false,
+	"resmon.show.cpufreq": false,
+	"glassit.alpha": 220
 
 	// </Other>
 }

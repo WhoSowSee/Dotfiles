@@ -20,7 +20,7 @@ symbol = "  "
 
 [directory]
 style = "blue"
-read_only = " "
+read_only = " 󰌾"
 truncation_length = 4
 truncate_to_repo = false
 
@@ -55,13 +55,17 @@ disabled = false
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 symbol = "  "
 
+[golang]
+format = '[$symbol($version )]($style)'
+symbol = "󰟓 "
+
 [rust]
 symbol = " "
 
-[time]
-disabled = false
-style = "bold magenta"
-format = "[$time]($style)"
+# [time]
+# disabled = false
+# style = "bold magenta"
+# format = "[$time]($style)"
 
 [cmd_duration]
 format = "[$duration]($style)"
