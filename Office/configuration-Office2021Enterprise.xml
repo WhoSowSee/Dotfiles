@@ -1,0 +1,29 @@
+<Configuration>
+
+  <Add OfficeClientEdition="64" Channel="PerpetualVL2021">
+    <Product ID="ProPlus2021Volume">
+      <Language ID="ru-ru" />
+      <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Access" />
+      <ExcludeApp ID="Publisher" />
+      <ExcludeApp ID="Outlook" />
+      <ExcludeApp ID="OneNote" />
+
+    </Product>
+    <Product ID="VisioPro2021Volume">
+      <Language ID="en-us" />
+    </Product>
+    <Product ID="ProjectPro2021Volume">
+      <Language ID="en-us" />
+    </Product>
+  </Add>
+
+  <Remove All="True" />
+
+  <!--  <RemoveMSI All="True" /> -->
+
+  <!--  <Display Level="None" AcceptEULA="TRUE" />  -->
+
+  <!--  <Property Name="AUTOACTIVATE" Value="1" />  -->
+
+</Configuration>
