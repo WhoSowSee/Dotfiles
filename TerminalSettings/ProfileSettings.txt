@@ -2,6 +2,7 @@ Set-Alias -Name tt -Value tree
 Set-Alias -Name g -Value git
 Set-Alias -Name p -Value python
 Set-Alias -Name x -Value cls
+
 function ll {Get-ChildItem -fo}
 function cc {Set-Location ..}
 function rr ($command) {Remove-Item $command -Force -Recurse}
@@ -9,6 +10,12 @@ function whereis ($command) {
     Get-Command -Name $command -ErrorAction SilentlyContinue |
     Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
+function Close-PowerShell {[System.Environment]::Exit(0)}
+Set-Alias -Name close -Value Close-PowerShell
+
+Set-Alias -Name open -Value start
+Set-Alias -Name mf -Value New-Item
+
 
 Invoke-Expression (&starship init powershell)
 Import-Module Terminal-Icons
