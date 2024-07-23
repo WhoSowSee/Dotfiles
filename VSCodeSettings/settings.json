@@ -1,7 +1,7 @@
 {
 	"editor.minimap.renderCharacters": false, // рендер миникарты
 	"editor.minimap.enabled": false, // отключение миникарты
-	"editor.wordWrap": "bounded", // включить длина строки
+	"editor.wordWrap": "bounded", // включить: длина строки
 	"editor.padding.top": 15, // отступ от хлебных крошек сверху
 	"editor.wordWrapColumn": 100,
 	"workbench.layoutControl.enabled": false,
@@ -11,18 +11,40 @@
 	"workbench.editor.tabSizing": "shrink", // уменьшает активные вкладки, если места недостаточно
 	"workbench.tips.enabled": false, // скрыть подсказки сочетаний клавиш на начальном экране
 	"workbench.startupEditor": "none", // Отключить начальный экран
+	"window.menuBarVisibility": "compact",
+	// "workbench.activityBar.location": "top",
+	"window.density.editorTabHeight": "compact",
 	// "workbench.editor.showTabs": "single", // Отображать только одну вкладку
-
 	// </Appearance>
+
+	// <Breadcrumbs>
+
+	"breadcrumbs.icons": false,
+	"breadcrumbs.showKeys": false,
+	"breadcrumbs.showFiles": false,
+	"breadcrumbs.symbolPath": "off",
+	"breadcrumbs.showArrays": false,
+	"breadcrumbs.showEvents": false,
+	"breadcrumbs.showFields": false,
+	"breadcrumbs.showClasses": false,
+	"breadcrumbs.showMethods": false,
+	"breadcrumbs.showBooleans": false,
+	"breadcrumbs.showFunctions": false,
+	"breadcrumbs.showConstants": false,
+	"breadcrumbs.showEnumMembers": false,
+	"breadcrumbs.showConstructors": false,
+
+	// </Breadcrumbs>
 
 	// <Explorer>
 
 	// Скрыть отображение папок из проводника
 	"files.exclude": {
-		"**/.idea": true,
-		"**/.vscode": true,
 		"**/__pycache__": true,
+		"**/.git": false,
+		"**/.idea": true,
 		"**/.venv": true,
+		"**/.vscode": true,
 		"**/venv": true
 	},
 
@@ -100,6 +122,9 @@
 		",": true
 	},
 	"cSpell.userWords": [
+		"деплоить",
+		"коммита",
+		"микросервиса",
 		"миникарты",
 		"скролл",
 		"скроллбар",
@@ -314,16 +339,20 @@
 	"markdown.extension.syntax.plainTheme": true,
 	"markdown.extension.completion.enabled": true,
 	"markdown.extension.print.theme": "dark",
-	"workbench.activityBar.location": "top",
-	"window.density.editorTabHeight": "compact",
-	"workbench.productIconTheme": "fluent-icons",
-	"workbench.iconTheme": "city-lights-icons-vsc",
-	"workbench.colorTheme": "Ayu Dark",
 	"animations.Scrolling": "None",
 	"resmon.show.cpuusage": false,
 	"resmon.show.battery": false,
 	"resmon.show.cpufreq": false,
-	"glassit.alpha": 220
+	"glassit.alpha": 220,
+	// "python.defaultInterpreterPath": "D:\\PythonProject\\PetProject\\WordHunt\\.venv",
+	"editor.unicodeHighlight.nonBasicASCII": false,
+	"workbench.productIconTheme": "el-vsc-v1-icons",
+	"material-icon-theme.hidesExplorerArrows": true,
+	"material-icon-theme.saturation": 1,
+	"workbench.iconTheme": "city-lights-icons-vsc",
+	"go.toolsManagement.autoUpdate": true,
+	"security.workspace.trust.enabled": false,
+	"workbench.colorTheme": "Ayu Dark"
 
 	// </Other>
 }

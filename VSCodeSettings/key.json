@@ -97,5 +97,19 @@
 	{
 		"key": "alt+b",
 		"command": "markdown.preview.toggleLock"
+	},
+	{
+		"key": "alt+u",
+		"command": "workbench.action.selectProductIconTheme"
+	},
+	{
+		"key": "ctrl+alt+a",
+		"command": "workbench.action.debug.run",
+		"when": "debuggersAvailable && debugState != 'initializing'"
+	},
+	{
+		"key": "ctrl+f5",
+		"command": "-workbench.action.debug.run",
+		"when": "debuggersAvailable && debugState != 'initializing'"
 	}
 ]

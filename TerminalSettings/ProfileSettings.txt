@@ -1,210 +1,505 @@
+Invoke-Expression (&starship init powershell)
+Import-Module Terminal-Icons
+Import-Module PSReadLine
+Set-PSReadLineKeyHandler -Key ~ -Function ClearScreen
+Set-PSReadLineKeyHandler -Key Tab -Function Complete
+Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
+Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -BellStyle None
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
+Add-Type -AssemblyName Microsoft.VisualBasic
+
+# Приписки в конце: f(files), d(directory), a(all-items), h(hidden), irr(irrevocably)
+# Приписка h(hidden) работает так, что если указан данный параметр, то данные файлы/директории наоборот исключаются (например, из списка перемещаемых файлов)
+
+
 Set-Alias -Name tt -Value tree
 Set-Alias -Name g -Value git
 Set-Alias -Name p -Value python
 Set-Alias -Name x -Value cls
-
 function ll {Get-ChildItem -fo}
-function cc {Set-Location ..}
-function rr ($command) {Remove-Item $command -Force -Recurse}
-function Remove-ItemWithAdminRights ($path) {
-    if (Test-Path -Path $path) {
-        try {
-            icacls $path /grant Администраторы:F /inheritance:e | Out-Null
-        } catch {
-            Write-Host "Ошибка при выдаче прав: $_" -ForegroundColor Red
+
+function Navigate-ToParentDirectory {
+    $currentPath = Get-Location
+    $parentPath = Split-Path -Path $currentPath -Parent
+    if (-not (Test-Path $currentPath)) {
+        Write-Host "Директории не существует" -ForegroundColor Yellow
+        while (-not (Test-Path $parentPath) -and $parentPath -ne "") {
+            $parentPath = Split-Path -Path $parentPath -Parent
         }
-        try {
-            Remove-Item $path -Force -Recurse
-        } catch {
-            Write-Host "Ошибка при удалении: $_" -ForegroundColor Red
+        if ($parentPath -eq "") {
+            Write-Host "Переход в корневую директорию" -ForegroundColor Red
+            Set-Location \
+            return
         }
-    } else {
-        Write-Host "Путь не найден: $path" -ForegroundColor Yellow
+    }
+    try {
+        Set-Location $parentPath
+    }
+    catch {
+        Write-Host "Ошибка при переходе в директорию: $_" -ForegroundColor Red
     }
 }
-Set-Alias -Name frr -Value Remove-ItemWithAdminRights
+Set-Alias -Name cc -Value Navigate-ToParentDirectory
+
+function Recycle-Bin { explorer.exe shell:RecycleBinFolder }
+Set-Alias -Name bin -Value Recycle-Bin
+
+function Rename-Items {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$OldName,
+        [Parameter(Mandatory=$true)]
+        [string]$NewName
+    )
+    try {
+        $FullOldPath = Resolve-Path $OldName -ErrorAction Stop
+        $FullNewPath = Join-Path (Split-Path $FullOldPath) $NewName
+        if (-not (Test-Path $FullOldPath)) {
+            throw "Исходный файл не существует"
+        }
+        if (Test-Path $FullNewPath) {
+            throw "Файл с новым именем уже существует"
+        }
+        $Acl = Get-Acl $FullOldPath
+        Rename-Item -Path $FullOldPath -NewName $NewName -ErrorAction Stop
+    }
+    catch [System.Management.Automation.ItemNotFoundException] {
+        Write-Host "Не удалось найти указанный путь" -ForegroundColor Red
+    }
+    catch [System.UnauthorizedAccessException] {
+        Write-Host "Недосточно прав для переименования" -ForegroundColor Red
+    }
+    catch {
+        Write-Host "$_" -ForegroundColor Red
+    }
+}
+Set-Alias -Name rn -Value Rename-Items
+
+function Remove-ItemToRecycleBin ($path) {
+    if (Test-Path -Path $path) {
+        try {
+            Add-Type -AssemblyName Microsoft.VisualBasic
+            $item = Get-Item -Path $path -Force
+            if ($item.PSIsContainer) {
+                [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteDirectory($item.FullName, 'OnlyErrorDialogs', 'SendToRecycleBin')
+            } else {
+                [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile($item.FullName, 'OnlyErrorDialogs', 'SendToRecycleBin')
+            }
+        } catch {
+            # Обработка ошибки прав доступа
+            if ($_.Exception.InnerException.GetType().FullName -eq "System.UnauthorizedAccessException") {
+                Write-Host "Недостаточно прав для удаления" -ForegroundColor Red
+            } else {
+                Write-Host "Не удалось удалить элемент: $_" -ForegroundColor Red
+            }
+        }
+    } else {
+        Write-Host "Путь не найден: $path"
+    }
+}
+Set-Alias -Name rr -Value Remove-ItemToRecycleBin
+
+# Скопировать директорию с содержимым
+function Copy-Recursively {
+    param(
+        [Parameter(Mandatory=$true, Position=0)]
+        [string]$Source,
+        [Parameter(Mandatory=$false, Position=1)]
+        [string]$Destination = (Get-Location).Path
+    )
+    if (-not (Test-Path $Source)) {
+        Write-Host "Исходный путь '$Source' не существует" -ForegroundColor Yellow
+        return
+    }
+    if (Test-Path $Source -PathType Container) {
+        $Destination = Join-Path $Destination (Split-Path $Source -Leaf)
+    }
+    try {
+        Copy-Item -Path $Source -Destination $Destination -Recurse -Force
+    }
+    catch {
+        Write-Host "Ошибка при копировании: $_" -ForegroundColor Red
+    }
+}
+Set-Alias -Name cpc -Value Copy-Recursively
+
 
 function whereis ($command) {
     Get-Command -Name $command -ErrorAction SilentlyContinue |
     Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
 
+# Создать и перейти в директорию
 function New-DirectoryAndEnter {
     param (
         [Parameter(Mandatory=$true)]
         [string]$Path
     )
-    New-Item -Path $Path -ItemType Directory -ErrorAction Stop
-    Set-Location -Path $Path
+    try {
+        if (Test-Path -Path $Path) {
+            Write-Host "Директория '$Path' уже существует" -ForegroundColor Yellow
+        } else {
+            New-Item -Path $Path -ItemType Directory -ErrorAction Stop | Out-Null
+        }
+        Set-Location -Path $Path
+    } catch {
+        Write-Host "Произошла ошибка при создании директории '$Path': $_" -ForegroundColor Red
+    }
 }
 Set-Alias -Name mc -Value New-DirectoryAndEnter
 
-function Remove-CurrentDirectory {
+# Удалить текущую директорию (RecycleBin)
+function Remove-CurrentDirectoryToRecycleBin {
     $currentPath = Get-Location
     $parentPath = Split-Path -Parent $currentPath
-
     if ([string]::IsNullOrEmpty($parentPath)) {
         Write-Error "Невозможно удалить корневую директорию."
         return
     }
-    Set-Location $parentPath
     try {
-        Remove-Item $currentPath -Recurse -Force
+        Set-Location $parentPath -ErrorAction Stop
+        [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteDirectory(
+            $currentPath,
+            'OnlyErrorDialogs',
+            'SendToRecycleBin'
+        )
     }
     catch {
         Write-Error "Не удалось удалить директорию: $_"
         Set-Location $currentPath
     }
 }
-Set-Alias -Name rw -Value Remove-CurrentDirectory
+Set-Alias -Name rw -Value Remove-CurrentDirectoryToRecycleBin
 
-
+# Перместить все файлы (-hidden)
 function Move-AllFiles {
     param (
         [Parameter(Mandatory=$true)]
         [string]$Destination
     )
-    # Проверяем, существует ли папка назначения
     if (-not (Test-Path -Path $Destination -PathType Container)) {
         New-Item -Path $Destination -ItemType Directory -Force | Out-Null
         Write-Host "Создана папка назначения: $Destination" -ForegroundColor Yellow
     }
-    # Получаем количество файлов перед перемещением
     $fileCount = (Get-ChildItem -File).Count
-    # Перемещаем все файлы
     Get-ChildItem -File | Move-Item -Destination $Destination -ErrorAction SilentlyContinue
-    # Получаем количество успешно перемещенных файлов
     $movedCount = $fileCount - (Get-ChildItem -File).Count
     if ($movedCount -lt $fileCount) {
-        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами." -ForegroundColor Yellow
+        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами" -ForegroundColor Yellow
         Write-Host "Перемещено файлов: $movedCount из $fileCount" -ForegroundColor Green
     }
 }
-Set-Alias -Name mvf -Value Move-AllFiles
+Set-Alias -Name mvfh -Value Move-AllFiles
 
+# Переместить все файлы (+hidden)
 function Move-AllFilesIncludingHidden {
     param (
         [Parameter(Mandatory=$true)]
         [string]$Destination
     )
-    # Проверяем, существует ли папка назначения
     if (-not (Test-Path -Path $Destination -PathType Container)) {
         New-Item -Path $Destination -ItemType Directory -Force | Out-Null
         Write-Host "Создана папка назначения: $Destination" -ForegroundColor Green
     }
-    # Получаем количество файлов перед перемещением, включая скрытые
     $fileCount = (Get-ChildItem -File -Force).Count
-    # Перемещаем все файлы, включая скрытые
     Get-ChildItem -File -Force | Move-Item -Destination $Destination -ErrorAction SilentlyContinue
-    # Получаем количество успешно перемещенных файлов
     $movedCount = $fileCount - (Get-ChildItem -File -Force).Count
     if ($movedCount -lt $fileCount) {
-        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами." -ForegroundColor Yellow
-        Write-Host "Перемещено файлов (включая скрытые): $movedCount из $fileCount" -ForegroundColor Green
+        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами" -ForegroundColor Yellow
+        Write-Host "Перемещено файлов: $movedCount из $fileCount" -ForegroundColor Green
     }
 }
-Set-Alias -Name mvfh -Value Move-AllFilesIncludingHidden
+Set-Alias -Name mvf -Value Move-AllFilesIncludingHidden
 
+# Переместить все элементы (-hidden)
 function Move-AllItems {
     param (
         [Parameter(Mandatory = $true)]
         [string] $Destination
     )
-    # Проверяем, существует ли папка назначения
     if (-not (Test-Path -Path $Destination -PathType Container)) {
         New-Item -Path $Destination -ItemType Directory -Force | Out-Null
         Write-Host "Создана папка назначения: $Destination" -ForegroundColor Green
     }
-    # Флаг, указывающий на наличие папки с тем же именем
     $sameNameFolderExists = Test-Path -Path (Join-Path (Get-Location).Path (Split-Path $Destination -Leaf))
-    # Получаем количество элементов перед перемещением
     if ($sameNameFolderExists) {
         $itemCount = (Get-ChildItem).Count - 1
     } else {
         $itemCount = (Get-ChildItem).Count
     }
-    # Перемещаем все элементы, кроме папки назначения
     Get-ChildItem | Where-Object { $_.FullName -ne (Resolve-Path $Destination).Path } | ForEach-Object {
         try {
             Move-Item -Path $_.FullName -Destination $Destination -ErrorAction Stop
         } catch { }
     }
-    # Получаем количество успешно перемещенных элементов
     if ($sameNameFolderExists) {
         $movedCount = $itemCount+1 - (Get-ChildItem).Count
     } else {
         $movedCount = $itemCount - (Get-ChildItem).Count
     }
     if ($movedCount -lt $itemCount) {
-        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами." -ForegroundColor Yellow
+        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами" -ForegroundColor Yellow
         Write-Host "Перемещено элементов: $movedCount из $itemCount" -ForegroundColor Green
     }
 }
-Set-Alias -Name mvd -Value Move-AllItems
+Set-Alias -Name mvah -Value Move-AllItems
 
+# Переместить все элементы (+hidden)
 function Move-AllItemsIncludingHidden {
     param (
         [Parameter(Mandatory = $true)]
         [string] $Destination
     )
-    # Проверяем, существует ли папка назначения
     if (-not (Test-Path -Path $Destination -PathType Container)) {
         New-Item -Path $Destination -ItemType Directory -Force | Out-Null
         Write-Host "Создана папка назначения: $Destination" -ForegroundColor Green
     }
-    # Флаг, указывающий на наличие папки с тем же именем
     $sameNameFolderExists = Test-Path -Path (Join-Path (Get-Location).Path (Split-Path $Destination -Leaf))
-    # Получаем количество элементов перед перемещением
     if ($sameNameFolderExists) {
         $itemCount = (Get-ChildItem -Force).Count - 1
     } else {
         $itemCount = (Get-ChildItem -Force).Count
     }
-    # Перемещаем все элементы, кроме папки назначения
     Get-ChildItem -Force | Where-Object { $_.FullName -ne (Resolve-Path $Destination).Path } | ForEach-Object {
         try {
             Move-Item -Path $_.FullName -Destination $Destination -Force -ErrorAction Stop
         } catch { }
     }
-    # Получаем количество успешно перемещенных элементов
     if ($sameNameFolderExists) {
         $movedCount = $itemCount+1 - (Get-ChildItem -Force).Count
     } else {
         $movedCount = $itemCount - (Get-ChildItem -Force).Count
     }
     if ($movedCount -lt $itemCount) {
-        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами." -ForegroundColor Yellow
+        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами" -ForegroundColor Yellow
         Write-Host "Перемещено элементов: $movedCount из $itemCount" -ForegroundColor Green
     }
 }
-Set-Alias -Name mvdh -Value Move-AllItemsIncludingHidden
+Set-Alias -Name mva -Value Move-AllItemsIncludingHidden
+
+# Переместить все файлы в родительскую директорию (-hidden)
+function Move-AllFilesToParent {
+    $Destination = (Get-Item ..).FullName
+    $fileCount = (Get-ChildItem -File).Count
+    Get-ChildItem -File | Move-Item -Destination $Destination -ErrorAction SilentlyContinue
+    $movedCount = $fileCount - (Get-ChildItem -File).Count
+    if ($movedCount -lt $fileCount) {
+        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами" -ForegroundColor Yellow
+        Write-Host "Перемещено файлов: $movedCount из $fileCount" -ForegroundColor Green
+    }
+}
+Set-Alias -Name mvfhcc -Value Move-AllFilesToParent
+
+# Переместить все файлы в родительскую директорию (+hidden)
+function Move-AllFilesIncludingHiddenToParent {
+    $Destination = (Get-It-Force ..).FullName
+    $fileCount = (Get-ChildItem -File -Force).Count
+    Get-ChildItem -File -Force | Move-Item -Destination $Destination -ErrorAction SilentlyContinue
+    $movedCount = $fileCount - (Get-ChildItem -File -Force).Count
+    if ($movedCount -lt $fileCount) {
+        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами" -ForegroundColor Yellow
+        Write-Host "Перемещено файлов (включая скрытые): $movedCount из $fileCount" -ForegroundColor Green
+    }
+}
+Set-Alias -Name mvfcc -Value Move-AllFilesIncludingHiddenToParent
+
+# Перемещение всех элементов в родительскую папку (-hidden)
+function Move-AllItemsToParent {
+    $Destination = (Get-Item ..).FullName
+    $itemCount = (Get-ChildItem).Count
+    Get-ChildItem | Where-Object { $_.FullName -ne $PWD.Path -and $_.FullName -ne $Destination } | ForEach-Object {
+        try {
+            Move-Item -Path $_.FullName -Destination $Destination -ErrorAction Stop
+        } catch { }
+    }
+    $movedCount = $itemCount - (Get-ChildItem).Count
+    if ($movedCount -lt $itemCount - 1) {  # Вычитаем 1, так как текущая папка всегда остается
+        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами" -ForegroundColor Yellow
+        Write-Host "Перемещено элементов: $movedCount из $($itemCount - 1)" -ForegroundColor Green
+    }
+}
+Set-Alias -Name mvahcc -Value Move-AllItemsToParent
+
+# Перемещение всех элементов в родительскую папку (+hidden)
+function Move-AllItemsIncludingHiddenToParent {
+    $Destination = (Get-Item -Force ..).FullName
+    $itemCount = (Get-ChildItem -Force).Count
+    Get-ChildItem -Force | Where-Object { $_.FullName -ne $PWD.Path -and $_.FullName -ne $Destination } | ForEach-Object {
+        try {
+            Move-Item -Path $_.FullName -Destination $Destination -Force -ErrorAction Stop
+        } catch { }
+    }
+    $movedCount = $itemCount - (Get-ChildItem -Force).Count
+    if ($movedCount -lt $itemCount - 1) {  # Вычитаем 1, так как текущая папка всегда остается
+        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами" -ForegroundColor Yellow
+        Write-Host "Перемещено элементов: $movedCount из $($itemCount - 1)" -ForegroundColor Green
+    }
+}
+Set-Alias -Name mvacc -Value Move-AllItemsIncludingHiddenToParent
+
+# Открытие Pycharm
+function Open-PyCharm {
+    param (
+        [Parameter(ValueFromRemainingArguments=$true)]
+        [string[]]$Path
+    )
+    $pycharmPath = "C:\Program Files\JetBrains\PyCharm 2024.1.2\bin\pycharm64.exe"
+    if (-not (Test-Path $pycharmPath)) {
+        Write-Host "PyCharm не найден. Проверьте путь установки" -ForegroundColor Red
+        return
+    }
+    if ($Path.Count -eq 0) {
+        Start-Process $pycharmPath
+    }
+    else {
+        foreach ($item in $Path) {
+            $resolvedPath = Resolve-Path $item -ErrorAction SilentlyContinue
+            if ($resolvedPath) {
+                & $pycharmPath $resolvedPath
+            } else {
+                Write-Host "Путь не найден: $item" -ForegroundColor Yellow
+            }
+        }
+    }
+}
+Set-Alias -Name pch -Value Open-PyCharm
+
+# Открытие Goland
+function Open-GoLand {
+    param (
+        [Parameter(ValueFromRemainingArguments=$true)]
+        [string[]]$Path
+    )
+    $golandPath = "C:\Program Files\JetBrains\GoLand 2024.1.4\bin\goland64.exe"
+    if (-not (Test-Path $golandPath)) {
+        Write-Host "GoLand не найден. Проверьте путь установки" -ForegroundColor Red
+        return
+    }
+    if ($Path.Count -eq 0) {
+        Start-Process $golandPath
+    }
+    else {
+        foreach ($item in $Path) {
+            $resolvedPath = Resolve-Path $item -ErrorAction SilentlyContinue
+            if ($resolvedPath) {
+                & $golandPath $resolvedPath
+            } else {
+                Write-Host "Путь не найден: $item" -ForegroundColor Yellow
+            }
+        }
+    }
+}
+Set-Alias -Name gld -Value Open-GoLand
+
+# Функция для скрытия файлов и директорий
+function Set-ItemHidden {
+    param (
+        [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [string[]]$Path
+    )
+    process {
+        foreach ($item in $Path) {
+            $resolvedPath = Resolve-Path $item -ErrorAction SilentlyContinue
+            if ($resolvedPath) {
+                $item = Get-Item $resolvedPath -Force
+                if (-not $item.Attributes.HasFlag([System.IO.FileAttributes]::Hidden)) {
+                    $item.Attributes = $item.Attributes -bor [System.IO.FileAttributes]::Hidden
+                } else {
+                    Write-Host "Элемент уже скрыт" -ForegroundColor Yellow
+                }
+            } else {
+                Write-Host "Путь не найден: $item" -ForegroundColor Red
+            }
+        }
+    }
+}
+Set-Alias -Name hide -Value Set-ItemHidden
+
+# Удаление всех файлов (RecycleBin) (+hidden)
+function Remove-AllFilesToRecycleBin {
+    param (
+        [string]$Path
+    )
+    $files = Get-ChildItem -Path $Path -File -Force
+    if ($files.Count -eq 0) {
+        Write-Host "Нет файлов для удаления" -ForegroundColor Yellow
+        return
+    }
+    foreach ($file in $files) {
+        [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile(
+            $file.FullName,
+            [Microsoft.VisualBasic.FileIO.UIOption]::OnlyErrorDialogs,
+            [Microsoft.VisualBasic.FileIO.RecycleOption]::SendToRecycleBin
+        )
+    }
+}
+Set-Alias -Name rmf -Value Remove-AllFilesToRecycleBin
+
+# Удаление всех элементов (RecycleBin) (+hidden)
+function Remove-AllItemsToRecycleBin {
+    param (
+        [string]$Path
+    )
+    $items = Get-ChildItem -Path $Path -Force
+    if ($items.Count -eq 0) {
+        Write-Host "Нет элементов для удаления" -ForegroundColor Yellow
+        return
+    }
+    foreach ($item in $items) {
+        if ($item.PSIsContainer) {
+            [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteDirectory(
+                $item.FullName,
+                [Microsoft.VisualBasic.FileIO.UIOption]::OnlyErrorDialogs,
+                [Microsoft.VisualBasic.FileIO.RecycleOption]::SendToRecycleBin
+            )
+        } else {
+            [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile(
+                $item.FullName,
+                [Microsoft.VisualBasic.FileIO.UIOption]::OnlyErrorDialogs,
+                [Microsoft.VisualBasic.FileIO.RecycleOption]::SendToRecycleBin
+            )
+        }
+    }
+}
+Set-Alias -Name rma -Value Remove-AllItemsToRecycleBin
+
+function New-MultipleItems {
+    param (
+        [Parameter(Mandatory=$true, ValueFromRemainingArguments=$true)]
+        [string[]]$Names
+    )
+    foreach ($name in $Names) {
+        if (![string]::IsNullOrWhiteSpace($name)) {
+            try {
+                $item = New-Item -Path $name -ItemType File -Force
+            }
+            catch {
+                Write-Host "Не удалось создать файл: $name. Ошибка: $_" -ForegroundColor Red
+            }
+        }
+    }
+}
+Set-Alias -Name mf -Value New-MultipleItems
 
 function Close-PowerShell {[System.Environment]::Exit(0)}
 Set-Alias -Name close -Value Close-PowerShell
 
 Set-Alias -Name open -Value start
-Set-Alias -Name mf -Value New-Item
 Set-Alias -Name ex -Value explorer
 
 function Open-ExplorerHere {explorer.exe .}
 Set-Alias -Name here -Value Open-ExplorerHere
 
-function Invoke-GoRun {go run $args}
-function Invoke-GoBuild {go build $args}
-Set-Alias -Name gr -Value Invoke-GoRun
-Set-Alias -Name gb -Value Invoke-GoBuild
+function Go-Run {go run $args}
+function Go-Build {go build $args}
+Set-Alias -Name gr -Value Go-Run
+Set-Alias -Name gb -Value Go-Build
 
-function Git-Status { git status $args }
-function Git-Log { git log $args }
+function Git-Status {git status $args}
+function Git-Log {git log $args}
+function Git-LsFiles {git ls-files $args}
+Set-Alias -Name gitls -Value Git-LsFiles
 Set-Alias -Name gits -Value Git-Status
 Set-Alias -Name gitl -Value Git-Log
-
-
-
-Invoke-Expression (&starship init powershell)
-Import-Module Terminal-Icons
-Import-Module PSReadLine
-Set-PSReadLineKeyHandler -Key ~ -Function ClearScreen
-Set-PSReadLineKeyHandler -Key Tab -Function Complete
-Set-PSReadLineOption -PredictionViewStyle ListView
-Set-PSReadLineOption -PredictionSource History

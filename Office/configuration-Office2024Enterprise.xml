@@ -1,0 +1,15 @@
+<Configuration>
+
+  <Add OfficeClientEdition="64" Channel="PerpetualVL2024">
+    <Product ID="ProPlus2024Volume">
+      <Language ID="ru-ru" />
+      <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Access" />
+      <ExcludeApp ID="Publisher" />
+      <ExcludeApp ID="Outlook" />
+      <ExcludeApp ID="OneNote" />
+    </Product>
+  </Add>
+  <Remove All="True" />
+
+</Configuration>
