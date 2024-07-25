@@ -4,6 +4,7 @@
 	"editor.wordWrap": "bounded", // включить: длина строки
 	"editor.padding.top": 15, // отступ от хлебных крошек сверху
 	"editor.wordWrapColumn": 100,
+	"editor.wrappingIndent": "indent",
 	"workbench.layoutControl.enabled": false,
 	"window.commandCenter": false, // компактные активные вкладки
 	"editor.folding": false, // сворачивание фрагментов кода (убирает отступ после номера строки)
@@ -14,6 +15,7 @@
 	"window.menuBarVisibility": "compact",
 	// "workbench.activityBar.location": "top",
 	"window.density.editorTabHeight": "compact",
+	"workbench.activityBar.location": "top",
 	// "workbench.editor.showTabs": "single", // Отображать только одну вкладку
 	// </Appearance>
 
@@ -57,8 +59,8 @@
 
 	// <ScrollBar>
 
-	"editor.overviewRulerBorder": false, // убрать контур скроллбара
-	// "editor.scrollbar.vertical": "hidden",   // скрыть вертикальный скроллбар
+	"editor.overviewRulerBorder": false, // убрать контур пути скроллбара
+	// "editor.scrollbar.vertical": "hidden", // скрыть вертикальный скроллбар
 	// "editor.scrollbar.horizontal": "hidden",   // скрыть горизонтальный скроллбар
 	"editor.scrollbar.horizontalScrollbarSize": 8, // размер горизонтального скроллбара
 	"editor.scrollbar.verticalScrollbarSize": 8, // размер вертикального скроллбара
@@ -177,6 +179,7 @@
 		"editor.defaultFormatter": "ms-python.black-formatter",
 		"editor.wordWrapColumn": 79, // перенос строки при такой длине
 		"editor.rulers": [79], // линия максимальной длины строки
+		"editor.insertSpaces": true,
 		"editor.codeActionsOnSave": {
 			// "source.fixAll": "explicit", // Фиксит все, в том числе удаляет неиспользуемые импорты
 			"source.organizeImports": "explicit" // Сортировка импортов
@@ -194,7 +197,7 @@
 
 	// <Black-formatter>
 
-	"black-formatter.args": ["-S", "--line-length=79"], // заменить двойные кавычки на одинарные и формат длины строки 79 символов
+	"black-formatter.args": ["-S", "--line-length=79"], // не заменить двойные кавычки на одинарные и формат длины строки 79 символов
 
 	// </Black-formatter>
 
@@ -310,11 +313,11 @@
 
 	// <Other>
 
-	"files.defaultLanguage": "python", // Расширение нового файла
-	// "editor.quickSuggestionsDelay": 0, // задержка показа подсказок
+	"files.defaultLanguage": "markdown", // Расширение нового файла
+	"editor.quickSuggestionsDelay": 0, // задержка показа подсказок
 	"zenMode.hideStatusBar": false,
 	"editor.mouseWheelZoom": true,
-	"editor.hover.delay": 600, // Задержка показа подсказок при наведении
+	"editor.hover.delay": 500, // Задержка показа подсказок при наведении
 	"editor.accessibilitySupport": "off", // Средство чтения с экрана выкл
 	"editor.parameterHints.enabled": true, // Подсказки при печати
 	"explorer.confirmDragAndDrop": false,
@@ -352,7 +355,118 @@
 	"workbench.iconTheme": "city-lights-icons-vsc",
 	"go.toolsManagement.autoUpdate": true,
 	"security.workspace.trust.enabled": false,
-	"workbench.colorTheme": "Ayu Dark"
-
+	"tabnine.experimentalAutoImports": true,
+	"randomThemeSwitcher.themeList": [
+		"Adonis",
+		"Adonis Dark",
+		"Adonis Darker",
+		"Adonis Eclipse",
+		"Adonis Gunmetal",
+		"Adonis Haze",
+		"Adonis Mirage",
+		"Adonis Palenight",
+		"Adonis+",
+		"Adonis+ Dark",
+		"Adonis+ Darker",
+		"Adonis+ Eclipse",
+		"Adonis+ Gunmetal",
+		"Adonis+ Haze",
+		"Adonis+ Mirage",
+		"Adonis+ Palenight",
+		"Alien Dark",
+		"Arkham Theme",
+		"Atlantic Night",
+		"Atlantic Night - Abyss",
+		"August - Ariake Dark",
+		"August - Arstotzka",
+		"August - Arstotzka (Darker)",
+		"August - BeardedTheme Oceanic Reversed",
+		"August - City Lights",
+		"August - City Lights (Darker)",
+		"August - Gruvbox",
+		"August - Gruvbox (Darker)",
+		"August - In Bed By 7pm (Darker)",
+		"August - Kanagawa",
+		"August - Kanagawa (Darker)",
+		"August - Material Ocean",
+		"August - Night Owl",
+		"August - Night Owl (Darker)",
+		"August - Nord",
+		"August - Nord (Darker)",
+		"August - Rosé Pine",
+		"Ayu Dark",
+		"Ayu Mirage",
+		"Ayu Mirage Bordered",
+		"Bearded Theme Altica",
+		"Bearded Theme Anthracite",
+		"Bearded Theme Aquarelle Hydrangea",
+		"Bearded Theme Aquarelle Lilac",
+		"Bearded Theme Arc",
+		"Bearded Theme Arc Blueberry",
+		"Bearded Theme Arc Eggplant",
+		"Bearded Theme Arc Reversed",
+		"Bearded Theme Black & Amethyst",
+		"Bearded Theme Black & Diamond",
+		"Bearded Theme Black & Diamond Soft",
+		"Bearded Theme Black & Emerald",
+		"Bearded Theme Black & Emerald Soft",
+		"Bearded Theme Black & Gold",
+		"Bearded Theme Monokai Black",
+		"Bearded Theme Monokai Metallian",
+		"Bearded Theme Monokai Reversed",
+		"Bearded Theme Monokai Stone",
+		"Bearded Theme Monokai Terra",
+		"Bearded Theme Oceanic Reversed",
+		"Bearded Theme Solarized Reversed",
+		"Bearded Theme Stained Blue",
+		"Bearded Theme Surprising Blueberry",
+		"Bearded Theme Surprising Watermelon",
+		"Bearded Theme Vivid Purple",
+		"Bearded Theme Void",
+		"Bearded Theme feat. Gold D Raynh",
+		"Bearded Theme feat. Melle Julie",
+		"Bearded Theme feat. Will",
+		"Dark Side",
+		"Darker Still",
+		"Default Dark Modern",
+		"Field Lights",
+		"Horizon",
+		"Horizon Bold",
+		"Horizon Italic",
+		"Hyper Term Black",
+		"Iceberg",
+		"Kanagawa Black",
+		"Material Theme Ocean",
+		"Moegi Black",
+		"Moegi Black Zen",
+		"Popping and Locking",
+		"Rosé Pine",
+		"Rosé Pine (no italics)",
+		"Serendipity Midnight",
+		"Serendipity Midnight Electric",
+		"Styx",
+		"Styx Dracula",
+		"Styx Fleet",
+		"Styx Material",
+		"Styx Monokai",
+		"Styx VSCode",
+		"Styx+",
+		"Syntax Dark",
+		"Tokyo Night",
+		"Tokyo Night Dark",
+		"codeSTACKr Theme (Muted)",
+		"oh-lucy",
+		"oh-lucy-evening"
+	],
+	"randomThemeSwitcher.switchInterval": 25,
+	"workbench.colorTheme": "Rosé Pine",
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": true,
+	"code-runner.showExecutionMessage": false,
+	"code-runner.runInTerminal": false,
+	"security.workspace.trust.untrustedFiles": "open",
+	"gitlens.telemetry.enabled": false,
+	"scm.alwaysShowActions": true,
+	"scm.alwaysShowRepositories": true
 	// </Other>
 }

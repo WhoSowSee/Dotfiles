@@ -18,7 +18,19 @@ Set-Alias -Name tt -Value tree
 Set-Alias -Name g -Value git
 Set-Alias -Name p -Value python
 Set-Alias -Name x -Value cls
+
 function ll {Get-ChildItem -fo}
+function Close-Terminal {
+  $windows = Get-Process | Where-Object { $_.MainWindowTitle -match "Windows Terminal" }
+  foreach ($window in $windows) {
+    try {
+      $window.CloseMainWindow()
+    } catch { }
+  }
+  Get-Process -Name "WindowsTerminal" -ErrorAction SilentlyContinue | Stop-Process -Force
+}
+Set-Alias -Name closewt -Value Close-Terminal
+Set-Alias -Name exitwt -Value Close-Terminal
 
 function Navigate-ToParentDirectory {
     $currentPath = Get-Location
@@ -102,29 +114,98 @@ function Remove-ItemToRecycleBin ($path) {
 Set-Alias -Name rr -Value Remove-ItemToRecycleBin
 
 # Скопировать директорию с содержимым
+# function Copy-Recursively {
+#     param(
+#         [Parameter(Mandatory=$true, Position=0)]
+#         [string]$Source,
+#         [Parameter(Mandatory=$false, Position=1)]
+#         [string]$Destination = (Get-Location).Path
+#     )
+#     if (-not (Test-Path $Source)) {
+#         Write-Host "Исходный путь '$Source' не существует" -ForegroundColor Yellow
+#         return
+#     }
+#     if (Test-Path $Source -PathType Container) {
+#         $Destination = Join-Path $Destination (Split-Path $Source -Leaf)
+#     }
+#     try {
+#         Copy-Item -Path $Source -Destination $Destination -Recurse -Force
+#     }
+#     catch {
+#         Write-Host "Ошибка при копировании: $_" -ForegroundColor Red
+#     }
+# }
+# Set-Alias -Name cpc -Value Copy-Recursively
+
 function Copy-Recursively {
     param(
         [Parameter(Mandatory=$true, Position=0)]
         [string]$Source,
         [Parameter(Mandatory=$false, Position=1)]
-        [string]$Destination = (Get-Location).Path
+        [string]$DestinationOrNewName,
+        [Parameter(Mandatory=$false, Position=2)]
+        [string]$NewName
     )
     if (-not (Test-Path $Source)) {
         Write-Host "Исходный путь '$Source' не существует" -ForegroundColor Yellow
         return
     }
-    if (Test-Path $Source -PathType Container) {
-        $Destination = Join-Path $Destination (Split-Path $Source -Leaf)
+    $sourceName = Split-Path $Source -Leaf
+    $isDirectory = Test-Path $Source -PathType Container
+    $currentLocation = (Get-Location).Path
+    if ($DestinationOrNewName -and -not $NewName) {
+        if ($DestinationOrNewName.Contains([IO.Path]::DirectorySeparatorChar) -or
+            $DestinationOrNewName.Contains([IO.Path]::AltDirectorySeparatorChar)) {
+            $Destination = $DestinationOrNewName
+            $NewName = $null
+        } else {
+            $Destination = $currentLocation
+            $NewName = $DestinationOrNewName
+        }
+    } elseif ($DestinationOrNewName -and $NewName) {
+        $Destination = $DestinationOrNewName
+    } else {
+        $Destination = $currentLocation
+    }
+    if ($isDirectory -and $NewName -and $NewName.Contains('.')) {
+        Write-Host "Ошибка: Нельзя скопировать директорию '$Source' и назвать её как файл '$NewName'" -ForegroundColor Red
+        return
+    }
+    if (Test-Path $Destination -PathType Leaf) {
+        Write-Host "Ошибка: Указанный путь назначения '$Destination' является файлом, а не директорией" -ForegroundColor Red
+        return
+    }
+    if ($NewName) {
+        $finalDestination = Join-Path $Destination $NewName
+    } else {
+        $finalDestination = Join-Path $Destination $sourceName
+    }
+    if (-not $isDirectory -and (Test-Path $Destination -PathType Container) -and -not $NewName) {
+        $finalDestination = Join-Path $Destination $sourceName
     }
     try {
-        Copy-Item -Path $Source -Destination $Destination -Recurse -Force
+        if ($isDirectory) {
+            if (-not (Test-Path $finalDestination)) {
+                New-Item -Path $finalDestination -ItemType Directory -Force | Out-Null
+            }
+            Get-ChildItem -Path $Source -Force | ForEach-Object {
+                $destPath = Join-Path $finalDestination $_.Name
+                Copy-Item -Path $_.FullName -Destination $destPath -Recurse -Force
+            }
+        } else {
+            $destDir = Split-Path $finalDestination -Parent
+            if (-not (Test-Path $destDir)) {
+                New-Item -Path $destDir -ItemType Directory -Force | Out-Null
+            }
+            Copy-Item -Path $Source -Destination $finalDestination -Force
+        }
+        Write-Host "Копирование выполнено успешно в '$finalDestination'" -ForegroundColor Green
     }
     catch {
         Write-Host "Ошибка при копировании: $_" -ForegroundColor Red
     }
 }
 Set-Alias -Name cpc -Value Copy-Recursively
-
 
 function whereis ($command) {
     Get-Command -Name $command -ErrorAction SilentlyContinue |
