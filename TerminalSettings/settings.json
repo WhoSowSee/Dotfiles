@@ -26,7 +26,9 @@
 			"keys": "alt+shift+d"
 		}
 	],
+	"alwaysShowNotificationIcon": true,
 	"alwaysShowTabs": true,
+	"autoHideWindow": false,
 	"centerOnLaunch": true,
 	"copyFormatting": "none",
 	"copyOnSelect": false,
@@ -62,7 +64,7 @@
 				"backgroundImageOpacity": 0.5,
 				"colorScheme": "tokyonight",
 				"commandline": "\"C:\\Users\\whosowsee\\AppData\\Local\\Microsoft\\WindowsApps\\pwsh.exe\" --nologo ",
-				"cursorShape": "underscore",
+				"cursorShape": "bar",
 				"experimental.retroTerminalEffect": false,
 				"font": {
 					"face": "JetBrainsMono Nerd Font",
@@ -543,5 +545,6 @@
 	"tabWidthMode": "equal",
 	"themes": [],
 	"useAcrylicInTabRow": true,
-	"windowingBehavior": "useNew"
+	"windowingBehavior": "useNew",
+	"multiLinePasteWarning": false
 }

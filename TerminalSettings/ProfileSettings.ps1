@@ -10,6 +10,7 @@ Set-PSReadLineOption -BellStyle None
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
 Add-Type -AssemblyName Microsoft.VisualBasic
 
+
 # Приписки в конце: f(files), d(directory), a(all-items), h(hidden), irr(irrevocably)
 # Приписка h(hidden) работает так, что если указан данный параметр, то данные файлы/директории наоборот исключаются (например, из списка перемещаемых файлов)
 
@@ -18,8 +19,73 @@ Set-Alias -Name tt -Value tree
 Set-Alias -Name g -Value git
 Set-Alias -Name p -Value python
 Set-Alias -Name x -Value cls
+Set-Alias -Name m -Value micro
+Set-Alias -Name n -Value nano
 
-function ll {Get-ChildItem -fo}
+function Open-Obsidian {
+    param (
+        [Parameter(ValueFromRemainingArguments=$true)]
+        [string[]]$Path,
+        [switch]$c
+    )
+    $obsidianPath = "D:\Obsidian\obsidian.exe"
+    $vaultPath = "D:\ObsidianVault\Zettelkasten"
+    $tempPath = "D:\Temp"
+    if (-not (Test-Path $obsidianPath)) {
+        Write-Host "Obsidian не найден. Проверьте путь установки" -ForegroundColor Red
+        return
+    }
+    if (-not (Test-Path $tempPath)) {
+        New-Item -ItemType Directory -Path $tempPath | Out-Null
+    }
+    if ($Path.Count -eq 0) {
+        Start-Process -FilePath $obsidianPath -NoNewWindow -RedirectStandardOutput "$tempPath\output.log" -RedirectStandardError "$tempPath\error.log"
+        Start-Sleep -Seconds 1
+        Remove-Item "$tempPath\output.log", "$tempPath\error.log" -ErrorAction SilentlyContinue
+    }
+    else {
+        foreach ($item in $Path) {
+            $fullPath = Resolve-Path $item -ErrorAction SilentlyContinue
+            if ($fullPath -and (Test-Path $fullPath)) {
+                $fileName = [System.IO.Path]::GetFileNameWithoutExtension($fullPath)
+                $fileExtension = [System.IO.Path]::GetExtension($fullPath)
+                $destPath = Join-Path $vaultPath ($fileName + $fileExtension)
+                if ($c.IsPresent) {
+                    if (Test-Path $destPath) {
+                        $counter = 1
+                        while (Test-Path (Join-Path $vaultPath ($fileName + " $counter" + $fileExtension))) {
+                            $counter++
+                        }
+                        $destPath = Join-Path $vaultPath ($fileName + " $counter" + $fileExtension)
+                    }
+                    Copy-Item -Path $fullPath -Destination $destPath -Force
+                }
+                else {
+                    if (-not (Test-Path $destPath)) {
+                        Copy-Item -Path $fullPath -Destination $destPath -Force
+                    }
+                }
+                $relativePath = [System.IO.Path]::GetRelativePath($vaultPath, $destPath)
+                $encodedVault = [System.Uri]::EscapeDataString([System.IO.Path]::GetFileName($vaultPath))
+                $encodedFile = [System.Uri]::EscapeDataString($relativePath)
+                $uri = "obsidian://open?vault=$encodedVault&file=$encodedFile"
+                Start-Process -FilePath $obsidianPath -ArgumentList $uri -NoNewWindow -RedirectStandardOutput "$tempPath\output.log" -RedirectStandardError "$tempPath\error.log"
+                Start-Sleep -Seconds 1
+                Remove-Item "$tempPath\output.log", "$tempPath\error.log" -ErrorAction SilentlyContinue
+            } else {
+                Write-Host "Файл не найден: $item" -ForegroundColor Red
+            }
+        }
+    }
+}
+Set-Alias -Name obs -Value Open-Obsidian
+
+function d { Set-Location D:\ }
+function dev { Set-Location D:\GolangProject }
+function devl { Set-Location D:\GolangProject\GoLearning }
+function rrad ($command) { Remove-Item $command -Force -Recurse }
+function ll { Get-ChildItem -fo }
+
 function Close-Terminal {
   $windows = Get-Process | Where-Object { $_.MainWindowTitle -match "Windows Terminal" }
   foreach ($window in $windows) {
@@ -56,7 +122,9 @@ function Navigate-ToParentDirectory {
 Set-Alias -Name cc -Value Navigate-ToParentDirectory
 
 function Recycle-Bin { explorer.exe shell:RecycleBinFolder }
+function Open-Downloads { explorer.exe shell:Downloads }
 Set-Alias -Name bin -Value Recycle-Bin
+Set-Alias -Name dow -Value Open-Downloads
 
 function Rename-Items {
     param (
@@ -89,53 +157,54 @@ function Rename-Items {
 }
 Set-Alias -Name rn -Value Rename-Items
 
-function Remove-ItemToRecycleBin ($path) {
-    if (Test-Path -Path $path) {
-        try {
-            Add-Type -AssemblyName Microsoft.VisualBasic
-            $item = Get-Item -Path $path -Force
-            if ($item.PSIsContainer) {
-                [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteDirectory($item.FullName, 'OnlyErrorDialogs', 'SendToRecycleBin')
+function Remove-ItemToRecycleBin {
+    param (
+        [Parameter(Mandatory=$true, ValueFromRemainingArguments=$true)]
+        [string[]]$path
+    )
+    process {
+        foreach ($p in $path) {
+            if (Test-Path -Path $p) {
+                try {
+                    Add-Type -AssemblyName Microsoft.VisualBasic
+                    $item = Get-Item -Path $p -Force
+                    if ($item.PSIsContainer) {
+                        [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteDirectory($item.FullName, 'OnlyErrorDialogs', 'SendToRecycleBin')
+                    } else {
+                        [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile($item.FullName, 'OnlyErrorDialogs', 'SendToRecycleBin')
+                    }
+                } catch {
+                    if ($_.Exception.InnerException.GetType().FullName -eq "System.UnauthorizedAccessException") {
+                        Write-Host "Недостаточно прав для удаления: $p" -ForegroundColor Red
+                    } else {
+                        Write-Host "Не удалось удалить элемент: $p" -ForegroundColor Red
+                    }
+                }
             } else {
-                [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile($item.FullName, 'OnlyErrorDialogs', 'SendToRecycleBin')
-            }
-        } catch {
-            # Обработка ошибки прав доступа
-            if ($_.Exception.InnerException.GetType().FullName -eq "System.UnauthorizedAccessException") {
-                Write-Host "Недостаточно прав для удаления" -ForegroundColor Red
-            } else {
-                Write-Host "Не удалось удалить элемент: $_" -ForegroundColor Red
+                Write-Host "Путь не найден: $p" -ForegroundColor Yellow
             }
         }
-    } else {
-        Write-Host "Путь не найден: $path"
     }
 }
 Set-Alias -Name rr -Value Remove-ItemToRecycleBin
 
-# Скопировать директорию с содержимым
-# function Copy-Recursively {
-#     param(
-#         [Parameter(Mandatory=$true, Position=0)]
-#         [string]$Source,
-#         [Parameter(Mandatory=$false, Position=1)]
-#         [string]$Destination = (Get-Location).Path
-#     )
-#     if (-not (Test-Path $Source)) {
-#         Write-Host "Исходный путь '$Source' не существует" -ForegroundColor Yellow
-#         return
-#     }
-#     if (Test-Path $Source -PathType Container) {
-#         $Destination = Join-Path $Destination (Split-Path $Source -Leaf)
-#     }
-#     try {
-#         Copy-Item -Path $Source -Destination $Destination -Recurse -Force
-#     }
-#     catch {
-#         Write-Host "Ошибка при копировании: $_" -ForegroundColor Red
-#     }
-# }
-# Set-Alias -Name cpc -Value Copy-Recursively
+function Remove-ItemWithAdminRights ($path) {
+    if (Test-Path -Path $path) {
+        try {
+            icacls $path /grant Администраторы:F /inheritance:e | Out-Null
+        } catch {
+            Write-Host "Ошибка при выдаче прав: $_" -ForegroundColor Red
+        }
+        try {
+            Remove-Item $path -Force -Recurse
+        } catch {
+            Write-Host "Ошибка при удалении: $_" -ForegroundColor Red
+        }
+    } else {
+        Write-Host "Путь не найден: $path" -ForegroundColor Yellow
+    }
+}
+Set-Alias -Name rradr -Value Remove-ItemWithAdminRights
 
 function Copy-Recursively {
     param(
@@ -231,12 +300,40 @@ function New-DirectoryAndEnter {
 }
 Set-Alias -Name mc -Value New-DirectoryAndEnter
 
+function New-MultipleDirectories {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, ValueFromRemainingArguments = $true)]
+        [string[]]$Paths
+    )
+    $existingDirs = @()
+    foreach ($Path in $Paths) {
+        if (![string]::IsNullOrWhiteSpace($Path)) {
+            if (Test-Path $Path) {
+                $existingDirs += $Path
+            } else {
+                try {
+                    New-Item -Path $Path -ItemType Directory -ErrorAction Stop
+                }
+                catch {
+                    Write-Host "Ошибка при создании директории '$Path': $_"
+                }
+            }
+        }
+    }
+    if ($existingDirs.Count -gt 0) {
+        Write-Host "`nСледующие директории уже существуют:" -ForegroundColor Yellow
+        $existingDirs | ForEach-Object { Write-Host $_ -ForegroundColor Yellow }
+    }
+}
+Set-Alias -Name mdd -Value New-MultipleDirectories
+
 # Удалить текущую директорию (RecycleBin)
 function Remove-CurrentDirectoryToRecycleBin {
     $currentPath = Get-Location
     $parentPath = Split-Path -Parent $currentPath
     if ([string]::IsNullOrEmpty($parentPath)) {
-        Write-Error "Невозможно удалить корневую директорию."
+        Write-Host "Невозможно удалить корневую директорию" -ForegroundColor Red
         return
     }
     try {
@@ -247,12 +344,36 @@ function Remove-CurrentDirectoryToRecycleBin {
             'SendToRecycleBin'
         )
     }
+    catch [UnauthorizedAccessException] {
+        Write-Host "Недостаточно прав для удаления директории" -ForegroundColor Red
+        Set-Location $currentPath
+    }
     catch {
-        Write-Error "Не удалось удалить директорию: $_"
+        Write-Host "$_" -ForegroundColor Yellow
         Set-Location $currentPath
     }
 }
 Set-Alias -Name rw -Value Remove-CurrentDirectoryToRecycleBin
+
+
+function Remove-CurrentDirectory {
+    $currentPath = Get-Location
+    $parentPath = Split-Path -Parent $currentPath
+
+    if ([string]::IsNullOrEmpty($parentPath)) {
+        Write-Host "Невозможно удалить корневую директорию."
+        return
+    }
+    Set-Location $parentPath
+    try {
+        Remove-Item $currentPath -Recurse -Force
+    }
+    catch {
+        Write-Host "$_"
+        Set-Location $currentPath
+    }
+}
+Set-Alias -Name rwad -Value Remove-CurrentDirectory
 
 # Перместить все файлы (-hidden)
 function Move-AllFiles {
@@ -551,15 +672,24 @@ function New-MultipleItems {
         [Parameter(Mandatory=$true, ValueFromRemainingArguments=$true)]
         [string[]]$Names
     )
+    $existingItems = @()
     foreach ($name in $Names) {
         if (![string]::IsNullOrWhiteSpace($name)) {
-            try {
-                $item = New-Item -Path $name -ItemType File -Force
-            }
-            catch {
-                Write-Host "Не удалось создать файл: $name. Ошибка: $_" -ForegroundColor Red
+            if (Test-Path $name) {
+                $existingItems += $name
+            } else {
+                try {
+                    New-Item -Path $name -ItemType File -ErrorAction Stop
+                }
+                catch {
+                    Write-Host "Ошибка при создании файла '$name': $_"
+                }
             }
         }
+    }
+    if ($existingItems.Count -gt 0) {
+        Write-Host "`nСледующие файлы уже существуют:" -ForegroundColor Yellow
+        $existingItems | ForEach-Object { Write-Host $_ -ForegroundColor Yellow }
     }
 }
 Set-Alias -Name mf -Value New-MultipleItems
