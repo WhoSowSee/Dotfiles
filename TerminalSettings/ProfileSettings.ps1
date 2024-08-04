@@ -8,12 +8,10 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -BellStyle None
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
+
 Add-Type -AssemblyName Microsoft.VisualBasic
 
-
-# Приписки в конце: f(files), d(directory), a(all-items), h(hidden), irr(irrevocably)
-# Приписка h(hidden) работает так, что если указан данный параметр, то данные файлы/директории наоборот исключаются (например, из списка перемещаемых файлов)
-
+$OutputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 Set-Alias -Name tt -Value tree
 Set-Alias -Name g -Value git
@@ -21,6 +19,31 @@ Set-Alias -Name p -Value python
 Set-Alias -Name x -Value cls
 Set-Alias -Name m -Value micro
 Set-Alias -Name n -Value nano
+Set-Alias -Name l -Value less
+Set-Alias -Name ex -Value explorer
+Set-Alias -Name open -Value start
+
+# Алиас для подсчета элементов
+function Count-Items {
+    param(
+        [string]$Path = (Get-Location).Path,
+        [switch]$f,
+        [switch]$d,
+        [switch]$h
+    )
+    $params = @{
+        Path = $Path
+        Force = (-not $h)
+    }
+    if ($f) {
+        $params['File'] = $true
+    }
+    elseif ($d) {
+        $params['Directory'] = $true
+    }
+    (Get-ChildItem @params).Count
+}
+Set-Alias -Name count -Value Count-Items
 
 function Open-Obsidian {
     param (
@@ -45,46 +68,81 @@ function Open-Obsidian {
     }
     else {
         foreach ($item in $Path) {
-            $fullPath = Resolve-Path $item -ErrorAction SilentlyContinue
-            if ($fullPath -and (Test-Path $fullPath)) {
-                $fileName = [System.IO.Path]::GetFileNameWithoutExtension($fullPath)
-                $fileExtension = [System.IO.Path]::GetExtension($fullPath)
-                $destPath = Join-Path $vaultPath ($fileName + $fileExtension)
-                if ($c.IsPresent) {
-                    if (Test-Path $destPath) {
-                        $counter = 1
-                        while (Test-Path (Join-Path $vaultPath ($fileName + " $counter" + $fileExtension))) {
-                            $counter++
+            $item = $item.TrimEnd('\')
+            $fullPath = $null
+            try {
+                $fullPath = Convert-Path $item -ErrorAction Stop
+            } catch {
+                $fullPath = Join-Path (Get-Location) $item
+            }
+            if (Test-Path $fullPath) {
+                if (Test-Path $fullPath -PathType Container) {
+                    $destDir = Join-Path $vaultPath ([System.IO.Path]::GetFileName($fullPath))
+                    if ($c.IsPresent) {
+                        if (Test-Path $destDir) {
+                            $counter = 1
+                            while (Test-Path (Join-Path $vaultPath ($([System.IO.Path]::GetFileName($fullPath)) + " $counter"))) {
+                                $counter++
+                            }
+                            $destDir = Join-Path $vaultPath ($([System.IO.Path]::GetFileName($fullPath)) + " $counter")
                         }
-                        $destPath = Join-Path $vaultPath ($fileName + " $counter" + $fileExtension)
+                        Copy-Item -Path $fullPath -Destination $destDir -Recurse -Force
+                    } else {
+                        if (-not (Test-Path $destDir)) {
+                            Copy-Item -Path $fullPath -Destination $destDir -Recurse -Force
+                        }
                     }
-                    Copy-Item -Path $fullPath -Destination $destPath -Force
+                    Start-Process -FilePath $obsidianPath -NoNewWindow -RedirectStandardOutput "$tempPath\output.log" -RedirectStandardError "$tempPath\error.log"
+                    Start-Sleep -Seconds 1
+                    Remove-Item "$tempPath\output.log", "$tempPath\error.log" -ErrorAction SilentlyContinue
                 }
                 else {
-                    if (-not (Test-Path $destPath)) {
+                    $fileName = [System.IO.Path]::GetFileNameWithoutExtension($fullPath)
+                    $fileExtension = [System.IO.Path]::GetExtension($fullPath)
+                    $destPath = Join-Path $vaultPath ($fileName + $fileExtension)
+                    if ($c.IsPresent) {
+                        if (Test-Path $destPath) {
+                            $counter = 1
+                            while (Test-Path (Join-Path $vaultPath ($fileName + " $counter" + $fileExtension))) {
+                                $counter++
+                            }
+                            $destPath = Join-Path $vaultPath ($fileName + " $counter" + $fileExtension)
+                        }
                         Copy-Item -Path $fullPath -Destination $destPath -Force
+                    } else {
+                        if (-not (Test-Path $destPath)) {
+                            Copy-Item -Path $fullPath -Destination $destPath -Force
+                        }
                     }
+                    $relativePath = [System.IO.Path]::GetRelativePath($vaultPath, $destPath)
+                    $encodedVault = [System.Uri]::EscapeDataString([System.IO.Path]::GetFileName($vaultPath))
+                    $encodedFile = [System.Uri]::EscapeDataString($relativePath)
+                    $uri = "obsidian://open?vault=$encodedVault&file=$encodedFile"
+                    Start-Process -FilePath $obsidianPath -ArgumentList $uri -NoNewWindow -RedirectStandardOutput "$tempPath\output.log" -RedirectStandardError "$tempPath\error.log"
+                    Start-Sleep -Seconds 1
+                    Remove-Item "$tempPath\output.log", "$tempPath\error.log" -ErrorAction SilentlyContinue
                 }
-                $relativePath = [System.IO.Path]::GetRelativePath($vaultPath, $destPath)
-                $encodedVault = [System.Uri]::EscapeDataString([System.IO.Path]::GetFileName($vaultPath))
-                $encodedFile = [System.Uri]::EscapeDataString($relativePath)
-                $uri = "obsidian://open?vault=$encodedVault&file=$encodedFile"
-                Start-Process -FilePath $obsidianPath -ArgumentList $uri -NoNewWindow -RedirectStandardOutput "$tempPath\output.log" -RedirectStandardError "$tempPath\error.log"
-                Start-Sleep -Seconds 1
-                Remove-Item "$tempPath\output.log", "$tempPath\error.log" -ErrorAction SilentlyContinue
             } else {
-                Write-Host "Файл не найден: $item" -ForegroundColor Red
+                Write-Host "Файл или директория не найдены: $item" -ForegroundColor Red
             }
         }
     }
 }
-Set-Alias -Name obs -Value Open-Obsidian
+Set-Alias -Name ob -Value Open-Obsidian
 
 function d { Set-Location D:\ }
 function dev { Set-Location D:\GolangProject }
 function devl { Set-Location D:\GolangProject\GoLearning }
+function conf { Set-Location D:\Settings }
 function rrad ($command) { Remove-Item $command -Force -Recurse }
 function ll { Get-ChildItem -fo }
+function Get-ChildItemFo {
+    param (
+        [string]$Path = "."
+    )
+    Get-ChildItem -Path $Path -Force | Format-Wide -Column 1
+}
+Set-Alias -Name lf -Value Get-ChildItemFo
 
 function Close-Terminal {
   $windows = Get-Process | Where-Object { $_.MainWindowTitle -match "Windows Terminal" }
@@ -124,7 +182,7 @@ Set-Alias -Name cc -Value Navigate-ToParentDirectory
 function Recycle-Bin { explorer.exe shell:RecycleBinFolder }
 function Open-Downloads { explorer.exe shell:Downloads }
 Set-Alias -Name bin -Value Recycle-Bin
-Set-Alias -Name dow -Value Open-Downloads
+Set-Alias -Name dw -Value Open-Downloads
 
 function Rename-Items {
     param (
@@ -268,7 +326,6 @@ function Copy-Recursively {
             }
             Copy-Item -Path $Source -Destination $finalDestination -Force
         }
-        Write-Host "Копирование выполнено успешно в '$finalDestination'" -ForegroundColor Green
     }
     catch {
         Write-Host "Ошибка при копировании: $_" -ForegroundColor Red
@@ -355,13 +412,12 @@ function Remove-CurrentDirectoryToRecycleBin {
 }
 Set-Alias -Name rw -Value Remove-CurrentDirectoryToRecycleBin
 
-
 function Remove-CurrentDirectory {
     $currentPath = Get-Location
     $parentPath = Split-Path -Parent $currentPath
 
     if ([string]::IsNullOrEmpty($parentPath)) {
-        Write-Host "Невозможно удалить корневую директорию."
+        Write-Host "Невозможно удалить корневую директорию"
         return
     }
     Set-Location $parentPath
@@ -375,171 +431,114 @@ function Remove-CurrentDirectory {
 }
 Set-Alias -Name rwad -Value Remove-CurrentDirectory
 
-# Перместить все файлы (-hidden)
-function Move-AllFiles {
-    param (
-        [Parameter(Mandatory=$true)]
-        [string]$Destination
-    )
-    if (-not (Test-Path -Path $Destination -PathType Container)) {
-        New-Item -Path $Destination -ItemType Directory -Force | Out-Null
-        Write-Host "Создана папка назначения: $Destination" -ForegroundColor Yellow
-    }
-    $fileCount = (Get-ChildItem -File).Count
-    Get-ChildItem -File | Move-Item -Destination $Destination -ErrorAction SilentlyContinue
-    $movedCount = $fileCount - (Get-ChildItem -File).Count
-    if ($movedCount -lt $fileCount) {
-        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами" -ForegroundColor Yellow
-        Write-Host "Перемещено файлов: $movedCount из $fileCount" -ForegroundColor Green
-    }
-}
-Set-Alias -Name mvfh -Value Move-AllFiles
-
-# Переместить все файлы (+hidden)
-function Move-AllFilesIncludingHidden {
-    param (
-        [Parameter(Mandatory=$true)]
-        [string]$Destination
-    )
-    if (-not (Test-Path -Path $Destination -PathType Container)) {
-        New-Item -Path $Destination -ItemType Directory -Force | Out-Null
-        Write-Host "Создана папка назначения: $Destination" -ForegroundColor Green
-    }
-    $fileCount = (Get-ChildItem -File -Force).Count
-    Get-ChildItem -File -Force | Move-Item -Destination $Destination -ErrorAction SilentlyContinue
-    $movedCount = $fileCount - (Get-ChildItem -File -Force).Count
-    if ($movedCount -lt $fileCount) {
-        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами" -ForegroundColor Yellow
-        Write-Host "Перемещено файлов: $movedCount из $fileCount" -ForegroundColor Green
-    }
-}
-Set-Alias -Name mvf -Value Move-AllFilesIncludingHidden
-
-# Переместить все элементы (-hidden)
-function Move-AllItems {
+function Move-ItemsAdvanced {
     param (
         [Parameter(Mandatory = $true)]
-        [string] $Destination
+        [string]$Destination,
+        [switch]$f,
+        [switch]$d,
+        [switch]$h
     )
     if (-not (Test-Path -Path $Destination -PathType Container)) {
         New-Item -Path $Destination -ItemType Directory -Force | Out-Null
         Write-Host "Создана папка назначения: $Destination" -ForegroundColor Green
     }
+    $items = if ($h) { Get-ChildItem } else { Get-ChildItem -Force }
+    if ($f) {
+        $items = $items | Where-Object { !$_.PSIsContainer }
+    } elseif ($d) {
+        $items = $items | Where-Object { $_.PSIsContainer }
+    }
     $sameNameFolderExists = Test-Path -Path (Join-Path (Get-Location).Path (Split-Path $Destination -Leaf))
-    if ($sameNameFolderExists) {
-        $itemCount = (Get-ChildItem).Count - 1
-    } else {
-        $itemCount = (Get-ChildItem).Count
-    }
-    Get-ChildItem | Where-Object { $_.FullName -ne (Resolve-Path $Destination).Path } | ForEach-Object {
+    $itemCount = if ($sameNameFolderExists) { $items.Count - 1 } else { $items.Count }
+    $items | Where-Object { $_.FullName -ne (Resolve-Path $Destination).Path } | ForEach-Object {
+        $sourcePath = $_.FullName
+        $destPath = Join-Path $Destination $_.Name
+        $moveSuccessful = $false
         try {
-            Move-Item -Path $_.FullName -Destination $Destination -ErrorAction Stop
-        } catch { }
+            if (-not $h) {
+                Move-Item -Path $sourcePath -Destination $Destination -Force -ErrorAction Stop
+            } else {
+                Move-Item -Path $sourcePath -Destination $Destination -ErrorAction Stop
+            }
+            $moveSuccessful = $true
+        } catch {
+            if (-not ($_.Exception.Message -like "*Destination path cannot be a subdirectory of the source*")) {
+                Write-Host "Не удалось переместить$($_.Name): $_" -ForegroundColor Red
+            }
+        }
+        if (-not $moveSuccessful -and (Test-Path $destPath) -and (Get-Item $destPath).PSIsContainer) {
+            try {
+                Remove-Item $destPath -Force -Recurse -ErrorAction Stop
+            } catch {
+                Write-Host "Не удалось удалить пустую директорию ${destPath}: $_" -ForegroundColor Red
+            }
+        }
     }
-    if ($sameNameFolderExists) {
-        $movedCount = $itemCount+1 - (Get-ChildItem).Count
-    } else {
-        $movedCount = $itemCount - (Get-ChildItem).Count
+    $remainingItems = if ($h) { Get-ChildItem } else { Get-ChildItem -Force }
+    if ($f) {
+        $remainingItems = $remainingItems | Where-Object { !$_.PSIsContainer }
+    } elseif ($d) {
+        $remainingItems = $remainingItems | Where-Object { $_.PSIsContainer }
     }
-    if ($movedCount -lt $itemCount) {
-        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами" -ForegroundColor Yellow
-        Write-Host "Перемещено элементов: $movedCount из $itemCount" -ForegroundColor Green
-    }
-}
-Set-Alias -Name mvah -Value Move-AllItems
+    $movedCount = if ($sameNameFolderExists) { $itemCount + 1 - $remainingItems.Count } else { $itemCount - $remainingItems.Count }
 
-# Переместить все элементы (+hidden)
-function Move-AllItemsIncludingHidden {
+    if ($movedCount -lt $itemCount) {
+        Write-Host "Перемещено элементов: $movedCount из $itemCount" -ForegroundColor Green
+    } else { }
+}
+Set-Alias -Name mvi -Value Move-ItemsAdvanced
+
+function Move-ItemsToParent {
     param (
-        [Parameter(Mandatory = $true)]
-        [string] $Destination
+        [switch]$f,
+        [switch]$d,
+        [switch]$h
     )
-    if (-not (Test-Path -Path $Destination -PathType Container)) {
-        New-Item -Path $Destination -ItemType Directory -Force | Out-Null
-        Write-Host "Создана папка назначения: $Destination" -ForegroundColor Green
-    }
-    $sameNameFolderExists = Test-Path -Path (Join-Path (Get-Location).Path (Split-Path $Destination -Leaf))
-    if ($sameNameFolderExists) {
-        $itemCount = (Get-ChildItem -Force).Count - 1
-    } else {
-        $itemCount = (Get-ChildItem -Force).Count
-    }
-    Get-ChildItem -Force | Where-Object { $_.FullName -ne (Resolve-Path $Destination).Path } | ForEach-Object {
-        try {
-            Move-Item -Path $_.FullName -Destination $Destination -Force -ErrorAction Stop
-        } catch { }
-    }
-    if ($sameNameFolderExists) {
-        $movedCount = $itemCount+1 - (Get-ChildItem -Force).Count
-    } else {
-        $movedCount = $itemCount - (Get-ChildItem -Force).Count
-    }
-    if ($movedCount -lt $itemCount) {
-        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами" -ForegroundColor Yellow
-        Write-Host "Перемещено элементов: $movedCount из $itemCount" -ForegroundColor Green
-    }
-}
-Set-Alias -Name mva -Value Move-AllItemsIncludingHidden
-
-# Переместить все файлы в родительскую директорию (-hidden)
-function Move-AllFilesToParent {
-    $Destination = (Get-Item ..).FullName
-    $fileCount = (Get-ChildItem -File).Count
-    Get-ChildItem -File | Move-Item -Destination $Destination -ErrorAction SilentlyContinue
-    $movedCount = $fileCount - (Get-ChildItem -File).Count
-    if ($movedCount -lt $fileCount) {
-        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами" -ForegroundColor Yellow
-        Write-Host "Перемещено файлов: $movedCount из $fileCount" -ForegroundColor Green
-    }
-}
-Set-Alias -Name mvfhcc -Value Move-AllFilesToParent
-
-# Переместить все файлы в родительскую директорию (+hidden)
-function Move-AllFilesIncludingHiddenToParent {
-    $Destination = (Get-It-Force ..).FullName
-    $fileCount = (Get-ChildItem -File -Force).Count
-    Get-ChildItem -File -Force | Move-Item -Destination $Destination -ErrorAction SilentlyContinue
-    $movedCount = $fileCount - (Get-ChildItem -File -Force).Count
-    if ($movedCount -lt $fileCount) {
-        Write-Host "Некоторые файлы не удалось переместить. Проверьте права доступа или убедитесь, что файлы не используются другими процессами" -ForegroundColor Yellow
-        Write-Host "Перемещено файлов (включая скрытые): $movedCount из $fileCount" -ForegroundColor Green
-    }
-}
-Set-Alias -Name mvfcc -Value Move-AllFilesIncludingHiddenToParent
-
-# Перемещение всех элементов в родительскую папку (-hidden)
-function Move-AllItemsToParent {
-    $Destination = (Get-Item ..).FullName
-    $itemCount = (Get-ChildItem).Count
-    Get-ChildItem | Where-Object { $_.FullName -ne $PWD.Path -and $_.FullName -ne $Destination } | ForEach-Object {
-        try {
-            Move-Item -Path $_.FullName -Destination $Destination -ErrorAction Stop
-        } catch { }
-    }
-    $movedCount = $itemCount - (Get-ChildItem).Count
-    if ($movedCount -lt $itemCount - 1) {  # Вычитаем 1, так как текущая папка всегда остается
-        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами" -ForegroundColor Yellow
-        Write-Host "Перемещено элементов: $movedCount из $($itemCount - 1)" -ForegroundColor Green
-    }
-}
-Set-Alias -Name mvahcc -Value Move-AllItemsToParent
-
-# Перемещение всех элементов в родительскую папку (+hidden)
-function Move-AllItemsIncludingHiddenToParent {
     $Destination = (Get-Item -Force ..).FullName
-    $itemCount = (Get-ChildItem -Force).Count
-    Get-ChildItem -Force | Where-Object { $_.FullName -ne $PWD.Path -and $_.FullName -ne $Destination } | ForEach-Object {
+    $items = if ($h) { Get-ChildItem } else { Get-ChildItem -Force }
+    if ($f) {
+        $items = $items | Where-Object { !$_.PSIsContainer }
+    } elseif ($d) {
+        $items = $items | Where-Object { $_.PSIsContainer }
+    }
+    $itemCount = $items.Count
+    $items | Where-Object { $_.FullName -ne $PWD.Path -and $_.FullName -ne $Destination } | ForEach-Object {
+        $sourcePath = $_.FullName
+        $destPath = Join-Path $Destination $_.Name
+        $moveSuccessful = $false
         try {
-            Move-Item -Path $_.FullName -Destination $Destination -Force -ErrorAction Stop
-        } catch { }
+            if (-not $h) {
+                Move-Item -Path $sourcePath -Destination $Destination -Force -ErrorAction Stop
+            } else {
+                Move-Item -Path $sourcePath -Destination $Destination -ErrorAction Stop
+            }
+            $moveSuccessful = $true
+        } catch {
+            if (-not ($_.Exception.Message -like "*Destination path cannot be a subdirectory of the source*")) {
+                Write-Host "Не удалось переместить$($_.Name): $_" -ForegroundColor Red
+            }
+        }
+        if (-not $moveSuccessful -and (Test-Path $destPath) -and (Get-Item $destPath).PSIsContainer) {
+            try {
+                Remove-Item $destPath -Force -Recurse -ErrorAction Stop
+            } catch {
+                Write-Host "Не удалось удалить пустую директорию ${destPath}: $_" -ForegroundColor Red
+            }
+        }
     }
-    $movedCount = $itemCount - (Get-ChildItem -Force).Count
-    if ($movedCount -lt $itemCount - 1) {  # Вычитаем 1, так как текущая папка всегда остается
-        Write-Host "Некоторые элементы не удалось переместить. Проверьте права доступа или убедитесь, что элементы не используются другими процессами" -ForegroundColor Yellow
-        Write-Host "Перемещено элементов: $movedCount из $($itemCount - 1)" -ForegroundColor Green
+    $remainingItems = if ($h) { Get-ChildItem } else { Get-ChildItem -Force }
+    if ($f) {
+        $remainingItems = $remainingItems | Where-Object { !$_.PSIsContainer }
+    } elseif ($d) {
+        $remainingItems = $remainingItems | Where-Object { $_.PSIsContainer }
     }
+    $movedCount = $itemCount - $remainingItems.Count
+    if ($movedCount -lt $itemCount) {
+        Write-Host "Перемещено элементов: $movedCount из $itemCount" -ForegroundColor Green
+    } else { }
 }
-Set-Alias -Name mvacc -Value Move-AllItemsIncludingHiddenToParent
+Set-Alias -Name mvp -Value Move-ItemsToParent
 
 # Открытие Pycharm
 function Open-PyCharm {
@@ -619,34 +618,26 @@ function Set-ItemHidden {
 }
 Set-Alias -Name hide -Value Set-ItemHidden
 
-# Удаление всех файлов (RecycleBin) (+hidden)
-function Remove-AllFilesToRecycleBin {
+function Remove-ItemsToRecycleBin {
     param (
-        [string]$Path
+        [Parameter(Mandatory=$false)]
+        [string]$Path = (Get-Location).Path,
+        [switch]$f,
+        [switch]$d,
+        [switch]$h
     )
-    $files = Get-ChildItem -Path $Path -File -Force
-    if ($files.Count -eq 0) {
-        Write-Host "Нет файлов для удаления" -ForegroundColor Yellow
-        return
+    $items = if ($h) {
+        Get-ChildItem -Path $Path
+    } else {
+        Get-ChildItem -Path $Path -Force
     }
-    foreach ($file in $files) {
-        [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile(
-            $file.FullName,
-            [Microsoft.VisualBasic.FileIO.UIOption]::OnlyErrorDialogs,
-            [Microsoft.VisualBasic.FileIO.RecycleOption]::SendToRecycleBin
-        )
+    if ($f) {
+        $items = $items | Where-Object { !$_.PSIsContainer }
+    } elseif ($d) {
+        $items = $items | Where-Object { $_.PSIsContainer }
     }
-}
-Set-Alias -Name rmf -Value Remove-AllFilesToRecycleBin
-
-# Удаление всех элементов (RecycleBin) (+hidden)
-function Remove-AllItemsToRecycleBin {
-    param (
-        [string]$Path
-    )
-    $items = Get-ChildItem -Path $Path -Force
     if ($items.Count -eq 0) {
-        Write-Host "Нет элементов для удаления" -ForegroundColor Yellow
+        Write-Host "Нет элементов для удаления в $Path" -ForegroundColor Yellow
         return
     }
     foreach ($item in $items) {
@@ -665,7 +656,7 @@ function Remove-AllItemsToRecycleBin {
         }
     }
 }
-Set-Alias -Name rma -Value Remove-AllItemsToRecycleBin
+Set-Alias -Name rmi -Value Remove-ItemsToRecycleBin
 
 function New-MultipleItems {
     param (
@@ -693,12 +684,11 @@ function New-MultipleItems {
     }
 }
 Set-Alias -Name mf -Value New-MultipleItems
+Set-Alias -Name ">" -Value New-MultipleItems
+Set-Alias -Name touch -Value New-MultipleItems
 
 function Close-PowerShell {[System.Environment]::Exit(0)}
 Set-Alias -Name close -Value Close-PowerShell
-
-Set-Alias -Name open -Value start
-Set-Alias -Name ex -Value explorer
 
 function Open-ExplorerHere {explorer.exe .}
 Set-Alias -Name here -Value Open-ExplorerHere
