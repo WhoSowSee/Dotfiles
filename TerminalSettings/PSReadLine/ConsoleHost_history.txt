@@ -1,0 +1,610 @@
+ls
+cls
+net user defaultuser0 /active:no
+exit
+ll
+ls -fo
+.\setup.exe /configure .\configuration-Office2021Enterprise.xml
+irm https://get.activated.win | iex
+Get-ExecutionPolicy
+Set-ExecutionPolicy AllSigned
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+choco
+choco list
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+scoop
+clear
+scoop install --global sudo
+sudo
+choco install starship
+sudo choco install starship
+$profile
+notepad $profile
+. $profile
+x
+Install-Module -Name Terminal-Icons -Repository PSGallery
+sudo Install-Module -Name Terminal-Icons -Repository PSGallery
+cd .\Documents\
+cd .\PowerShell\
+cd .\Scripts\
+cd .\InstalledScriptInfos\
+cc
+cd .\Documents\PowerShell\
+sudo Install-Module -Name z -Force
+z whosowsee
+z d
+z d:
+sudo Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
+cd d:
+cd
+python
+cd .\.c
+cd .\.config\
+notepad starship.toml
+cd .\Windows\
+ccc
+сды
+cl
+cd .\whosowsee\
+mf main.go
+starship_config_path
+code $profile
+code
+tt
+mytree
+md test
+mf test.md
+mc TEST2
+cpc "D:\TEST\"
+rw
+rrad .\TEST\
+cpc ddasda
+cd .\TEST2
+rrad
+rradmin
+rradmin .\TEST\
+Install-Module -Name PSFzf -Scope CurrentUser -Force
+sl
+sudo choco install fzf
+D:\TEST\main.go
+
+cd D:\Icons
+D:\WindowsSetup
+cd \Deepl
+cd D:\TEST2
+cd D:\TEST
+cd D:\main.go
+open .\main.go
+where
+where code
+where D:
+whereis code
+which
+sudo choco install okular
+ex
+cd test2
+z test2
+cd .\Test2
+rr
+rmf
+rmfr
+bin
+rma
+ч
+rmas
+cpc dsadas
+cd D:
+z D:
+z D
+cd .\
+cd .\WindowsSetup\
+z d:
+z w
+z t
+z
+z who
+cd dL
+rn
+cpc .\main.go
+cpc test
+cp .\main.go
+cd .\test
+cd .\TEST2\
+csl
+cpc D:\TEST2\TEST\
+cpc D:\TEST2
+cpc d:
+rn .\test .\test3
+cpc .\test3
+clc
+here
+Get-Alias
+?
+ac .\Aliases.md das
+cpp D:\TEST
+cpi D:\TEST
+copy "D:\TEST"
+cpi D:\TEST -Recurse
+cp D:\TEST -Recurse
+cp dsadadas
+cp D:\TEST2
+cd .\test2 -Recurse
+cp D:\TEST2 -Recurse
+g
+git
+code git config
+git config
+git user.name
+git config --global user.name
+git config --global user.name "WhoSowSee"
+git config --global user.email "yanmishbash.i.s.2.21@gmail.com"
+git config --global user.email
+ssh-keygen
+cd .\.ssh\
+code .\id_rsa.pub
+git clone git@github.com:WhoSowSee/Settings.git
+cd .\Settings\
+gits
+git add .
+git commit -m "Update settings"
+git push
+whereis choco
+whereis okular
+print
+lcls
+lc
+slcs
+eixt
+cd .\WoMic\
+ex .
+start D:\Aliases.md
+closewt
+close
+exitwt
+mc Test
+cd ".\Program Files"
+go
+gr .\main.go
+cd .\go\
+cd .\pkg\
+go -V
+go -version
+go -v
+go version
+go run "d:\GolangProject\GoLearning\main.go"
+mc GitExcludeWatcher
+code .
+npm
+npm install -g yo generator-code
+npm install -g npm@10.8.2
+npm -V
+npm versions
+npm version
+yo code
+mc TestExt
+git init
+git -m commit "test.md"
+git commit -m "test.md"
+npm install
+cd .\GitExcludeWatcher\
+rr .\git-exclude-watcher\
+npm init -y
+npm install --save-dev @types/vscode @types/nodegit nodegit
+mc GitExcludeWatcher2
+mc WorkingVersions
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\src\extension.ts"
+cd .\TestExt\
+rr .\.git
+rr .\.gitignore
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\src\extension.ts" extension2.ts
+code .\extension2.ts
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\src\extension.ts" extension3.ts
+rr .\extension3.ts
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\src" src2
+cd .\src2\
+cd .\src\
+rr .\src2\
+c
+cpc "D:\WindowsSetup\Terminal\" WinSet
+cd .\WinSet\
+cd .\Terminal\
+rr .\WinSet\
+cpc "D:\WindowsSetup\" WinSet
+cd .\dsad\
+cpc "D:\WindowsSetup\Terminal\" "D:\WorkingVersions\" wins
+cd .\wins\
+cd .\WorkingVersions\
+rr .\wins\
+cpc "D:\WindowsSetup\Terminal\" "D:\WorkingVersions\Term" wins
+cd .\Term\
+cpc "D:\WindowsSetup\Terminal\Chocolatey.md" "D:\WorkingVersions\Term" wins
+cpc "D:\WindowsSetup\Terminal\Chocolatey.md" wins
+rr .\wins
+cpc "D:\WindowsSetup\Terminal\" wins.txt
+cd .\wins.txt\
+tw
+cpc "D:\WindowsSetup\Terminal\" wins
+lcs
+rr .\wins.txt\
+cpc "D:\WindowsSetup\Terminal\Chocolatey.md" wins.txt
+code .\wins.txt
+rr .\wins.txt
+cpc "D:\WindowsSetup\Terminal\Chocolatey.md" "D:\WorkingVersions\" wins
+gitl
+cd D:\Settings\
+cd .\TerminalSettings\
+open .\ProfileSettings.txt
+code .\ProfileSettings.txt
+cd setii
+cd .\Office\
+cat .\configuration-Office2024Enterprise.xml
+cpc .\configuration-Office2024Enterprise.xml .\configuration-Office2021Enterprise.xml
+cd .\configuration-Office2021Enterprise.xml\
+cpc .\configuration-Office2024Enterprise.xml configuration-Office2021Enterprise.xml
+code .\configuration-Office2021Enterprise.xml
+code .\configuration-Office2024Enterprise.xml
+cd .\StarshipSettings\
+code .\starship.toml
+cd .\VSCodeSettings\
+code .\key.json .\settings.json
+mc Typora
+cpc "C:\Users\whosowsee\AppData\Roaming\Typora\conf\conf.user.json"
+cpc "C:\Users\whosowsee\AppData\Roaming\Typora\themes"
+cd .\themes\
+git commit -m "Update settings terminal profile. Added new settings for Typora"
+gtis
+cd .\GitExcludeWatcher2
+code .\extension3.ts
+mf test4.md test5.md test6.md test7.md test8.md test9.md test10.md test11.md test12.md test 13.md test14.md test15.md test16.md test17.md test18.md test19.md test20.md
+md test2 test3
+mdd test2 test3
+rr .\test
+rn 13 test13.md
+rn 13.md test13.md
+mdd test4 test5 test6
+mdd test7 test8
+mf test21
+mf test22 test23
+rn test21 test21.md
+rn test22 test22.md
+rn test23 test23.md
+mf test24.md test25.md
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\package.json" package.json
+code .\package.json
+npm install lodash
+npm install @types/lodash
+npm install -g vsce
+npm uninstall -g vsce
+npm install -g @vscode/vsce
+vsce package
+cd .\git-exclude-watcher\
+git commit -m "Stable version 1.0.0"
+git branch -M main
+git remote add origin git@github.com:WhoSowSee/vscode-git-exclude-watcher.git
+git push -u origin main
+cd :
+cd .\GolangProject\
+cd .\GoLearning\
+code $
+code $PROFILE
+Cd Test
+rr .\.git\
+cd .\GolangProject\GoLearning\
+cd .\.git\
+rrad .g
+rrad .\.git\
+rr .\test.txt
+rrad .\test.txt
+rradr .\test.txt
+rwad
+rradr .\test\
+mdd test
+mdd test2
+mdd test test2
+mdd test3 test4
+mdd test3 test5
+mdd test6
+mf test1.md
+rm test test2
+rm test
+mdd test7
+mf test1.txt
+mdd test8
+mdd test9
+mf test2.txt
+mf test2.md
+mf test2.md test.md
+mdd test test22
+mdd test test23
+mdd test test24
+New-Item text.md
+mf test2.md test.md test3.md
+mf test2.md test.md test4.md
+rr test.md
+rr test2.md test3.md
+rr test4.md test3.md
+rr test
+cd .\Test
+rm .\test\
+cd D:\Test
+mc test
+cd D:\GitExcludeWatcher\
+rradr .\.git
+g init
+sudo fsutil behavior query DisableDeleteNotify
+rr .\.vscode
+git commit -m "Stable version 1.0.1"
+git remote add origin git@github.com:WhoSowSee/vscode-git-exclude-watcher-source-code.git
+gld .
+cd D:\TESSST\
+mc TESSST
+cd .\Wallpaper\
+open .\
+open .\zatmenie_luna_svet_120001_1366x768.jpg
+z D:\
+z wh
+z gl
+z go
+z GolangProject
+slc
+cd D:\GolangProject\GoLearning\
+vim .\main.go
+powershell_ise .\main.go
+sudo choco install micro
+micro
+micro .\main.go
+m .\main.go
+sudo choco install nano
+nano
+psano
+Get-Content .\main.go
+cat .\main.go
+gc .\main.go
+edit .\main.go
+type .\main.go
+more .\main.go
+ipconfig
+ssh root@109.120.134.69
+ssh -L 8384:localhost:8384 your_username@remote_server_ip
+ssh -L 8384:localhost:8384 root@109.120.134.69
+Get-NetTCPConnection | Where-Object { $_.State -eq "Established" } | Format-Table -Property LocalAddress,LocalPort,RemoteAddress,RemotePort,State,OwningProcess
+netstat -nb
+z g
+z GoLearning
+z D:\GolangProject\GoLearning\
+z golang
+z Go
+d
+dir
+ex C:\ProgramData\chocolatey\bin\choco.exe
+ex C:\ProgramData\chocolatey\bin
+cinsta
+cinst
+refreshenv
+z 'D:\GolangProject\GoLearning'
+dev
+devl
+up
+obs
+obs .\p.md
+cd .\ObsidianVault\
+cd .\Zettelkasten\
+obs .\Debt.md
+obs .\Resource.md
+obs .\Aliases.md
+rn .\keysmoothscroll.txt .\keysmoothscroll.md
+gld
+obs -c .\Aliases.md
+z .\ObsidianVault\Zettelkasten\
+z Obs
+z Zettel
+rr .\Aliases 1 '.\Aliases 4.md' '.\Aliases 5.md' '.\Aliases 2.md' '.\Aliases 3.md'
+obs '.\Aliases 2.md' '.\Aliases 1.md'
+rr '.\Aliases 2.md' '.\Aliases 1.md'
+rr .\Resource.md
+mf main.md
+rrad .\main.md
+rr .\main.md
+p
+n .\Aliases.md
+m .\Aliases.md
+rr .\aliases2.md
+open .\al
+open .\al.md
+rr .\al.md
+cd D:\Aliases.md
+cd Settings
+code .\ProfileSettings.ps1
+ob
+cd .\Books\
+cd .\GolangBooks\
+ob '.\Pro Go - Фриман Адам.pdf'
+dw
+cd .\micro\
+code .\settings.json
+m .\settings.json
+m .\b
+m .\bindings.json
+code .\main.go
+mf main.py
+m .\main.py
+code .\main.py
+rr .\main.py
+micro run .\main.go
+micro -plugin install filemanager
+micro plugin list
+plugin list
+m
+code .\bindings.json
+cd .\plug\
+cd .\filemanager\
+code .\filemanager.lua
+micro.RegisterKeyBinding("Enter", "TryOpenAtCursor", function()
+if micro.CurPane() == tree_view then
+try_open_at_cursor()
+micro -plugin install palettero
+micro -plugin install jump
+micro -plugin remove palettero
+micro list
+mc PythonProject
+git clone git@github.com:WhoSowSee/TimeTracker.git
+cd .\TimeTracker\
+m .\README.md
+micro -plugin install fzf
+micro -plugin install go
+micro -plugin remove fzf
+micro -plugin remove jump
+micro -plugin list
+micro -plugin install detectindent
+cpc C:\Users\whosowsee\Downloads
+rr .\Downloads\
+cpc C:\Users\whosowsee\Downloads\notes
+cd .\notes\
+count
+fc
+cf
+ac
+cf -h
+mf
+rn .\notes\ Simplenote
+cd .\.trash\
+sudo wsl --install
+mf .wslconfig
+code .\.wslconfig
+open .\.wslconfig
+wsl --shutdown
+wsl --list --running
+wsl --update
+md GitLearning
+md LinuxLearning
+cd .\LinuxLearning\
+mc Terminal
+mf Commands.md
+open .\Commands.md
+code .\Commands.md
+cd whosowsee\AppData\Local\Programs\Microsoft VS Code\resources\app\
+cd AppData\Local\Programs\Microsoft VS Code\resources\app\
+cd Books
+cp D:\Books\GolangBooks\
+cp -r D:\Books\GolangBooks\
+cd .\LinuxLearning\Terminal\
+pwd
+cd .\Books\GolangBooks\
+да
+lf
+la
+lsd
+cd .\Books
+ob .\GolangBooks\
+ca -h
+ob -c .\GolangBooks\
+ob GolangBooks
+ob D:\Books\GolangBooks\
+count -f
+count -d
+count -d -h
+mc TESTCLOSE
+mc TEST
+md TST
+cd .\TST\
+cd .\TESTCLOSE\TEST\TST\
+cd ..
+touch test
+cp -r D:\Books\GolangBooks
+cp -r D:\Books\GolangBooks dir
+cd .\dir\
+cp -r 'D:\Books\GolangBooks\Pro Go - Фриман Адам.pdf' test.pdf
+open .\test.pdf
+rr .\test.pdf
+cpc 'D:\Books\GolangBooks\Pro Go - Фриман Адам.pdf' test.pdf
+cpc D:\Books\GolangBooks dir
+cpc D:\Books\GolangBooks dir.txt
+cp -r D:\Books\GolangBooks dir.txt
+cd .\dir.txt\
+less
+cd .\PythonProject\
+cat .\main.py
+more .\main.py
+Get-ChildItem | Out-Host -Paging
+Get-ChildItem | Out-Host -Paging .\main.py
+Out-Host -Paging .\main.py
+Get-Content .\main.py | Out-Host -Paging
+sudo choco install less
+less .\main.py
+less main.py
+less "main.py"
+less ".\main.py"
+less "D:\PythonProject\TimeTracker\main.py"
+less D:\PythonProject\TimeTracker\main.py
+cd D:\PythonProject\TimeTracker\
+less --help
+$OutputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Get-Content russian_text.txt | less
+$OutputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::Default
+Get-Content .\main.py | less
+lessru .\main.py
+wget
+choco upgrade less
+choco --all upgrade
+Unicode-Less .\main.py
+Get-Content -Path .\main.py -Encoding UTF8 | less
+sudo list
+scoop list
+less .\main.go
+l .\main.go
+cd \
+> file.txt
+chrome
+edge
+ls -a
+ls -l
+md file
+l .\Themes.md
+cat .\Themes.md
+mc TESTDEL && > file.txt
+wsl -l
+wsl --unregister Ubuntu
+type ls
+type rn
+type .\p.md
+l --help
+> file2.txt
+hide file2.txt
+rmi
+open .\ProfileSettings.ps1
+rmi -f
+rmi -f -h
+rmi -d
+rd
+rn test ttest
+cd test
+cd .\ttest\
+hide .\file.txt
+mvp
+mvp -h
+mvp -f
+mvi
+cd settings
+set
+settings
+conf
+setup
+z S
+z Set
+z D:\Settings
+z Settings
+z Setti
+mc Micro
+ex C:\Users\whosowsee\.config\micro\
+cpc C:\Users\whosowsee\.config\micro\settings.json C:\Users\whosowsee\.config\micro\bindings.json
+cpc C:\Users\whosowsee\.config\micro\settings.json
+cpc C:\Users\whosowsee\.config\micro\bindings.json
+cd .\Micro\
+git commit -m "Micro conf files"
+tm
+lf -h
+lh
+~
+ex $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine
+mc TestGo

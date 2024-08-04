@@ -1,0 +1,8 @@
+{
+    "colorscheme": "gruvbox",
+    "ft:py": {
+        "tabstospaces": true
+    },
+    "saveundo": true,
+    "softwrap": true
+}

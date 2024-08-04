@@ -1,0 +1,6 @@
+{
+	"Alt-/": "lua:comment.comment",
+	"Alt-e": "command:tree",
+	"CtrlUnderscore": "lua:comment.comment",
+	"F6": "command-edit:gorename"
+}
