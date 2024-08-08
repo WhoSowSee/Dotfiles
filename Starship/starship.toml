@@ -33,8 +33,8 @@ truncate_to_repo = false
 'Music' = ' '
 'Pictures' = ' '
 '~' = '󱂵 '
-'D' = ''
-'C' = ''
+'D:' = ' '
+'C:' = ' '
 
 [git_branch]
 style = 'fg:green'
