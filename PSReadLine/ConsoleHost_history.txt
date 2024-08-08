@@ -1,0 +1,4342 @@
+ls
+cls
+net user defaultuser0 /active:no
+exit
+ll
+ls -fo
+.\setup.exe /configure .\configuration-Office2021Enterprise.xml
+irm https://get.activated.win | iex
+Get-ExecutionPolicy
+Set-ExecutionPolicy AllSigned
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+choco
+choco list
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+scoop
+clear
+scoop install --global sudo
+sudo
+choco install starship
+sudo choco install starship
+$profile
+notepad $profile
+. $profile
+x
+Install-Module -Name Terminal-Icons -Repository PSGallery
+sudo Install-Module -Name Terminal-Icons -Repository PSGallery
+cd .\Documents\
+cd .\PowerShell\
+cd .\Scripts\
+cd .\InstalledScriptInfos\
+cc
+cd .\Documents\PowerShell\
+sudo Install-Module -Name z -Force
+z whosowsee
+z d
+z d:
+sudo Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
+cd d:
+cd
+python
+cd .\.c
+cd .\.config\
+notepad starship.toml
+cd .\Windows\
+ccc
+сды
+cl
+cd .\whosowsee\
+mf main.go
+starship_config_path
+code $profile
+code
+tt
+mytree
+md test
+mf test.md
+mc TEST2
+cpc "D:\TEST\"
+rw
+rrad .\TEST\
+cpc ddasda
+cd .\TEST2
+rrad
+rradmin
+rradmin .\TEST\
+Install-Module -Name PSFzf -Scope CurrentUser -Force
+sl
+sudo choco install fzf
+D:\TEST\main.go
+
+cd D:\Icons
+D:\WindowsSetup
+cd \Deepl
+cd D:\TEST2
+cd D:\TEST
+cd D:\main.go
+open .\main.go
+where
+where code
+where D:
+whereis code
+which
+sudo choco install okular
+ex
+cd test2
+z test2
+cd .\Test2
+rr
+rmf
+rmfr
+bin
+rma
+ч
+rmas
+cpc dsadas
+cd D:
+z D:
+z D
+cd .\
+cd .\WindowsSetup\
+z d:
+z w
+z t
+z
+z who
+cd dL
+rn
+cpc .\main.go
+cpc test
+cp .\main.go
+cd .\test
+cd .\TEST2\
+csl
+cpc D:\TEST2\TEST\
+cpc D:\TEST2
+cpc d:
+rn .\test .\test3
+cpc .\test3
+clc
+here
+Get-Alias
+?
+ac .\Aliases.md das
+cpp D:\TEST
+cpi D:\TEST
+copy "D:\TEST"
+cpi D:\TEST -Recurse
+cp D:\TEST -Recurse
+cp dsadadas
+cp D:\TEST2
+cd .\test2 -Recurse
+cp D:\TEST2 -Recurse
+g
+git
+code git config
+git config
+git user.name
+git config --global user.name
+git config --global user.name "WhoSowSee"
+git config --global user.email "yanmishbash.i.s.2.21@gmail.com"
+git config --global user.email
+ssh-keygen
+cd .\.ssh\
+code .\id_rsa.pub
+git clone git@github.com:WhoSowSee/Settings.git
+cd .\Settings\
+gits
+git add .
+git commit -m "Update settings"
+git push
+whereis choco
+whereis okular
+print
+lcls
+lc
+slcs
+eixt
+cd .\WoMic\
+ex .
+start D:\Aliases.md
+closewt
+close
+exitwt
+mc Test
+cd ".\Program Files"
+go
+gr .\main.go
+cd .\go\
+cd .\pkg\
+go -V
+go -version
+go -v
+go version
+go run "d:\GolangProject\GoLearning\main.go"
+mc GitExcludeWatcher
+code .
+npm
+npm install -g yo generator-code
+npm install -g npm@10.8.2
+npm -V
+npm versions
+npm version
+yo code
+mc TestExt
+git init
+git -m commit "test.md"
+git commit -m "test.md"
+npm install
+cd .\GitExcludeWatcher\
+rr .\git-exclude-watcher\
+npm init -y
+npm install --save-dev @types/vscode @types/nodegit nodegit
+mc GitExcludeWatcher2
+mc WorkingVersions
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\src\extension.ts"
+cd .\TestExt\
+rr .\.git
+rr .\.gitignore
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\src\extension.ts" extension2.ts
+code .\extension2.ts
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\src\extension.ts" extension3.ts
+rr .\extension3.ts
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\src" src2
+cd .\src2\
+cd .\src\
+rr .\src2\
+c
+cpc "D:\WindowsSetup\Terminal\" WinSet
+cd .\WinSet\
+cd .\Terminal\
+rr .\WinSet\
+cpc "D:\WindowsSetup\" WinSet
+cd .\dsad\
+cpc "D:\WindowsSetup\Terminal\" "D:\WorkingVersions\" wins
+cd .\wins\
+cd .\WorkingVersions\
+rr .\wins\
+cpc "D:\WindowsSetup\Terminal\" "D:\WorkingVersions\Term" wins
+cd .\Term\
+cpc "D:\WindowsSetup\Terminal\Chocolatey.md" "D:\WorkingVersions\Term" wins
+cpc "D:\WindowsSetup\Terminal\Chocolatey.md" wins
+rr .\wins
+cpc "D:\WindowsSetup\Terminal\" wins.txt
+cd .\wins.txt\
+tw
+cpc "D:\WindowsSetup\Terminal\" wins
+lcs
+rr .\wins.txt\
+cpc "D:\WindowsSetup\Terminal\Chocolatey.md" wins.txt
+code .\wins.txt
+rr .\wins.txt
+cpc "D:\WindowsSetup\Terminal\Chocolatey.md" "D:\WorkingVersions\" wins
+gitl
+cd D:\Settings\
+cd .\TerminalSettings\
+open .\ProfileSettings.txt
+code .\ProfileSettings.txt
+cd setii
+cd .\Office\
+cat .\configuration-Office2024Enterprise.xml
+cpc .\configuration-Office2024Enterprise.xml .\configuration-Office2021Enterprise.xml
+cd .\configuration-Office2021Enterprise.xml\
+cpc .\configuration-Office2024Enterprise.xml configuration-Office2021Enterprise.xml
+code .\configuration-Office2021Enterprise.xml
+code .\configuration-Office2024Enterprise.xml
+cd .\StarshipSettings\
+code .\starship.toml
+cd .\VSCodeSettings\
+code .\key.json .\settings.json
+mc Typora
+cpc "C:\Users\whosowsee\AppData\Roaming\Typora\conf\conf.user.json"
+cpc "C:\Users\whosowsee\AppData\Roaming\Typora\themes"
+cd .\themes\
+git commit -m "Update settings terminal profile. Added new settings for Typora"
+gtis
+cd .\GitExcludeWatcher2
+code .\extension3.ts
+mf test4.md test5.md test6.md test7.md test8.md test9.md test10.md test11.md test12.md test 13.md test14.md test15.md test16.md test17.md test18.md test19.md test20.md
+md test2 test3
+mdd test2 test3
+rr .\test
+rn 13 test13.md
+rn 13.md test13.md
+mdd test4 test5 test6
+mdd test7 test8
+mf test21
+mf test22 test23
+rn test21 test21.md
+rn test22 test22.md
+rn test23 test23.md
+mf test24.md test25.md
+cpc "D:\GitExcludeWatcher\git-exclude-watcher\package.json" package.json
+code .\package.json
+npm install lodash
+npm install @types/lodash
+npm install -g vsce
+npm uninstall -g vsce
+npm install -g @vscode/vsce
+vsce package
+cd .\git-exclude-watcher\
+git commit -m "Stable version 1.0.0"
+git branch -M main
+git remote add origin git@github.com:WhoSowSee/vscode-git-exclude-watcher.git
+git push -u origin main
+cd :
+cd .\GolangProject\
+cd .\GoLearning\
+code $
+code $PROFILE
+Cd Test
+rr .\.git\
+cd .\GolangProject\GoLearning\
+cd .\.git\
+rrad .g
+rrad .\.git\
+rr .\test.txt
+rrad .\test.txt
+rradr .\test.txt
+rwad
+rradr .\test\
+mdd test
+mdd test2
+mdd test test2
+mdd test3 test4
+mdd test3 test5
+mdd test6
+mf test1.md
+rm test test2
+rm test
+mdd test7
+mf test1.txt
+mdd test8
+mdd test9
+mf test2.txt
+mf test2.md
+mf test2.md test.md
+mdd test test22
+mdd test test23
+mdd test test24
+New-Item text.md
+mf test2.md test.md test3.md
+mf test2.md test.md test4.md
+rr test.md
+rr test2.md test3.md
+rr test4.md test3.md
+rr test
+cd .\Test
+rm .\test\
+cd D:\Test
+mc test
+cd D:\GitExcludeWatcher\
+rradr .\.git
+g init
+sudo fsutil behavior query DisableDeleteNotify
+rr .\.vscode
+git commit -m "Stable version 1.0.1"
+git remote add origin git@github.com:WhoSowSee/vscode-git-exclude-watcher-source-code.git
+gld .
+cd D:\TESSST\
+mc TESSST
+cd .\Wallpaper\
+open .\
+open .\zatmenie_luna_svet_120001_1366x768.jpg
+z D:\
+z wh
+z gl
+z go
+z GolangProject
+slc
+cd D:\GolangProject\GoLearning\
+vim .\main.go
+powershell_ise .\main.go
+sudo choco install micro
+micro
+micro .\main.go
+m .\main.go
+sudo choco install nano
+nano
+psano
+Get-Content .\main.go
+cat .\main.go
+gc .\main.go
+edit .\main.go
+type .\main.go
+more .\main.go
+ipconfig
+ssh root@109.120.134.69
+ssh -L 8384:localhost:8384 your_username@remote_server_ip
+ssh -L 8384:localhost:8384 root@109.120.134.69
+Get-NetTCPConnection | Where-Object { $_.State -eq "Established" } | Format-Table -Property LocalAddress,LocalPort,RemoteAddress,RemotePort,State,OwningProcess
+netstat -nb
+z g
+z GoLearning
+z D:\GolangProject\GoLearning\
+z golang
+z Go
+d
+dir
+ex C:\ProgramData\chocolatey\bin\choco.exe
+ex C:\ProgramData\chocolatey\bin
+cinsta
+cinst
+refreshenv
+z 'D:\GolangProject\GoLearning'
+dev
+devl
+up
+obs
+obs .\p.md
+cd .\ObsidianVault\
+cd .\Zettelkasten\
+obs .\Debt.md
+obs .\Resource.md
+obs .\Aliases.md
+rn .\keysmoothscroll.txt .\keysmoothscroll.md
+gld
+obs -c .\Aliases.md
+z .\ObsidianVault\Zettelkasten\
+z Obs
+z Zettel
+rr .\Aliases 1 '.\Aliases 4.md' '.\Aliases 5.md' '.\Aliases 2.md' '.\Aliases 3.md'
+obs '.\Aliases 2.md' '.\Aliases 1.md'
+rr '.\Aliases 2.md' '.\Aliases 1.md'
+rr .\Resource.md
+mf main.md
+rrad .\main.md
+rr .\main.md
+p
+n .\Aliases.md
+m .\Aliases.md
+rr .\aliases2.md
+open .\al
+open .\al.md
+rr .\al.md
+cd D:\Aliases.md
+cd Settings
+code .\ProfileSettings.ps1
+ob
+cd .\Books\
+cd .\GolangBooks\
+ob '.\Pro Go - Фриман Адам.pdf'
+dw
+cd .\micro\
+code .\settings.json
+m .\settings.json
+m .\b
+m .\bindings.json
+code .\main.go
+mf main.py
+m .\main.py
+code .\main.py
+rr .\main.py
+micro run .\main.go
+micro -plugin install filemanager
+micro plugin list
+plugin list
+m
+code .\bindings.json
+cd .\plug\
+cd .\filemanager\
+code .\filemanager.lua
+micro.RegisterKeyBinding("Enter", "TryOpenAtCursor", function()
+if micro.CurPane() == tree_view then
+try_open_at_cursor()
+micro -plugin install palettero
+micro -plugin install jump
+micro -plugin remove palettero
+micro list
+mc PythonProject
+git clone git@github.com:WhoSowSee/TimeTracker.git
+cd .\TimeTracker\
+m .\README.md
+micro -plugin install fzf
+micro -plugin install go
+micro -plugin remove fzf
+micro -plugin remove jump
+micro -plugin list
+micro -plugin install detectindent
+cpc C:\Users\whosowsee\Downloads
+rr .\Downloads\
+cpc C:\Users\whosowsee\Downloads\notes
+cd .\notes\
+count
+fc
+cf
+ac
+cf -h
+mf
+rn .\notes\ Simplenote
+cd .\.trash\
+sudo wsl --install
+mf .wslconfig
+code .\.wslconfig
+open .\.wslconfig
+wsl --shutdown
+wsl --list --running
+wsl --update
+md GitLearning
+md LinuxLearning
+cd .\LinuxLearning\
+mc Terminal
+mf Commands.md
+open .\Commands.md
+code .\Commands.md
+cd whosowsee\AppData\Local\Programs\Microsoft VS Code\resources\app\
+cd AppData\Local\Programs\Microsoft VS Code\resources\app\
+cd Books
+cp D:\Books\GolangBooks\
+cp -r D:\Books\GolangBooks\
+cd .\LinuxLearning\Terminal\
+pwd
+cd .\Books\GolangBooks\
+да
+lf
+la
+lsd
+cd .\Books
+ob .\GolangBooks\
+ca -h
+ob -c .\GolangBooks\
+ob GolangBooks
+ob D:\Books\GolangBooks\
+count -f
+count -d
+count -d -h
+mc TESTCLOSE
+mc TEST
+md TST
+cd .\TST\
+cd .\TESTCLOSE\TEST\TST\
+cd ..
+touch test
+cp -r D:\Books\GolangBooks
+cp -r D:\Books\GolangBooks dir
+cd .\dir\
+cp -r 'D:\Books\GolangBooks\Pro Go - Фриман Адам.pdf' test.pdf
+open .\test.pdf
+rr .\test.pdf
+cpc 'D:\Books\GolangBooks\Pro Go - Фриман Адам.pdf' test.pdf
+cpc D:\Books\GolangBooks dir
+cpc D:\Books\GolangBooks dir.txt
+cp -r D:\Books\GolangBooks dir.txt
+cd .\dir.txt\
+less
+cd .\PythonProject\
+cat .\main.py
+more .\main.py
+Get-ChildItem | Out-Host -Paging
+Get-ChildItem | Out-Host -Paging .\main.py
+Out-Host -Paging .\main.py
+Get-Content .\main.py | Out-Host -Paging
+sudo choco install less
+less .\main.py
+less main.py
+less "main.py"
+less ".\main.py"
+less "D:\PythonProject\TimeTracker\main.py"
+less D:\PythonProject\TimeTracker\main.py
+cd D:\PythonProject\TimeTracker\
+less --help
+$OutputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Get-Content russian_text.txt | less
+$OutputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::Default
+Get-Content .\main.py | less
+lessru .\main.py
+wget
+choco upgrade less
+choco --all upgrade
+Unicode-Less .\main.py
+Get-Content -Path .\main.py -Encoding UTF8 | less
+sudo list
+scoop list
+lless '.\Pro Go - Фриман Адам.pdf'
+less '.\Pro Go - Фриман Адам.pdf'
+less .\main.go
+l .\main.go
+cd \
+> file.txt
+llf
+chrome
+edge
+ls -a
+ls -l
+md file
+rr .\file
+l .\Themes.md
+cat .\Themes.md
+mc TESTDEL && > file.txt
+wsl -l
+wsl --unregister Ubuntu
+type ls
+type rn
+type .\p.md
+l --help
+> file2.txt
+hide file2.txt
+rmi
+open .\ProfileSettings.ps1
+rmi -f
+rmi -f -h
+rmi -d
+rd
+rn test ttest
+cd test
+cd .\ttest\
+hide .\file.txt
+mvp
+mvp -h
+mvp -f
+mvi
+cd settings
+set
+settings
+conf
+setup
+z S
+z Set
+z D:\Settings
+z Settings
+z Setti
+mc Micro
+ex C:\Users\whosowsee\.config\micro\
+cpc C:\Users\whosowsee\.config\micro\settings.json C:\Users\whosowsee\.config\micro\bindings.json
+cpc C:\Users\whosowsee\.config\micro\settings.json
+cpc C:\Users\whosowsee\.config\micro\bindings.json
+cd .\Micro\
+git commit -m "Micro conf files"
+tm
+lf -h
+lh
+~
+ex $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine
+mc TestGo
+cls
+ll
+cls
+lf
+cls
+cls
+ll
+lh
+cls
+ll
+lh
+cls
+ll
+cls
+d
+cd Settings
+cd .\TerminalSettings\
+cpc C:\Users\whosowsee\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+code .\ConsoleHost_history.txt
+cls
+ll
+lf
+cls
+lf
+code .\ConsoleHost_history.txt
+cls
+ll
+gits
+ex .
+gits
+code $PROFILE
+gits
+git add .
+git commit -m "Updated location conf. PSReadLine history file"
+git push
+ll
+gits
+ll
+cc
+ll
+gits
+cls
+cd !!
+cls
+gits
+git
+cls
+sudo !!
+cls
+. $profile
+!!`
+
+cls
+lf
+!!`
+
+cls
+. $profile
+!!`
+
+!!()
+cls
+!`
+
+. $profile
+!!`
+
+. $profile
+cul
+cls
+lf
+cul
+. $profile
+cul
+cls
+lf
+cul
+cls
+cul
+cls
+!-1
+сды
+cls
+!1
+cls
+$$
+clear
+$$
+cls
+sudo $$
+cls
+$
+$$
+cls
+choco list
+$$
+choco $$
+cul
+cls
+cul
+cls
+cul
+list
+choco cul
+$$
+list
+choco $$
+cls
+z
+z d
+z d -Remove
+ll
+cd
+cld
+cls
+z d
+z list
+cls
+ll
+z
+Get-Help z -Detailed
+z -ListFiles
+z Obs
+cd
+z Obs
+cls
+ll
+z -ListFiles
+z D:\ObsidianVault\Zettelkasten\notes -Remove
+d
+cd
+z d
+z -ListFiles
+z D:\ObsidianVault\Zettelkasten
+cd
+z D:
+cls
+cd
+z D
+z d
+z D:\ObsidianVault\Zettelkasten
+Get-Help z -Detailed
+cls
+. $profile
+cls
+r
+cls
+cd
+cls
+ll
+cls
+~
+cls
+cd
+cls
+ll
+cls
+clear
+cd d:
+cls
+ll
+cd
+cd d:
+z d:
+cls
+ll
+cd
+cls
+C:\Users\whosowsee\Favorites
+cls
+ll
+cls
+$env:FZF_DEFAULT_OPTS = '--height 20'
+$env:FZF_DEFAULT_OPTS = '--height 10'
+$env:FZF_DEFAULT_OPTS = '--height 15'
+$env:FZF_DEFAULT_OPTS = '--height 20'
+cls
+$env:FZF_DEFAULT_OPTS = '--height 15'
+. $profile
+Set-PSReadLineOption -HistoryNoDuplicates $true
+сды
+cls
+. $profile
+cls
+ll
+cls
+ll
+cls
+cd !!
+cls
+. $profile
+cls
+. $profile
+cls
+ll
+cls
+cpc C:\Users\whosowsee\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+ll
+lf
+rr .\ConsoleHost_history.txt
+ll
+cls
+
+
+cls
+dsadasdasa
+cls
+code C:\Users\whosowsee\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+cls
+ll
+cls
+clear
+cls
+ll
+cls
+ll
+cls
+dsad  
+
+cls
+. $profile
+cls
+Get-PSReadlineOption | fl *history*
+cls
+$env:FZF_DEFAULT_OPTS = '--height 20'
+cls
+. $profile
+cls
+. $profile
+cls
+. $profile
+cls
+. $profile
+cls
+. $profile
+cls
+choco list
+nano
+. $profile
+choco uninstall nano
+sudo $$
+$$
+sudo choco uninstall nano
+choco list
+sudo choco uninstall nano-win 7.2.36.20230412
+choco list
+choco upgrade all
+sudo choco upgrade all
+choco list
+cls
+z Books
+z D:\Books\
+cd
+z Books
+cd .\GolangBooks\
+open '.\Pro Go - Фриман Адам.pdf'
+sudo choco install yazi
+yazi
+cls
+ll
+cls
+d
+y
+cls
+code $PROFILE
+cls
+. $profile
+cls
+y
+cls
+ll
+cls
+choco list
+sudo choco uninstall yazi
+y
+cls
+scoop bucket add main
+scoop install main/yazi
+sudo scoop install main/yazi
+scoop bucket add main
+sudo scoop install main/yazi
+cls
+. $profile
+y
+d
+y
+cls
+cd
+ll
+cd .\.co
+cd .\.config\
+ll
+cc
+lf
+cls
+lh
+ex .
+sudo scoop uninstall main/yazi
+cls
+sudo choco install yazi
+sudo choco install yazi -y
+cls
+y
+q d:
+y d:
+wsl --shutdown
+сдуфк
+clear
+ll
+cls
+y
+ex %APPDATA%\yazi\config\yazi.toml
+whereis y
+whereis yazi
+ex C:\ProgramData\chocolatey\bin\yazi.exe
+ex C:\ProgramData\chocolatey\bin
+sudo choco install ueberzugpp ffmpegthumbnailer poppler
+sudo choco install ffmpegthumbnailer
+clear
+ll
+y
+d
+y
+choco list
+sudo choco uninstall ueberzugpp ffmpegthumbnailer poppler
+cl
+cls
+choco list
+choco upgrade all
+clear
+ll
+cls
+u
+y
+sudo choco install lf
+lf
+cls
+wsl --shutdown
+wsl --list --running
+lf
+lf D:
+d
+lf
+u
+y
+d
+y
+sudo choco install nnn
+cls
+walk
+cls
+code $PROFILE
+w
+cls
+d
+w
+sudo choco install neovim -y
+vim
+cls
+nvim
+vim
+nvim
+cls
+d
+y
+choco install vim
+sudo choco install vim -y
+vim
+y
+sudo choco install file
+cls
+file
+cls
+ll
+d
+cls
+ll
+file .\Themes.md
+cls
+y
+lf
+cls
+ll
+cls
+d
+y
+cls
+vim .\main.go
+clear
+ll
+d
+cls
+vim .\Themes.md
+nvim .\Themes.md
+clear
+m .\Themes.md
+clear
+l .\Themes.md
+cls
+y
+lf
+y
+clear
+choco lis
+choco list
+sudo choco uninstall file
+clear
+file
+cls
+sudo scoop install file
+cls
+ll
+y
+cd
+ex .
+> yazi.toml
+code .\yazi.toml
+y
+d
+y
+cls
+y
+closewt
+lf
+cls
+ll
+cls
+y
+cd C:\Users\YourName\AppData\Roaming\yazi\config
+cd C:\Users\whosowsee\AppData\Roaming\yazi\config
+cls
+ll
+code .\yazi.toml
+y
+cls
+d
+y
+н
+y
+cls
+ll
+clear
+ll
+lf
+lh
+llf
+cls
+lh
+ll
+lf
+cls
+lf
+y
+cls
+y
+d
+y
+lf
+cls
+y
+cls
+cls
+y
+d
+y
+cls
+lf
+cls
+ll
+cls
+lf
+d
+lf
+cls
+lf
+cls
+> lfrc
+clear
+ll
+cls
+lf
+cls
+lf
+d
+lf
+cs
+c;s
+lf
+> lfrc
+code .\lfrc
+lf
+cls
+lf
+d
+lf
+. $profile
+lf
+d
+lf
+d
+lf
+да
+lf
+q
+d
+cls
+lf
+code $PROFILE
+. $profile
+lf
+. $profile
+lf
+l
+lf
+. $profile
+lf
+. $profile
+lf
+cd
+mc .local
+mc bin
+$HOME
+cls
+в
+d
+git clone https://github.com/slavistan/lf-gadgets.git
+cd .\lf-gadgets\
+ll
+cpc .\lf-scrollingpreview\ .\lf-shellcd\ .\lf-ueberzug\ C:\Users\whosowsee\.local\bin\
+cp -r .\lf-scrollingpreview\ .\lf-shellcd\ .\lf-ueberzug\ C:\Users\whosowsee\.local\bin\
+cpc D:\lf-gadgets\lf-shellcd\ D:\lf-gadgets\lf-ueberzug\ D:\lf-gadgets\lf-scrollingpreview\
+. $profile
+cls
+cpc D:\lf-gadgets\lf-shellcd\ D:\lf-gadgets\lf-ueberzug\ D:\lf-gadgets\lf-scrollingpreview\
+cd ..
+cd .\bin\
+cpc D:\lf-gadgets\lf-shellcd\ D:\lf-gadgets\lf-ueberzug\ D:\lf-gadgets\lf-scrollingpreview\
+cp -r .\lf-scrollingpreview\ .\lf-shellcd\ .\lf-ueberzug\ C:\Users\whosowsee\.local\bin\
+cpc D:\lf-gadgets\lf-shellcd\
+ll
+cpc D:\lf-gadgets\lf-ueberzug\
+cpc D:\lf-gadgets\lf-scrollingpreview\
+ll
+cls
+cls
+cd
+cd .\.co
+cd .\.config\
+ll
+lll
+lf
+ls
+mc lf-ueberzug
+ll
+cls
+lfrc-ueberzug
+> lfrc-ueberzug
+cls
+code .\lfrc-ueberzug
+lfrc-ueberzug
+lf\-ueberzug
+lf-ueberzug
+cls
+. $profile
+lf-ueberzug
+cls
+. $profile
+lf-ueberzug
+сды
+lf-ueberzug
+lf
+d
+lf
+. $profile
+lf
+. $profile
+lf
+d
+lf
+$HOME
+cls
+lf
+. $profile
+lf
+d
+lf
+. $profile
+lf
+d
+lf
+. $profile
+lf
+code file.css
+да
+lf
+. $profile
+lf
+. $profile
+d
+lf
+d
+lf
+да
+lf
+d
+lf
+. $profile
+lf
+d
+lf
+d
+lf
+в
+d
+lf
+d
+lf
+d
+lf
+d
+lf
+d
+lf
+d
+lf
+d
+lf
+. $profile
+lf
+d
+lf
+d
+lf
+d
+lf
+. $profile
+lf
+d
+lf
+d
+lf
+d
+lf
+. $profile
+lf
+d
+lf
+d
+lf
+. $profile
+lf
+. $profile
+lf
+code $PROFILE
+. $profile
+lf
+d
+cd Flash
+lf
+llf
+. $profile
+lf
+. $profile
+lf
+d
+lf
+. $profile
+lf
+. $profile
+lf
+. $profile
+lf
+cc
+cls
+cd '.\FileZilla FTP Client\'
+ll
+. $profile
+lf
+cc
+cd .\Office\
+ll
+. $profile
+lf
+cc
+cd .\PythonProject\TimeTracker\
+ll
+. $profile
+lf
+cc
+cc
+cls
+ll
+cd '.\Telegram Desktop\'
+ll
+cc
+cd '.\Phantom Wireless\'
+ll
+. $profile
+lf
+сс
+cc
+cd .\QuickLook\
+ll
+. $profile
+lf
+cc
+cd .\Wallpaper\
+l
+llf
+cc
+cd .\QuickLook\
+ll
+. $profile
+lf
+cc
+cd .\Temp\
+ll
+cc
+d
+cls
+. $profile
+lf
+. $profile
+lf
+. $profile
+lf
+cc
+ll
+cd .\PythonProject\TimeTracker\
+ll
+. $profile
+cls
+lf
+d
+lf
+. $profile
+lf
+main.go
+cls
+. $profile
+main.go
+cd
+D:
+jetbra
+.\jetbra
+.\jetbra\
+cc
+jetbra
+.jetbra
+.\jetbra
+. $
+. $profile
+cls
+ll
+cls
+cc
+jetbra
+.]jetbra
+.\jetbra
+D:
+jetbra
+.\jetbra\
+cls
+.\jetbra\
+. $profile
+cls
+clear
+cls
+D:
+cd D:`
+
+z d
+. $profile
+cls
+jetbra
+cls
+. $profile
+.\jetbra
+cls
+cc
+cls
+ll
+cd .\Flash\
+ll
+cc
+ll
+cls
+Aliases.md
+cls
+. $profile
+cls
+. $profile
+lf
+f
+d
+cls
+lf
+cls
+lf
+y
+cls
+lf
+ls
+cls
+. $profile
+lf
+cls
+ll
+cls
+cd
+cd .\AppData\Local\lf\
+ll
+m .\history
+lf
+cls
+ll
+lf
+z d
+d
+cls
+lf
+. $profile
+lf
+wsl --shutdown
+clear
+ll
+cls
+y
+cls
+sudo choco uninstall yazi
+cls
+y
+cls
+scoop install yazi
+sudo scoop install yazi
+sudo scoop install 7zip jq poppler fd ripgrep fzf zoxide imagemagick
+. $profile
+lf
+llf
+. $profile
+lf
+llf
+lf
+cls
+. $profile
+lf
+llf
+lf
+. $profile
+lf
+llf
+lf
+llf
+ls
+lf -h
+llf -h
+cls
+ll
+llf -h
+llf
+lh
+cls
+ll
+cls
+y
+d
+y
+whereis yazi
+. $profile
+y
+whereis jq
+whereis 7z
+whereis poppler
+whereis code 7z
+cls
+lf
+d
+y
+whereis pdftotext
+lf
+y
+d
+y
+$env:Path
+н
+y
+cls
+d
+y
+> config.toml
+code .\
+lf
+y
+d
+y
+$env:EDITOR
+scoop list
+. $profile
+d
+y
+cd %AppData%
+ll
+%AppData%
+cls
+closewt
+d
+y
+. $profile
+y
+d
+y
+cls
+.
+y
+d
+y
+d
+y
+d
+y
+d
+y
+. $profile
+d
+y
+cd
+y
+d
+y
+Get-ExecutionPolicy
+$OutputEncoding
+yazi --debug
+sudo scoop bucket add extras
+scoop install ueberzugpp
+scoop bucket add extras
+sudo scoop install ueberzugpp
+sudo scoop install ffmpegthumbnailer
+scoop bucket add extras
+scoop install chafa
+y
+scoop install 7zz
+yazi --debug
+scoop install ffmpeg
+scoop install imagemagick
+yazi --debug
+y
+cls
+wsl yazi
+d
+wsl yazi
+Get-ExecutionPolicy
+cls
+ll
+. $profile
+y
+wsl yazi
+y
+d
+cls
+wsl yazi
+micro
+wsl yazi
+cls
+cd .\.co
+cd .\.config\
+cd .\micro\
+ll
+m .\settings.json
+l .\settings.json
+cls
+cls
+m
+code .\settings.json
+wsl yazi
+code $PROFILE
+. $profile
+y
+wsl yazi
+. $profile
+y
+.
+. $profile
+cls
+y
+yazi
+y
+d
+y
+lf
+cls
+. $profile
+y
+cd ~\.config\micro
+ll
+y
+. $profile
+m
+cd ~\.config\micro
+cls
+d
+m .\main.go
+micro .\main.go
+m
+m .\main.go
+d
+m .\main.go
+y
+yazi
+m .\main.go
+d
+y
+clear
+ll
+cls
+y
+ls
+cls
+exit
+cls
+y
+d
+y
+d
+yazi
+y
+cls
+yazi
+sudo choco install wezterm -y
+wsl
+cls
+wezterm edit-config
+cd
+conf
+ll
+cd
+cd .\.config\
+cd .\wezterm\
+> More complex configurations that need to span multiple files can be placed in
+ll
+rmi
+ll
+> wezterm.lua
+code .\wezterm.lua
+clear
+cls
+ll
+clear
+exit
+exit
+в
+d
+cls
+wsl
+exit
+ssh root@178.236.246.7
+. $profile
+exit
+cls
+ll
+cls
+ls
+cls
+l
+да
+lf 
+y
+d
+y
+йсды
+cls
+ll
+exit
+ll
+cls
+clear
+ll
+cls
+ll
+cls
+m .\main.go
+cls
+y
+cls
+ll
+cls
+y
+йсды
+cls
+wsl
+cls
+exit
+Думаю
+cls
+ll
+cls
+m
+clear
+l
+ll
+cls
+ll
+lf
+cls
+cls
+ll
+ll
+cls
+llf
+lh
+llf
+cls
+ll
+lcs
+cls
+lf
+y
+cls
+y
+d
+y
+cls
+wsl
+ll
+cls
+ll
+cls
+l
+cls
+l
+cls
+ll
+cls
+y
+exit
+cls
+y
+wsl
+cls
+wsl
+bash
+cls
+d
+mc WezTerm
+ll
+> wezterm.lua
+code .\wezterm.lua
+l .\wezterm.lua
+cat .\wezterm.lua
+cls
+cls
+ll
+cls
+exit
+cls
+ll
+cls
+ll
+cls
+exit
+exit
+cls
+exit
+cls
+cls
+ll
+ll
+cls
+ll
+cls
+x
+cls
+exit
+x
+cls
+ll
+cls
+lf
+y
+d
+q
+cls
+y
+cls
+ssh root@5.42.99.74
+cls
+ssh root@5.42.99.74
+ssh root@5.42.99.74
+cls
+cls
+ll
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+cd
+d
+cls
+y
+cls
+ll
+cls
+ll
+ls
+cls
+d
+y
+exit
+cls
+ll
+lf
+y
+l
+lf
+d
+lf
+cls
+ll
+cls
+y
+ls
+cls
+ll
+cls
+exit
+cls
+ll
+cls
+lf
+cls
+llf
+cls
+x
+m
+cls
+exit
+exit
+cls
+z Books Golang
+z Books
+cc
+z Golang
+cd
+z GoP
+z GoPr
+z Python
+z PythonProject
+cls
+ll
+cls
+d
+z PythonProject
+ll
+cd
+z Pyth
+exit
+z Python
+cls
+ll
+cls
+close
+close
+cls
+ll
+~`
+❯`
+`
+`
+`
+`
+
+cls
+сды
+cls
+ll
+cls
+ll
+cls
+llf
+cls
+llf
+cls
+llf
+cls
+llf
+cls
+lf
+cls
+ll
+exit
+cls
+ll
+cls
+exit
+exit
+cls
+llf
+lf
+d
+lf
+y
+vim
+cls
+nvim
+cls
+vim
+vim .\main.go
+m .\main.go
+cls
+ll
+cls
+lf
+exit
+cls
+ll
+cls
+lf
+cls
+ll
+llf
+cls
+y
+cls
+ll
+llf
+cls
+y
+d
+y
+d
+y
+cls
+clear
+y
+lf
+wsl
+cls
+ll
+cls
+ll
+cls
+lf
+cls
+ll
+cls
+ll
+cls
+m .\main.go
+cls
+ll
+cls
+l
+cls
+d
+l .\main.go
+cls
+ll
+cls
+y
+lf
+llf
+exit
+exit
+cls
+ll
+cls
+clear
+exit
+lf
+llf
+cls
+llf
+cls
+llf
+cls
+ll
+y
+сды
+cls
+llf
+z ObsidianVault
+d
+z ObsidianVault
+cls
+ll
+cd .\Zettelkasten\
+ll
+z
+cls
+ll
+m .\TO-DO.md
+z ObsidianVault
+m .\TO-DO.md
+cd .\Zettelkasten\
+m .\TO-DO.md
+cls
+cls
+сды
+cls
+ll
+cls
+ll
+cls
+cd d:
+cls
+llf
+m .\TO-DO.md
+z Vault
+cd .\Zettelkasten\
+ll
+m .\TO-DO.md
+cls
+ll
+cls
+llf
+lh
+llf
+lh
+llf
+l .\TO-DO.md
+cls
+ll
+cls
+wsl
+cls
+l .\main.go
+l .\TO-DO.md
+cls
+lf
+y
+cls
+d
+c
+cd
+conf
+cls
+. $profile
+conf
+cd
+pwd
+cd .\.config\
+ll
+. $profile
+settings
+conf
+cls
+ll
+cls
+ll
+code .\starship.toml
+cd
+cls
+ssh root@147.45.43.170
+z Zett
+m .\TO-DO.md
+cls
+ll
+cls
+wls
+wsl
+m .\TO-DO.md
+cls
+ll
+cls
+lf
+llf
+cls
+. $profile
+m .\TO-DO.md
+z Zet
+cls
+m .\TO-DO.md
+ll
+n
+m
+m .\TO-DO.md
+m .\main.go
+m .\TO-DO.md
+. $profile
+m .\TO-DO.md
+conf
+cd .\micro\
+code .\settings.json
+m
+z 'D:\ObsidianVault\Zettelkasten'
+ll
+m .\TO-DO.md
+z 'D:\ObsidianVault\Zettelkasten'
+m .\TO-DO.md
+wsl
+m
+cls
+ll
+cls
+lf
+ll
+llf
+cls
+ll
+cls
+conf
+cd .\wezterm\
+ll
+d
+cls
+cls
+ll
+cls
+cd
+llf
+cd .\Documents\
+ll
+cls
+cd
+. $profile
+ll
+cls
+llf
+cls
+z Python
+ll
+cd .\TimeTracker\
+ll
+d
+z Python
+cd .\TimeTracker\
+cls
+ll
+cls
+llf
+d
+cls
+ll
+cls
+> starh.toml
+code .\starh.toml
+cls
+ll
+cls
+cls
+cls
+cd
+cc
+cls
+d
+cd
+cc
+cls
+d
+cls
+cc
+cls
+settings
+m
+cls
+d
+cls
+ll
+> starh_temp.toml && code starh_temp.toml
+cls
+ll
+ll
+cls
+d
+cls
+conf
+cd wz
+cd .\wezterm\
+cls
+cd
+cc
+cls
+z Time
+cls
+cc
+d
+cls
+conf
+cd .\wezterm\
+cls
+z Time
+cls
+.\venv\activate
+.\.venv\activate
+lf
+cls
+ll
+rr tall less
+rr "tall less"
+cls
+ll
+cls
+settings
+d
+mf t.r
+rr t.r
+mf test.rs
+cls
+> test.lua
+cls
+mf test.jst
+mf test.js
+rr .\test.jst
+ll
+cls
+rr .\test.js
+rr .\test.rs
+rr .\test.lua
+cls
+ll
+cls
+mmm
+cls
+m
+cls
+dasda
+cls
+l
+cls
+ffff
+cls
+ll
+cls
+ddsadas
+cls
+settings
+cls
+сды
+cls
+ll
+cls
+сды
+cls
+c;s
+x
+cls
+das
+cls
+ll
+cls
+z Tracker
+cls
+dasdas
+cls
+d
+cls
+settings
+cd .\.git\
+cls
+cd
+cd .\Downloads\
+cls
+cc
+cd .\Music\
+ll
+cls
+c
+cd
+cls
+cd .\Music\
+cls
+cd
+cd .\.config\
+cls
+pwd
+cls
+m
+cls
+ll
+cls
+d
+cls
+cc
+ll
+cc
+ll
+cc
+cls
+cd "Этот компьютер"
+cls
+Get-PSDrive -PSProvider FileSystem
+ls
+cls
+ll
+d
+z Tracker
+cd .\.git
+cc
+d
+cls
+ll
+cd C:
+cc
+ll
+cd
+cc
+pwd
+cd
+cc
+cls
+cc
+d
+cls
+ll
+cls
+ll
+la
+llf
+cls
+cls
+cd
+d
+cls
+cd .\Books\
+ll
+cd .\GolangBooks\
+ll
+cc
+cd Books
+llf
+z .\Программирование\
+ll
+llf
+z .\Редактированные\
+cd
+cls
+ls
+llf
+lls
+cls
+ls
+cls
+ll
+cls
+cd
+cc
+cls
+cd
+exit
+d
+cls
+ll
+. $profile
+cls
+ll
+cls
+ll
+cls
+lf
+cls
+llf
+. $profile
+llf
+ll
+ls
+cls
+. $profile
+llf
+ll
+lf
+y
+cls
+ll
+llf
+ll
+cls
+d
+ll
+cls
+ll
+lh
+cls
+d
+ll
+cls
+ll
+nvim
+cls
+ll
+cls
+wsl
+cls
+сды
+m
+y
+d
+cls
+d
+cls
+y
+cls
+yazi
+conf
+code .\starship.toml
+d
+m
+cls
+y
+cls
+clear
+ll
+d
+cls
+cl
+cls
+clear
+cls
+ll
+d
+cls
+lf
+y
+cls
+ll
+cls
+lf
+wsl lf
+wsl
+lf
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+lf
+cls
+ll
+cls
+ll
+cls
+ll
+y
+ssh root@46.226.165.152
+thCp1c7LnINj
+cls
+ssh root@46.226.165.152
+cls
+ll
+cls
+exi
+exit
+cls
+ssh root@46.226.165.152
+y
+d
+y
+cls
+y
+cls
+y
+wsl
+cls
+y
+cls
+y
+ssh root@46.226.165.152
+cls
+y
+start
+cls
+y
+cls
+y
+cls
+y
+н
+y
+cls
+y
+cls
+echo focused_file()
+cls
+y
+н
+y
+cls
+y
+t
+y
+wsl
+clear
+cls
+m
+cls
+ll
+cls
+ll
+cls
+cmd.exe
+cls
+exit
+cls
+exit
+cls
+exit
+exit
+cls
+ll
+cls
+conf
+z .\wezterm\
+ll
+code .\wezterm.lua
+cls
+exit
+cls
+ll
+cls
+ll
+cls
+сды
+cls
+ll
+y
+d
+z Books
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+y
+cls
+ll
+cls
+ll
+cls
+m
+exit
+cls
+ll
+cls
+d
+ll
+> wezterm.lua
+code .\WezTerm
+code .\wezterm.lua
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+exit
+cls
+ll
+cls
+сды
+cls
+ll
+cls
+exit
+cl
+cls
+exit
+cls
+cwd
+cls
+exit
+d
+cls
+wsl
+cls
+ll
+cls
+wsl
+m
+cls
+d
+> wezterm_icons.md
+code !!
+code ??
+code ?
+?
+??
+cls
+?
+cls
+$$
+cls
+code .\wezterm_icons.md
+cls
+wsl
+cls
+d
+cls
+ll
+cls
+d
+cls
+d
+cd
+cls
+d
+cls
+wsl
+d
+cls
+conf
+wsl
+cls
+d
+cls
+d
+exit
+d
+cls
+d
+cd
+cls
+d
+cls
+cd
+ll
+cd
+cls
+d
+cls
+cd D:
+cls
+wsl
+cls
+d
+cls
+wsl
+cd
+wsl
+cls
+d
+exit
+d
+cls
+exit
+d
+cls
+exit
+d
+cls
+m
+y
+cd
+pwd
+wsl
+m
+cls
+d
+wsl
+cls
+m
+cls
+d
+cls
+ll
+conf
+m
+ll
+> wezterm-shell-integration.ps1
+code .\wezterm-shell-integration.ps1
+code $PROFILE
+pwd
+cd
+d
+cls
+exit
+cls
+ll
+cls
+d
+cls
+ll
+cls
+exit
+exit
+cls
+d
+cls
+в
+d
+cls
+exit
+m
+d
+m
+cls
+git
+cls
+nano
+cls
+wsl
+cls
+m
+exit
+d
+cc
+d
+cls
+d
+ll
+conf
+cls
+ll
+conf
+cls
+clear
+ll
+cls
+d
+cls
+wsl
+cls
+ll
+cls
+m
+cls
+ll
+cls
+d
+exit
+d
+cls
+d
+ll
+d
+conf
+cls
+. $profile
+cls
+ll
+cls
+d
+cls
+d
+cls
+ll
+cd
+cls
+ll
+d
+cls
+cd
+conf
+cc
+cls
+ll
+cd
+d
+cls
+exint
+close
+d
+m D:\keysmoothscroll.md
+cls
+ll
+conf
+rr .\wezterm-shell-integration.ps1
+ll
+cls
+lf
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+. $profile
+m
+y
+yazi
+cls
+m
+micro
+wsl
+cls
+clear
+ll
+cls
+lf
+ll
+exit
+cls
+cls
+closewt
+exit
+exit
+exit
+exit
+lf
+yazi
+lf
+lf
+cls
+ll
+lf
+m
+d
+cls
+ll
+cls
+ll
+cls
+m .\p.md
+m D:\keysmoothscroll.md
+m
+. $profile
+cls
+m
+m .\p.md
+cls
+clear
+cls
+lf
+cls
+rn .\wezterm.lua .\wezterm.md
+code wezterm.md
+exit
+cls
+ll
+cls
+ll
+cls
+lf
+y
+cls
+exit
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+lf
+cls
+ll
+cls
+l
+cls
+ll
+d
+m .\p.md
+cls
+exit
+cls
+cd
+cc
+cls
+conf
+code .\starship.toml
+cls
+d
+> req.lua && code req.lua
+exit
+wsl
+wsl micro
+wsl
+cls
+wsl
+lf
+wsl
+lf
+wsl
+cls
+micro
+lf
+y
+wsl
+cls
+wsl
+exit
+wsl
+y
+m
+wsl
+exit
+m
+wsl
+cls
+wsl
+cls
+ll
+cls
+ll
+cls
+wsl
+cls
+ll
+cls
+y
+cls
+ll
+cls
+ll
+cls
+exit
+exit
+cls
+exit
+exit
+cls
+exit
+cls
+ll
+cls
+python
+cls
+exit
+exit
+cls
+ll
+m
+cls
+exit
+сды
+cls
+ll
+cls
+ cls
+ll
+cls
+y
+cls
+ll
+cls
+exit
+exit
+d
+cls
+conf
+ll
+cd .\wezterm\
+code .\wezterm.lua
+d
+code .\wezterm.md
+cls
+zoxide.exe
+z
+cls
+ll
+cls
+ll
+cls
+ll
+ cls
+cls
+ll
+cls
+exit
+cls
+l
+ll
+cls
+exit
+cls
+ll
+cls
+ll
+cls
+exit
+cls
+ll
+cls
+exit
+cls
+ll
+cls
+ll
+cls
+clear
+exit
+exit
+cls
+ll
+cls
+exit
+cls
+exit
+cls
+ll
+cls
+clcs
+cls
+exit
+exit
+d
+mc TempWz
+ll
+cls
+ll
+rn '.\Vers1.l;ua.md' '.\Vers1.lua'
+cls
+> .\Vers2FIXEXE.lua && code .\Vers2FIXEXE.lua
+cls
+code $PROFILE
+. $profile
+cpr
+. $profile
+m .\Vers2FIXEXE.lua
+. $profile
+cls
+m .\Vers2FIXEXE.lua
+. $profile
+cls
+m
+cls
+m .\Vers2FIXEXE.lua
+cls
+m .\Vers2FIXEXE.lua
+micro .\Vers2FIXEXE.lua
+cls
+. $profile
+cpr
+cls
+. $profile
+cls
+exit
+cls
+m .\Videos\
+cls
+d
+cls
+cd .\TempWz\
+m .\Vers2FIXEXE.luaQ
+cls
+m .\Vers2FIXEXE.lua
+cls
+ll
+rr .\Vers2FIXEXE.luaQ
+ll
+m .\Vers1.lua
+cls
+ll
+cls
+l .\Vers2FIXEXE.lua
+code .\Vers2FIXEXE.lua
+cls
+exit
+m
+cls
+y
+cls
+d
+cls
+m .\Themes.md
+cls\
+cls
+wsl
+cls
+wsl
+cls
+сды
+cls
+wsl
+m .\Themes.md
+cd .\TempWz\
+cls
+code .\Vers2FIXEXE.lua
+wsl
+cls
+ll
+cls
+wsl
+m
+cls
+m .\Vers2FIXEXE.lua
+wsl
+z TempWZ
+z D:\TempWz\
+cls
+m .\Vers2FIXEXE.lua
+lf
+clos
+cls
+ll
+z Temp
+cls
+ll
+cls
+m .\Vers2FIXEXE.lua
+cls
+ll
+y
+cls
+ll
+code .\Vers2FIXEXE.lua
+wsl
+z Temp
+cls
+ll
+cls
+code .\Vers1.lua
+cls
+wsl
+cls
+ll
+m .\Vers2FIXEXE.lua
+wsl
+cls
+wsl
+cls
+z Temp
+cls
+m .\Vers2FIXEXE.lua
+cls
+ll
+cls
+lf
+y
+lf
+cls
+code .\Vers2FIXEXE.lua
+wsl
+cls
+> .\Vers3FIXWSLHOST.lua && code .\Vers3FIXWSLHOST.lua
+cls
+exit
+ll
+cls
+ll
+cls
+ls
+ll
+c
+cd
+cls
+l
+ll
+cls
+ll
+exit
+cls
+ll
+cls
+lf
+cls
+ll
+cls
+lf
+d
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+lf
+y
+cls
+ll
+> wezterm_theme.md
+code .\wezterm_theme.md
+cls
+yt
+y
+cls
+ll
+cls
+m .\Themes.md
+cls
+ll
+cls
+y
+cls
+ll
+cls
+y
+cls
+ll
+cls
+ll
+cls
+lf
+ll
+cls
+ll
+cls
+y
+cls
+ll
+cls
+y
+cls
+exit
+exit
+ll
+cls
+ll
+cls
+ll
+cls
+yu
+y
+cls
+ll
+cls
+y
+cls
+ll
+cls
+y
+cls
+lf
+cls
+ll
+cls
+m
+cls
+m .\Themes.md
+cls
+ll
+cls
+ll
+cls
+ls
+lh
+cls
+ll
+cls
+clks
+cls
+lf
+cls
+ll
+cls
+ll
+cls
+y
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+y
+cls
+ll
+cls
+ll
+cls
+lf
+cls
+ll
+y
+cls
+ll
+cls
+l
+cls
+ll
+wsl
+cls
+wsl
+cls
+lf
+d
+cls
+m .\Themes.md
+cls
+ll
+cls\
+cls
+ll\
+cls
+ll
+cls
+y
+cls
+m .\WorkingVersions\
+сды
+cls
+ll
+cls
+lf
+m .\Themes.md
+cls
+y
+lf
+ll
+cls
+y
+cls
+ll
+cls
+ll
+cls
+y
+cls
+ll
+cls
+m .\Themes.md
+cls
+ll
+cls
+y
+cls
+ll
+cls
+y
+m .\Themes.md
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+y
+cls
+cpr
+d
+cls
+m .\WorkingVersions\
+d
+m .\WorkingVersions\
+. $profile
+m .\WorkingVersions\
+. $profile
+m .\WorkingVersions\
+. $profile
+m .\WorkingVersions\
+cls
+. $profile
+cls
+m ddsa
+micro dsadas
+micro test.md
+ll
+rr test.md
+cls
+ll
+. $profile
+m test.md
+. $profile
+cls
+ll
+cls
+ll
+cls
+m test.md
+d
+m .\WorkingVersions\
+m dsdsa
+cls
+ll
+lf
+y
+cls
+m dsdsa
+ll
+rr .\dsdsa
+d
+cls
+ll
+exit
+cls
+wsl
+cls
+cls
+ll
+cls
+y
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+y
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+y
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+y
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+y
+lf
+cd
+wsl
+cls
+exit
+exit
+cls
+ls
+cls
+lf
+wsl
+cls
+y
+lf
+cls
+ll
+cls
+ls
+cls
+ll
+cls
+сды
+cls
+сды
+cls
+dsdsacls
+cls
+ cls
+cls
+lf
+ll
+cls
+ll
+cls
+exit
+exit
+lf
+cls
+exit
+ll
+cls
+exit
+exit
+wsl
+cls
+сды
+cls
+ll
+cls
+ll
+y
+cls
+ll
+cls
+ll
+cl
+cls
+ll
+cls
+ll
+cls
+ls
+cls
+ll
+cls
+exit
+ll
+cls\
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ls
+cls
+ll
+cls
+ll
+ls
+cls
+ll
+ls
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+lf
+cls
+ll
+cls
+wsl
+cls
+ll
+cls
+x
+cls
+x
+cl
+scls
+cls
+ll
+cls
+wsl
+cls
+ll
+cls
+z Temp
+cls
+ll
+> Vers4OceanThemePlusKey.lua && code Vers4OceanThemePlusKey.lua
+cls
+ll
+cls
+сды
+cls
+ll
+cls
+ll
+cls
+l
+ls
+сды
+cls
+ll
+clss
+ls
+ls
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ls
+cls
+ll
+cls
+d
+cls
+d
+cls
+wsl
+cls
+d
+cls
+в
+cls
+exit
+d
+cls
+exit
+d
+cls
+exit
+d
+cls
+ll
+go
+g
+cls
+ll
+cls
+gr .\main.go
+cls
+d
+cls
+d
+wsl
+cls
+lc
+cls
+lc
+cls
+сды
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+сды
+cls
+ll
+cls
+l
+cls
+d
+ccls
+ll
+cls
+ll
+m dsdsa
+cls
+. $profile
+cls
+m dsdsa
+rr .\dsdsa
+cls
+ll
+m .\WorkingVersions\
+cls
+m .\WoMic\
+cls
+m .\WindowsSetup\
+cls
+m .\Themes.md
+micro .\Themes.md
+m .\Themes.md
+cls
+ll
+cls
+wsl
+cls
+ll
+cls
+l
+cls
+ccls
+cls
+ll
+ll
+cls
+ll
+cls
+la
+cla
+ls
+cls
+ll
+cls
+y
+cls
+y
+cls
+ll
+cls
+ll
+cls
+ll
+y
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+y
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+uy
+lf
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+lsdsal
+cls
+dsadsa
+cls
+ll
+cls
+ll
+cls
+cldsa
+dd
+cls
+dsadsa
+cls
+dsadas
+cls
+dsakdsa
+dsakkdas
+dsasa
+dsa
+cls
+ll
+cls
+lc
+cls
+ll
+cls
+starhip
+cls
+ll
+y
+cls
+ll
+cls
+ll
+cls
+lf
+cls
+df
+d
+cls
+ll
+cls
+ll
+cls
+сды
+cls
+ll
+cls
+ll
+c
+cls
+сды
+cls
+m
+micro
+cls
+lf
+cls
+lf
+cls
+lf
+cls
+ll
+cls
+ ls
+cls
+lf
+cls
+cl
+cls
+lf
+cls
+lf
+cls
+lf
+cls
+ll
+cls
+ll
+cls
+ll
+close
+cls
+ll
+cls
+сды
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ls
+cls
+ll
+cls
+ll
+cls
+lf
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+wsl
+cc
+cls
+d
+cls
+ll
+ll
+cls
+lll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+сды
+cls
+exit
+exit
+exit
+cls
+ll
+cls
+exit
+cls
+ll
+exit
+cls
+q
+cls
+ll
+cls
+exit
+cls
+ll
+cls
+d
+cls
+m .\Themes.md
+cls
+m 
+cls
+m
+ll
+rr TEST
+ll
+cls
+ll
+cls
+ll
+cls
+r
+cls
+r
+cls
+r
+cls
+ll
+cls
+r
+ll
+r
+cls
+r
+cls
+choco
+sudo r
+cls
+r
+choco
+r
+sudo r
+edge
+cls
+edge
+. $profile
+edge
+cls
+ob
+c -f
+cls
+count
+cls
+ll
+cl
+cls
+count -f
+cls
+count -d
+count
+cls
+lf
+wsl
+cls
+сды
+cls
+ll
+lf
+cls
+ll
+cls
+сды
+cls
+lf
+cls
+ll
+qcls
+cls
+ll
+cls
+ll
+cls
+lf
+cls
+ll
+cls
+ll
+cls
+сды
+дд
+сды
+cols
+cls
+сды
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+d
+cls
+conf
+cls
+settings
+cls
+ll
+cls
+cd
+cls
+ll
+cls
+d
+cls
+ll
+cls
+wsl
+cls
+exit
+cls
+d
+cls
+> Vers5Battery.lua && code Vers5Battery.lua
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+exit
+exit
+cls
+сды
+cls
+cks
+cls
+cls
+exit
+exit
+cls
+ll
+cls
+code
+settings
+cls
+ll
+ex .
+cd .\TerminalSettings\
+ll
+mvp -d
+ll
+cls
+ll
+cc
+cls
+ll
+rn TerminalSettings WindowsTerminal
+gits
+cls
+ll
+cls
+ll
+cd .\PSReadLine\
+ll
+ccc
+c
+cc
+cls
+ll
+rn .\StarshipSettings\ .\Starship
+cls
+ll
+rn .\VSCodeSettings\ VsCode
+cls
+ll
+gits
+ll
+gits
+cls
+ll
+mc WezTerm
+> wezterm.lua
+cls
+ll
+cls
+ex conf
+ex C:\Users\whosowsee\.config\micro\
+conf
+cd .\micro\
+ll
+cls
+ll
+ls
+lh
+ll
+cls
+ls
+lls
+cls
+ll
+cls
+llf
+cls
+ls
+cls
+l
+cls
+ll
+cd .\colorschemes\
+code .\mine_simple.micro
+cls
+ll
+cls
+d
+cls
+m .\Themes.md
+cls
+. $profile
+m .\Themes.md
+. $profile
+cls
+m .\Themes.md
+cls
+m .\Themes.md
+cls
+cls
+ll
+cls
+micro .\wezterm.lua
+cls
+wsl
+exit
+cls
+ll
+cls
+ll
+cls
+y
+cls
+ll
+micro .\wezterm.lua
+cls
+m .\wezterm.lua
+cls
+wsl
+d
+m .\Themes.md
+cls
+m .\main.go
+сды
+cls
+ll
+cls
+ll
+cls
+ll
+cls
+lc
+cls
+ll
+m .\main.go
+clos
+cls
+m .\main.go
+ll
+m '.\ConsoleHost_history.txtash %trash-put $fx'
+rr '.\ConsoleHost_history.txtash %trash-put $fx'
+ll
+cls
+ll
+m .\Vers5Battery.lua
+cls
+ll
+code .\mine_simple.micro
+cls
+exit
+cls
+cd
+ll
+cls
+ll
+. $profile
+cls
+git s
+cls
+git s
+gits
+cls
+ll
+cls
+gits
+cls
+y
+cls
+ll
+cc
+cls
+cd .\PSReadLine\
+code .\ConsoleHost_history.txt
+ex .
+cls
+> ConsoleHost_history.txt
+y
+lf
+y
+yazi
+cls
+ll
+cls
+y
+l .\ConsoleHost_history.txt
+more .\ConsoleHost_history.txt
+cls
+l .\ConsoleHost_history.txt
+cls
+ll
+cls
+exit
+cls
+conf
+cls
+ll
+settings
+cls
+ll
+z conf
+cls
+conf
+cls
+z set
+cls
+ll
+ex .
+cd .\Enhancer\
+code .\settings.json
+wsl
+cc
+cd .\Micro\
+ll
+cls
+ll
+cls
+ll
+cc
+cls
+ll
+lf
+y
+cls
+ll
+cd .\Powershell\
+ll
+cls
+code .\ProfileSettings.ps1
+whereis obsidian.exe
+whereis code
+cls
+edge
+cls
+ll
+cls
+l .\ProfileSettings.ps1
+cls
+cc
+cls
+ll
+cls
+cd .\Micro\
+ll
+cc
+cls
+ll
+cls
+cd .\VsCode\
+l
+ll
+code .\settings.json
+code .\key.json
+rn .\key.json .\keybindings.json
+cls
+ll
+cc
+cd .\Starship\
+ll
+code .\starship.toml
+cls
+ll
+conf
+code .\starship.toml
+cls\
+cls
+ll
+cls
+ll
+cls
+ex
+cc
+cls
+ll
+gits
+cls
+ll
+mdd Yazi Lf
+cls
+ll
+cls
+y
+cls
+cd .\Yazi\
+cpc C:\Users\whosowsee\AppData\Roaming\yazi\config\yazi.toml
+ll
+cat .\yazi.toml
+cls
+ll
+cls
+ls
+ll
+cls
+ll
+cls
+ls
+cls
+cc
+cls
+cd .\Lf\
+cpc C:\Users\whosowsee\AppData\Local\lf\lfrc
+cls
+ll
+cls
+cc
+gits
+cls

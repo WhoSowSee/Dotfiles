@@ -1,5 +1,6 @@
 {
-    "colorscheme": "gruvbox",
+    "basename": true,
+    "colorscheme": "mine_simple",
     "ft:py": {
         "tabstospaces": true
     },
