@@ -1,9 +1,10 @@
 {
-    "basename": true,
-    "colorscheme": "mine_simple",
-    "ft:py": {
-        "tabstospaces": true
-    },
-    "saveundo": true,
-    "softwrap": true
+	"basename": true,
+	"colorscheme": "mine_simple",
+	"ft:py": {
+		"tabstospaces": true
+	},
+	"reload": false,
+	"saveundo": true,
+	"softwrap": true
 }

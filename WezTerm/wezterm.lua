@@ -106,13 +106,17 @@ config.keys = {
   { key = "Tab",        mods = "CTRL",        action = act.ShowTabNavigator },
 
   -- Default key bindings
-  { key = "t",          mods = "ALT",         action = act.SpawnTab("CurrentPaneDomain") },
   { key = "Enter",      mods = "ALT",         action = act.ToggleFullScreen },
-  { key = "w",          mods = "CTRL",        action = act.CloseCurrentTab {confirm=false} },
-  { key = "ц",          mods = "CTRL",        action = act.CloseCurrentTab {confirm=false} },
+  { key = "w",          mods = "ALT",         action = act.CloseCurrentTab {confirm=false} },
+  { key = "ц",          mods = "ALT",         action = act.CloseCurrentTab {confirm=false} },
   { key = "с",          mods = "CTRL",        action = act.CopyTo("Clipboard") },
   { key = "м",          mods = "CTRL",        action = act.PasteFrom("Clipboard") },
-  { key = "v",          mods = "CTRL",        action=wezterm.action.PasteFrom("Clipboard") },
+
+  -- Mine
+  { key = "t",          mods = "ALT",         action = act.SpawnTab("CurrentPaneDomain") },
+  { key = "LeftArrow",  mods = "LEADER",      action = act.ActivateTabRelative(-1) },
+  { key = "RightArrow", mods = "LEADER",      action = act.ActivateTabRelative(1) },
+  { key = "v",          mods = "CTRL",        action = wezterm.action.PasteFrom("Clipboard") },
 
   {
     key = "q",
@@ -184,16 +188,16 @@ config.key_tables = {
     { key = "UpArrow",     action = act.AdjustPaneSize { "Up", 1 } },
     { key = "RightArrow",  action = act.AdjustPaneSize { "Right", 1 } },
 
-	{ key = "Escape",      action = "PopKeyTable" },
+	  { key = "Escape",      action = "PopKeyTable" },
     { key = "Enter",       action = "PopKeyTable" },
   },
   move_tab = {
     { key = "LeftArrow",   action = act.MoveTabRelative(-1) },
     { key = "RightArrow",  action = act.MoveTabRelative(1) },
 
-	{ key = "Escape",      action = "PopKeyTable" },
+	  { key = "Escape",      action = "PopKeyTable" },
     { key = "Enter",       action = "PopKeyTable" },
-  }
+  },
 }
 
 -- Tab bar
@@ -273,10 +277,19 @@ wezterm.on("update-status", function(window, pane)
   -- CWD and CMD could be nil (e.g. viewing log using Ctrl-Alt-l)
   cmd = cmd and basename(cmd):gsub("%.exe$", "") or ""
 
+  -- Определяем иконку процесса
+
   if cmd == "go" or cmd == "zoxide" or cmd == "git" or cmd == "starship" then
     cmd = "pwsh"
   elseif cmd == "wslhost" then
     cmd = "wsl"
+  end
+
+  local process_icon = wezterm.nerdfonts.cod_server_process -- Иконка по умолчанию
+  if cmd == "wsl" then
+    process_icon = wezterm.nerdfonts.cod_terminal_linux-- Иконка для WSL (Linux)
+  elseif cmd == "pwsh" then
+    process_icon = wezterm.nerdfonts.oct_terminal -- Иконка для PowerShell
   end
 
   -- Обновляем заголовок вкладки только если он не был установлен вручную
@@ -309,7 +322,7 @@ wezterm.on("update-status", function(window, pane)
     { Text = wezterm.nerdfonts.md_folder_outline .. "  " .. cwd },
     { Text = " | " },
     { Foreground = { Color = "#e0af68" } },
-    { Text = wezterm.nerdfonts.cod_server_process .. "  " .. cmd },
+    { Text = process_icon .. "  " .. cmd },
     "ResetAttributes",
     { Text = " | " },
     { Text = wezterm.nerdfonts.md_clock_outline .. "  " .. time },

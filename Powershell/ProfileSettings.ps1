@@ -1,4 +1,5 @@
 Invoke-Expression (&starship init powershell)
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
 Import-Module Terminal-Icons
 Import-Module PSReadLine
 Set-PSReadLineKeyHandler -Key Tab -Function Complete
@@ -19,15 +20,6 @@ Add-Type -AssemblyName Microsoft.VisualBasic
 $OutputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $env:FZF_DEFAULT_OPTS = '--height 15'
 
-Set-Alias -Name tt -Value tree
-Set-Alias -Name g -Value git
-Set-Alias -Name p -Value python
-Set-Alias -Name x -Value cls
-Set-Alias -Name l -Value less
-Set-Alias -Name ex -Value explorer
-Set-Alias -Name open -Value start
-function y { wsl yazi }
-function cpr { code $PROFILE }
 
 function Open-MicroWSL {
     param(
@@ -41,7 +33,7 @@ function Open-MicroWSL {
         if ($fileExists -eq "exists" -and $isDirectory -eq "not_directory") {
             wsl micro $wslPath
         } elseif ($isDirectory -eq "is_directory") {
-            Write-Host "Cannot open a directory in micro. Please specify a file path."
+            Write-Host "Cannot open a directory in micro. Please specify a file path"
         } else {
             New-Item -ItemType File -Path $FilePath -Force
             wsl micro $wslPath
@@ -186,14 +178,6 @@ function Open-Obsidian {
 }
 Set-Alias -Name ob -Value Open-Obsidian
 
-function d { Set-Location D:\ }
-function dev { Set-Location D:\GolangProject }
-function devl { Set-Location D:\GolangProject\GoLearning }
-function dot { Set-Location D:\Dotfiles }
-function conf { Set-Location C:\Users\whosowsee\.config }
-function rrad ($command) { Remove-Item $command -Force -Recurse }
-function llf { Get-ChildItem -fo }
-
 function Get-ChildItemFo {
     param (
         [string]$Path = "."
@@ -245,11 +229,6 @@ function Navigate-ToParentDirectory {
     }
 }
 Set-Alias -Name cc -Value Navigate-ToParentDirectory
-
-function Recycle-Bin { explorer.exe shell:RecycleBinFolder }
-function Open-Downloads { explorer.exe shell:Downloads }
-Set-Alias -Name bin -Value Recycle-Bin
-Set-Alias -Name dw -Value Open-Downloads
 
 function Rename-Items {
     param (
@@ -750,6 +729,29 @@ function New-MultipleItems {
         $existingItems | ForEach-Object { Write-Host $_ -ForegroundColor Yellow }
     }
 }
+
+
+
+# Directories
+function d { Set-Location D:\ }
+function dev { Set-Location D:\GolangProject }
+function devl { Set-Location D:\GolangProject\GoLearning }
+function dot { Set-Location D:\Dotfiles }
+function conf { Set-Location C:\Users\whosowsee\.config }
+
+
+# One-liners
+function la { eza -a --icons=always --no-time --no-user --no-permissions -s type }
+function lla { eza --icons=always --no-time --no-user --no-permissions -s type }
+function lg{ eza -a --long --icons=always --no-time --no-user --no-permissions --no-filesize -s type --git }
+function rrad ($command) { Remove-Item $command -Force -Recurse }
+function llf { Get-ChildItem -fo }
+
+function Recycle-Bin { explorer.exe shell:RecycleBinFolder }
+function Open-Downloads { explorer.exe shell:Downloads }
+Set-Alias -Name bin -Value Recycle-Bin
+Set-Alias -Name dw -Value Open-Downloadsd
+
 Set-Alias -Name mf -Value New-MultipleItems
 Set-Alias -Name ">" -Value New-MultipleItems
 Set-Alias -Name touch -Value New-MultipleItems
@@ -765,40 +767,110 @@ function Go-Build { go build $args }
 Set-Alias -Name gr -Value Go-Run
 Set-Alias -Name gb -Value Go-Build
 
+Set-Alias -Name cd -Value __zoxide_z -Option AllScope -Scope Global -Force
+Set-Alias -Name cdi -Value __zoxide_zi -Option AllScope -Scope Global -Force
+
+Set-Alias -Name tt -Value tree
+Set-Alias -Name g -Value git
+Set-Alias -Name p -Value python
+Set-Alias -Name x -Value cls
+Set-Alias -Name l -Value less
+Set-Alias -Name ex -Value explorer
+Set-Alias -Name open -Value start
+function y { wsl yazi }
+# function yz { wsl zsh -ic yy }
+function cpr { code $PROFILE }
+
+
+# Git
 function Git-Status { git status $args }
 function Git-Log { git log $args }
 function Git-LsFiles { git ls-files $args }
 function Git-AddAllFiles { git add .}
-Set-Alias -Name gitls -Value Git-LsFiles
-Set-Alias -Name gits -Value Git-Status
-Set-Alias -Name gitl -Value Git-Log
-Set-Alias -Name gitad -Value Git-AddAllFiles
+function Git-Init { git init}
+function Git-LogOneLine { git log --oneline $args }
+Set-Alias -Name gils -Value Git-LsFiles
+Set-Alias -Name gis -Value Git-Status
+Set-Alias -Name gil -Value Git-Log
+Set-Alias -Name giad -Value Git-AddAllFiles
+Set-Alias -Name giti -Value Git-Init
+Set-Alias -Name gil1 -Value Git-LogOneLine
 
 function GitCommitWithMessage {
-    param (
-        [Parameter(Mandatory=$true)]
-        [string]$CommitMessage
-    )
-    git commit -m "$CommitMessage"
+    $commitMessage = Read-Host "Commit Message"
+    git commit -m "$commitMessage"
 }
-Set-Alias -Name gitc -Value GitCommitWithMessage
+Set-Alias -Name gic -Value GitCommitWithMessage
 
 function GitCommitWithMultipleMessages {
-    param (
-        [Parameter(Mandatory=$true)]
-        [string]$FirstMessage,
-        [Parameter(Mandatory=$true)]
-        [string]$SecondMessage
-    )
-    git commit -m "$FirstMessage" -m "$SecondMessage"
+    $commitMessage = Read-Host "Commit Message"
+    $description = Read-Host "Description"
+    git commit -m "$commitMessage" -m "$description"
 }
-Set-Alias -Name gitcm -Value GitCommitWithMultipleMessages
+Set-Alias -Name gicm -Value GitCommitWithMultipleMessages
 
 function Git-Push { git push }
 function Git-PushForce { git push --force }
-Set-Alias -Name gitp -Value Git-Push
-Set-Alias -Name gitpf -Value Git-PushForce
+function Git-MergeSquash { git merge --squash }
+function Git-Switch { git switch $args }
+function Git-SwitchNewBranch { git switch -c $args }
+Set-Alias -Name gip -Value Git-Push
+Set-Alias -Name gipf -Value Git-PushForce
+Set-Alias -Name gisq -Value Git-MergeSquash
+Set-Alias -Name gisw -Value Git-Switch
+Set-Alias -Name giswc -Value Git-SwitchNewBranch
+
+function Git-Merge-SquashAndCommit {
+    $branchName = Read-Host "Branch name"
+    $commitMessage = Read-Host "Commit Message"
+    git merge --squash $branchName
+    if ($?) {
+        git commit -m "$commitMessage"
+    } else {
+        Write-Host "Слияние не удалось" -ForegroundColor Red
+    }
+}
+Set-Alias gisqc Git-Merge-SquashAndCommit
+
+function Git-Merge-SquashAndCommitAndDescription {
+    $branchName = Read-Host "Branch name"
+    $commitMessage = Read-Host "Commit Message"
+    $description = Read-Host "Description"
+    git merge --squash $branchName
+    if ($?) {
+        git commit -m "$commitMessage" -m "$description"
+    } else {
+        Write-Host "Слияние не удалось" -ForegroundColor Red
+    }
+}
+Set-Alias gisqcm Git-Merge-SquashAndCommitAndDescription
+
 
 # lf icons
 $env:LF_ICONS = "tw=:st=:ow=:dt=:di=:fi=:ln=:or=:ex=:*.c=:*.cc=:*.clj=:*.coffee=:*.cpp=:*.txt=:*.css=:*.d=:*.dart=:*.erl=:*.exs=:*.fs=:*.go=:*.h=:*.hh=:*.hpp=:*.hs=:*.html=:*.java=:*.jl=:*.js=:*.json=:*.lua=:*.md=:*.php=:*.pl=:*.pro=:*.py=:*.rb=:*.rs=:*.scala=:*.ts=:*.vim=:*.cmd=:*.ps1=:*.sh=:*.bash=:*.zsh=:*.fish=:*.tar=:*.tgz=:*.arc=:*.arj=:*.taz=:*.lha=:*.lz4=:*.lzh=:*.lzma=:*.tlz=:*.txz=:*.db=:*.tzo=:*.t7z=:*.zip=:*.z=:*.dz=:*.gz=:*.lrz=:*.lz=:*.lzo=:*.xz=:*.zst=:*.tzst=:*.bz2=:*.bz=:*.tbz=:*.tbz2=:*.tz=:*.deb=:*.rpm=:*.jar=:*.war=:*.ear=:*.sar=:*.rar=:*.alz=:*.ace=:*.zoo=:*.cpio=:*.7z=:*.rz=:*.cab=:*.wim=:*.swm=:*.dwm=:*.esd=:*.jpg=:*.jpeg=:*.mjpg=:*.mjpeg=:*.gif=:*.bmp=:*.pbm=:*.pgm=:*.ppm=:*.tga=:*.xbm=:*.xpm=:*.tif=:*.tiff=:*.png=:*.svg=:*.ico=:*.svgz=:*.mng=:*.pcx=:*.mov=:*.mpg=:*.mpeg=:*.m2v=:*.mkv=:*.webm=:*.ogm=:*.mp4=:*.m4v=:*.mp4v=:*.vob=:*.qt=:*.nuv=:*.wmv=:*.asf=:*.rm=:*.rmvb=:*.flc=:*.avi=:*.fli=:*.flv=:*.gl=:*.dl=:*.xcf=:*.xwd=:*.yuv=:*.cgm=:*.emf=:*.ogv=:*.ogx=:*.aac=:*.au=:*.flac=:*.m4a=:*.mid=:*.midi=:*.mka=:*.mp3=:*.mpc=:*.ogg=:*.ra=:*.wav=:*.oga=:*.opus=:*.spx=:*.xspf=:*.pdf=:*.nix=:*.csv=:*.xlsx=󰈛:*.dll= :*.exe=󰣆 :*.xml=󰗀:*.gitignore=󰊢:*.ini=:*.config=:images=󰉏:
 "
+
+# WezTerm - Full path
+# $prompt = ""
+# function Invoke-Starship-PreCommand {
+#     $current_location = $executionContext.SessionState.Path.CurrentLocation
+#     if ($current_location.Provider.Name -eq "FileSystem") {
+#         $ansi_escape = [char]27
+#         $provider_path = $current_location.ProviderPath -replace "\\", "/"
+#         $prompt = "$ansi_escape]7;file://${env:COMPUTERNAME}/${provider_path}$ansi_escape\"
+#     }
+#     $host.ui.Write($prompt)
+# }
+
+# WezTerm - Basename path
+$prompt = ""
+function Invoke-Starship-PreCommand {
+    $current_location = $executionContext.SessionState.Path.CurrentLocation
+    if ($current_location.Provider.Name -eq "FileSystem") {
+        $ansi_escape = [char]27
+        $current_dir = Split-Path -Leaf $current_location.ProviderPath
+        $provider_path = $current_dir -replace "\\", "/"
+        $prompt = "$ansi_escape]7;file://${env:COMPUTERNAME}/${provider_path}$ansi_escape\"
+    }
+    $host.ui.Write($prompt)
+}
