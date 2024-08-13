@@ -14,16 +14,16 @@
 			"keys": "ctrl+v"
 		},
 		{
-			"command": "find",
-			"keys": "ctrl+shift+f"
-		},
-		{
 			"command": {
 				"action": "splitPane",
 				"split": "auto",
 				"splitMode": "duplicate"
 			},
 			"keys": "alt+shift+d"
+		},
+		{
+			"command": "find",
+			"keys": "ctrl+shift+f"
 		}
 	],
 	"alwaysShowNotificationIcon": true,
@@ -37,6 +37,7 @@
 	"initialCols": 90,
 	"initialRows": 21,
 	"minimizeToNotificationArea": false,
+	"multiLinePasteWarning": false,
 	"newTabMenu": [
 		{
 			"type": "remainingProfiles"
@@ -60,7 +61,7 @@
 		},
 		"list": [
 			{
-				"backgroundImage": "D:\\Wallpaper\\FwMcjcrZPM.png",
+				"backgroundImage": null,
 				"backgroundImageOpacity": 0.5,
 				"colorScheme": "tokyonight",
 				"commandline": "\"C:\\Users\\whosowsee\\AppData\\Local\\Microsoft\\WindowsApps\\pwsh.exe\" --nologo ",
@@ -75,7 +76,7 @@
 				"hidden": false,
 				"icon": "D:\\Icons\\terminal.png",
 				"name": "PowerShell",
-				"opacity": 100,
+				"opacity": 75,
 				"padding": "8",
 				"scrollbarState": "hidden",
 				"source": "Windows.Terminal.PowershellCore",
@@ -120,6 +121,25 @@
 				"hidden": false,
 				"name": "Git Bash",
 				"source": "Git"
+			},
+			{
+				"guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+				"hidden": false,
+				"name": "Ubuntu",
+				"source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+			},
+			{
+				"guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+				"hidden": true,
+				"name": "Ubuntu",
+				"source": "Windows.Terminal.Wsl"
+			},
+			{
+				"guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+				"hidden": false,
+				"icon": "D:\\Icons\\icons8-arch-linux-512.png",
+				"name": "Arch",
+				"source": "Windows.Terminal.Wsl"
 			}
 		]
 	},
@@ -493,6 +513,29 @@
 			"yellow": "#C4A000"
 		},
 		{
+			"background": "#300A24",
+			"black": "#171421",
+			"blue": "#0037DA",
+			"brightBlack": "#767676",
+			"brightBlue": "#08458F",
+			"brightCyan": "#2C9FB3",
+			"brightGreen": "#26A269",
+			"brightPurple": "#A347BA",
+			"brightRed": "#C01C28",
+			"brightWhite": "#F2F2F2",
+			"brightYellow": "#A2734C",
+			"cursorColor": "#FFFFFF",
+			"cyan": "#3A96DD",
+			"foreground": "#FFFFFF",
+			"green": "#26A269",
+			"name": "Ubuntu-ColorScheme",
+			"purple": "#881798",
+			"red": "#C21A23",
+			"selectionBackground": "#FFFFFF",
+			"white": "#CCCCCC",
+			"yellow": "#A2734C"
+		},
+		{
 			"background": "#000000",
 			"black": "#000000",
 			"blue": "#000080",
@@ -545,6 +588,5 @@
 	"tabWidthMode": "equal",
 	"themes": [],
 	"useAcrylicInTabRow": true,
-	"windowingBehavior": "useNew",
-	"multiLinePasteWarning": false
+	"windowingBehavior": "useNew"
 }

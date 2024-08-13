@@ -4,7 +4,7 @@
 	"ft:py": {
 		"tabstospaces": true
 	},
-	"reload": false,
+	"reload": "always",
 	"saveundo": true,
 	"softwrap": true
 }

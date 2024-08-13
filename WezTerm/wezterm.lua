@@ -113,9 +113,9 @@ config.keys = {
   { key = "м",          mods = "CTRL",        action = act.PasteFrom("Clipboard") },
 
   -- Mine
-  { key = "t",          mods = "ALT",         action = act.SpawnTab("CurrentPaneDomain") },
   { key = "LeftArrow",  mods = "LEADER",      action = act.ActivateTabRelative(-1) },
   { key = "RightArrow", mods = "LEADER",      action = act.ActivateTabRelative(1) },
+  { key = "t",          mods = "ALT",         action = act.SpawnTab("CurrentPaneDomain") },
   { key = "v",          mods = "CTRL",        action = wezterm.action.PasteFrom("Clipboard") },
 
   {
@@ -131,7 +131,22 @@ config.keys = {
       end),
     }
   },
-
+  {
+    key = "l",
+    mods = "LEADER",
+    action = act.SpawnCommandInNewTab {
+      domain = "CurrentPaneDomain",
+      args = { "wsl.exe", "-d", "Arch" }
+    }
+  },
+  {
+    key = "u",
+    mods = "LEADER",
+    action = act.SpawnCommandInNewTab {
+      domain = "CurrentPaneDomain",
+      args = { "wsl.exe", "-d", "Ubuntu" }
+    }
+  },
   {
     key = "e",
     mods = "LEADER",
@@ -285,11 +300,13 @@ wezterm.on("update-status", function(window, pane)
     cmd = "wsl"
   end
 
-  local process_icon = wezterm.nerdfonts.cod_server_process -- Иконка по умолчанию
+  local process_icon = wezterm.nerdfonts.cod_server_process
   if cmd == "wsl" then
-    process_icon = wezterm.nerdfonts.cod_terminal_linux-- Иконка для WSL (Linux)
+    process_icon = wezterm.nerdfonts.cod_terminal_linux
   elseif cmd == "pwsh" then
-    process_icon = wezterm.nerdfonts.oct_terminal -- Иконка для PowerShell
+    process_icon = wezterm.nerdfonts.oct_terminal
+  elseif cmd == "ssh" then
+    process_icon = wezterm.nerdfonts.fa_github
   end
 
   -- Обновляем заголовок вкладки только если он не был установлен вручную
