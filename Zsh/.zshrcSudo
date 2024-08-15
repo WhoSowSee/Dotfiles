@@ -1,0 +1,40 @@
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
+
+
+export EDITOR=micro
+
+alias tt="eza --tree --level=3 --icons=always --no-time --no-user --no-permissions -s type"
+alias ls="eza -a --icons=always --no-time --no-user --no-permissions -s type"
+alias lls="eza --icons=always --no-time --no-user --no-permissions -s type"
+alias ld="eza -a --icons=always --no-time --no-user --no-permissions -D"
+alias lld="eza --icons=always --no-time --no-user --no-permissions -D"
+alias lf="eza -a --icons=always --no-time --no-user --no-permissions -f"
+alias llf="eza --icons=always --no-time --no-user --no-permissions -f"
+alias ll="eza -a --tree --level=1 --icons=always --no-time --no-user --no-permissions -s type"
+alias lq="eza --tree --level=1 --icons=always --no-time --no-user --no-permissions -s type"
+alias lv="eza -a --long --icons=always --no-time --no-user --no-permissions --no-filesize -s type"
+alias llv="eza --long --icons=always --no-time --no-user --no-permissions --no-filesize -s type"
+alias lg="eza -a --long --icons=always --no-time --no-user --no-permissions --no-filesize -s type --git"
+alias la="eza -a --long --icons=always -s type"
+alias lla="eza --long --icons=always -s type"
+
+alias m="micro"
+alias mf="touch"
+
+alias cc="cd .."
+alias cls="clear"
+
+alias uzsh="source /root/.zshrc"
+alias p="pacman"
+
+alias d="cd /mnt/d"
+alias c="cd /mnt/c"
+alias dot="cd /mnt/d/Dotfiles"
+alias conf="cd /home/whosowsee/.config"
+alias bin="cd /bin"
