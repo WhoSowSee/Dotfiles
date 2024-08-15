@@ -15,6 +15,7 @@ $line_break\
 $character"""
 
 add_newline = true
+command_timeout = 1000
 palette = "nord"
 
 [character]
@@ -28,13 +29,13 @@ truncation_symbol = '…/'
 truncate_to_repo = false
 
 [directory.substitutions]
-'Documents' = '󰈙'
-'Downloads' = ' '
-'Music' = ' '
-'Pictures' = ' '
+'Documents' = ' 󰈙 '
+'Downloads' = '  '
+'Music' = '  '
+'Pictures' = '  '
 '~' = '󱂵 '
-'D:' = ' '
-'C:' = ' '
+'D:' = '󱧶 '
+'C:' = '󱁿 '
 
 [git_branch]
 style = 'fg:green'
@@ -52,24 +53,24 @@ disabled = false
 symbol = ' '
 
 [golang]
-style = "blue"
+style = 'blue'
 format = '[$symbol($version)]($style)'
-symbol = "󰟓 "
+symbol = '  '
 
 [python]
-style = 'teal'
-symbol = ' '
+style = 'blue'
+symbol = '  '
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 pyenv_version_name = true
 pyenv_prefix = ''
 
 [lua]
-style = "blue"
+style = 'blue'
 format = '[$symbol]($style)'
-symbol = ' '
+symbol = '  '
 
 [package]
-style = "blue"
+style = 'blue'
 format = '[$symbol]($style)'
 symbol = '󰏗 '
 
@@ -97,7 +98,7 @@ style = 'fg:gray'
 format = '[ $duration]($style)'
 
 [palettes.nord]
-dark_blue = '#5E81AC'
+dark_blue = '#6F88C8'
 blue = '#81A1C1'
 teal = '#88C0D0'
 red = '#BF616A'
