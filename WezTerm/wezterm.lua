@@ -39,7 +39,13 @@ config.window_padding = {
   left = '0.8cell',
 }
 
+-- Command palette
+config.command_palette_rows = 16
+config.command_palette_fg_color = "#8f93a2"
+-- config.command_palette_fg_color = "rgba(143, 147, 175, 1)"
+
 if config.color_scheme == "MaterialOcean" then
+  config.command_palette_bg_color = "#10121b"
   config.colors = {
     tab_bar = {
       background = '#10121b',
@@ -117,6 +123,7 @@ config.keys = {
   { key = "RightArrow", mods = "LEADER",      action = act.ActivateTabRelative(1) },
   { key = "t",          mods = "ALT",         action = act.SpawnTab("CurrentPaneDomain") },
   { key = "v",          mods = "CTRL",        action = wezterm.action.PasteFrom("Clipboard") },
+  { key = "p",          mods = "CTRL|SHIFT",  action = act.ActivateCommandPalette },
 
   {
     key = "q",
@@ -129,6 +136,14 @@ config.keys = {
       action = wezterm.action_callback(function(window, pane, _)
         window:perform_action(act.QuitApplication, pane)
       end),
+    }
+  },
+  {
+    key = "p",
+    mods = "LEADER",
+    action = act.SpawnCommandInNewTab {
+      domain = "CurrentPaneDomain",
+      args = { "pwsh", "-l", "-NoLogo" }
     }
   },
   {
@@ -224,16 +239,16 @@ config.tab_bar_at_bottom = false
 wezterm.on("update-status", function(window, pane)
   -- Workspace name
   local stat = window:active_workspace()
-  local stat_color = "#6f88c8"
+  local stat_color = "#7e9cd8"
   -- It's a little silly to have workspace name all the time
   -- Utilize this to display LDR or current key table name
   if window:active_key_table() then
     stat = window:active_key_table()
-    stat_color = "#7dcfff"
+    stat_color = "#afd7ff"
   end
   if window:leader_is_active() then
     stat = "LDR"
-    stat_color = "#bb9af7"
+    stat_color = "#8787d7"
   end
 
   local basename = function(s)
@@ -275,9 +290,9 @@ wezterm.on("update-status", function(window, pane)
     end
 
     if cwd:match("/C:") then
-      cwd = cwd:sub(2, 2)
+      cwd = cwd:sub(2, 3)
     elseif cwd:match("/D:") then
-      cwd = cwd:sub(2, 2)
+      cwd = cwd:sub(2, 3)
     elseif cwd == "/" then
       cwd = cwd
     else
