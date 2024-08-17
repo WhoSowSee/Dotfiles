@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf sudo zsh-completions)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf sudo zsh-completions fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,6 +112,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu no
 
 export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=01;34:st=37;44:ex=01;32:*.7z=01;38;5;215:*.ace=01;31:*.alz=01;31:*.apk=01;38;5;72:*.arc=01;31:*.arj=01;31:*.bz=01;31:*.bz2=01;31:*.cab=01;31:*.cpio=01;31:*.crate=01;31:*.deb=01;31:*.drpm=01;31:*.dwm=01;31:*.dz=01;31:*.ear=01;31:*.egg=01;31:*.esd=01;31:*.gz=01;31:*.jar=01;33:*.lha=01;31:*.lrz=01;31:*.lz=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.lzo=01;31:*.pyz=01;31:*.rar=01;38;5;215:*.rpm=01;31:*.rz=01;31:*.sar=01;31:*.swm=01;31:*.t7z=01;38;5;215:*.tar=01;38;5;215:*.taz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tgz=01;31:*.tlz=01;31:*.txz=01;31:*.tz=01;31:*.tzo=01;31:*.tzst=01;31:*.udeb=01;31:*.war=01;31:*.whl=01;31:*.wim=01;31:*.xz=01;31:*.z=01;31:*.zip=01;38;5;215:*.zoo=01;31:*.zst=01;31:*.avif=01;35:*.jpg=01;38;5;104:*.ico=01;38;5;104:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;38;5;104:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=01;38;5;211:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.md=01;96:*.exe=01;31:*.go=01;38;5;68:*.txt=01;38;5;248:*.toml=01;38;5;152:*.lua=01;38;5;153:*.js=01;38;5;230:*.ts=01;38;5;230:*.jar=01;38;5;208:*.java=01;38;5;208:*.html=01;38;5;174:*.css=01;38;5;75:*.c=01;38;5;32:*.cpp=01;38;5;33:*.json=01;38;5;214:*.php=01;38;5;146:*.rs=01;38;5;167:*.sh=01;38;5;151:*.bash=01;38;5;151:*.zsh=01;38;5;151:*.ps1=01;38;5;111'
 
@@ -127,8 +128,11 @@ eval "$(zoxide init zsh)"
 eval $(thefuck --alias)
 eval $(thefuck --alias fk)
 
+# Load completions
+# autoload -Uz compinit && compinit
+
 # History
-HISTSIZE=5000
+HISTSIZE=15000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -326,6 +330,7 @@ alias uz="source /home/whosowsee/.zshrc"
 alias cz="code /home/whosowsee/.zshrc"
 
 alias mf="touch"
+alias zz="z -"
 
 alias tt="eza --tree --level=3 --icons=always --no-time --no-user --no-permissions -s type"
 alias ls="eza -a --icons=always --no-time --no-user --no-permissions -s type"
@@ -367,9 +372,15 @@ _fzf_compgen_dir() {
     fd --type=d --hidden --exclude .git . "$1"
 }
 
-show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always --icons=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
+# show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always --icons=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
+show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always --icons=always {} | head -200; else bat -n --color=always --line-range :500 {} ; fi"
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always --icons=always {} | head -200'"
+
+
+alias cfz='fzf --multi --preview="$show_file_or_dir_preview" --print0 | xargs -0 code'
+alias mfz='fzf --multi --preview="$show_file_or_dir_preview" --print0 | xargs -0 micro'
+
 
 # Advanced customization of fzf options via _fzf_comprun function
 # - The first argument to the function is the name of the command.
@@ -385,3 +396,31 @@ _fzf_comprun() {
     *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
   esac
 }
+
+function fzf_preview_setup() {
+  for cmd in "$@"; do
+    zstyle ":fzf-tab:complete:$cmd:*" fzf-preview '
+      if [ -d "$realpath" ]; then
+        eza --tree --level=2 --color=always --icons=always "$realpath" | head -200
+      else
+        bat -n --color=always --line-range :500 "$realpath"
+      fi
+    '
+  done
+}
+fzf_preview_setup cd code micro nano z zi
+
+# Simple Version
+# function fzf_preview_setup() {
+#   for cmd in "$@"; do
+#     zstyle ":fzf-tab:complete:$cmd:*" fzf-preview '
+#       if [ -d "$realpath" ]; then
+#         ls --color=always "$realpath" | head -100
+#       else
+#         bat --color=always --style=numbers --line-range :100 "$realpath"
+#       fi
+#     '
+#   done
+# }
+
+source /home/whosowsee/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh

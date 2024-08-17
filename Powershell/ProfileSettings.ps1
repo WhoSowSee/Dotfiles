@@ -5,6 +5,17 @@ Import-Module PSReadLine
 Set-PSReadLineKeyHandler -Key Tab -Function Complete
 Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
+Set-PSReadLineOption -Colors @{
+    Command = '#b5d19e'
+    Parameter = '#8f93a2'
+    String = '#7e9cd8'
+    Number = '#d27e99'
+
+    Variable = '#d6ceb0'
+    Comment  = '#434c5e'
+    Operator = '#c0a36e'
+    Keyword = "#957fb8"
+}
 $PSReadLineOptions = @{
     HistoryNoDuplicates = $true
     HistorySearchCursorMovesToEnd = $true
@@ -194,8 +205,7 @@ function Get-ChildItemWithoutFo {
 }
 Set-Alias -Name lh -Value Get-ChildItemWithoutFo
 
-
-function Close-Terminal {
+function Close-WindowsTerminal {
   $windows = Get-Process | Where-Object { $_.MainWindowTitle -match "Windows Terminal" }
   foreach ($window in $windows) {
     try {
@@ -204,8 +214,20 @@ function Close-Terminal {
   }
   Get-Process -Name "WindowsTerminal" -ErrorAction SilentlyContinue | Stop-Process -Force
 }
-Set-Alias -Name closewt -Value Close-Terminal
-Set-Alias -Name exitwt -Value Close-Terminal
+Set-Alias -Name closewt -Value Close-WindowsTerminal
+Set-Alias -Name exitwt -Value Close-WindowsTerminal
+
+function Close-WezTermTerminal {
+    $windows = Get-Process | Where-Object { $_.MainWindowTitle -match "WezTerm" }
+    foreach ($window in $windows) {
+        try {
+            $window.CloseMainWindow()
+        } catch { }
+    }
+    Get-Process -Name "wezterm-gui" -ErrorAction SilentlyContinue | Stop-Process -Force
+}
+Set-Alias -Name closewz -Value Close-WezTermTerminal
+Set-Alias -Name exitwz -Value Close-WezTermTerminal
 
 function Navigate-ToParentDirectory {
     $currentPath = Get-Location
@@ -311,78 +333,110 @@ function Remove-ItemWithAdminRights ($path) {
 Set-Alias -Name rradr -Value Remove-ItemWithAdminRights
 
 function Copy-Recursively {
+    [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true, Position=0)]
-        [string]$Source,
-        [Parameter(Mandatory=$false, Position=1)]
-        [string]$DestinationOrNewName,
-        [Parameter(Mandatory=$false, Position=2)]
-        [string]$NewName
+        [Parameter(Mandatory=$true, Position=0, ValueFromRemainingArguments=$true)]
+        [string[]]$Items,
+        [Parameter(Mandatory=$false)]
+        [switch]$f,
+        [Parameter(Mandatory=$false)]
+        [switch]$r
     )
-    if (-not (Test-Path $Source)) {
-        Write-Host "Исходный путь '$Source' не существует" -ForegroundColor Yellow
-        return
-    }
-    $sourceName = Split-Path $Source -Leaf
-    $isDirectory = Test-Path $Source -PathType Container
     $currentLocation = (Get-Location).Path
-    if ($DestinationOrNewName -and -not $NewName) {
-        if ($DestinationOrNewName.Contains([IO.Path]::DirectorySeparatorChar) -or
-            $DestinationOrNewName.Contains([IO.Path]::AltDirectorySeparatorChar)) {
-            $Destination = $DestinationOrNewName
-            $NewName = $null
+    $Sources = @()
+    $Destination = $currentLocation
+    $NewName = $null
+    $successCount = 0
+    $totalCount = 0
+    if ($r) {
+        if ($f) {
+            if ($Items.Count -ne 3) {
+                Write-Host "При использовании флагов -r и -f необходимо указать источник, директорию назначения и новое имя" -ForegroundColor Red
+                return
+            }
+            $Sources = @($Items[0])
+            $Destination = $Items[1]
+            $NewName = $Items[2]
         } else {
+            if ($Items.Count -ne 2) {
+                Write-Host "При использовании флага -r без -f необходимо указать источник и новое имя" -ForegroundColor Red
+                return
+            }
+            $Sources = @($Items[0])
+            $NewName = $Items[1]
             $Destination = $currentLocation
-            $NewName = $DestinationOrNewName
         }
-    } elseif ($DestinationOrNewName -and $NewName) {
-        $Destination = $DestinationOrNewName
+    } elseif ($f) {
+        if ($Items.Count -lt 2) {
+            Write-Host "При использовании флага -f необходимо указать источник и директорию назначения" -ForegroundColor Red
+            return
+        }
+        $Destination = $Items[-1]
+        $Sources = $Items[0..($Items.Count-2)]
     } else {
-        $Destination = $currentLocation
+        $Sources = $Items
     }
-    if ($isDirectory -and $NewName -and $NewName.Contains('.')) {
-        Write-Host "Ошибка: Нельзя скопировать директорию '$Source' и назвать её как файл '$NewName'" -ForegroundColor Red
+    if ($Sources -contains $currentLocation) {
+        Write-Host "Копирование текущей директории без флага -f запрещено" -ForegroundColor Red
         return
     }
-    if (Test-Path $Destination -PathType Leaf) {
-        Write-Host "Ошибка: Указанный путь назначения '$Destination' является файлом, а не директорией" -ForegroundColor Red
-        return
+    if (-not (Test-Path $Destination)) {
+        New-Item -Path $Destination -ItemType Directory -Force | Out-Null
     }
-    if ($NewName) {
-        $finalDestination = Join-Path $Destination $NewName
-    } else {
-        $finalDestination = Join-Path $Destination $sourceName
-    }
-    if (-not $isDirectory -and (Test-Path $Destination -PathType Container) -and -not $NewName) {
-        $finalDestination = Join-Path $Destination $sourceName
-    }
-    try {
-        if ($isDirectory) {
-            if (-not (Test-Path $finalDestination)) {
-                New-Item -Path $finalDestination -ItemType Directory -Force | Out-Null
-            }
-            Get-ChildItem -Path $Source -Force | ForEach-Object {
-                $destPath = Join-Path $finalDestination $_.Name
-                Copy-Item -Path $_.FullName -Destination $destPath -Recurse -Force
-            }
+    $destinationFullPath = (Resolve-Path $Destination).Path
+    foreach ($Source in $Sources) {
+        $totalCount++
+        if (-not (Test-Path $Source)) {
+            Write-Host "Исходный путь '$Source' не существует" -ForegroundColor Yellow
+            continue
+        }
+        $sourceName = Split-Path $Source -Leaf
+        $isDirectory = Test-Path $Source -PathType Container
+        $sourceFullPath = (Resolve-Path $Source).Path
+        if ($sourceFullPath -eq $destinationFullPath -or $destinationFullPath.StartsWith($sourceFullPath + [IO.Path]::DirectorySeparatorChar)) {
+            Write-Host "Попытка рекурсивного копирования '$Source' в '$Destination'" -ForegroundColor Red
+            continue
+        }
+        $finalDestination = if ($r) {
+            Join-Path $Destination $NewName
         } else {
-            $destDir = Split-Path $finalDestination -Parent
-            if (-not (Test-Path $destDir)) {
-                New-Item -Path $destDir -ItemType Directory -Force | Out-Null
+            Join-Path $Destination $sourceName
+        }
+        try {
+            if ($isDirectory) {
+                if ($r) {
+                    if (-not (Test-Path $finalDestination)) {
+                        New-Item -Path $finalDestination -ItemType Directory -Force | Out-Null
+                    }
+                    Copy-Item -Path "$Source\*" -Destination $finalDestination -Recurse -Force
+                } else {
+                    Copy-Item -Path $Source -Destination $Destination -Recurse -Force
+                }
+            } else {
+                $finalDestinationDir = Split-Path $finalDestination -Parent
+                if (-not (Test-Path $finalDestinationDir)) {
+                    New-Item -Path $finalDestinationDir -ItemType Directory -Force | Out-Null
+                }
+                Copy-Item -Path $Source -Destination $finalDestination -Force
             }
-            Copy-Item -Path $Source -Destination $finalDestination -Force
+            $successCount++
+        }
+        catch {
+            Write-Host "Ошибка при копировании $Source в $finalDestination $_" -ForegroundColor Red
         }
     }
-    catch {
-        Write-Host "Ошибка при копировании: $_" -ForegroundColor Red
+    if ($successCount -lt $totalCount) {
+        Write-Host "Успешно скопировано $successCount из $totalCount объектов" -ForegroundColor Yellow
     }
 }
 Set-Alias -Name cpc -Value Copy-Recursively
+
 
 function whereis ($command) {
     Get-Command -Name $command -ErrorAction SilentlyContinue |
     Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
+Set-Alias -Name which -Value whereis
 
 # Создать и перейти в директорию
 function New-DirectoryAndEnter {
@@ -731,7 +785,6 @@ function New-MultipleItems {
 }
 
 
-
 # Directories
 function d { Set-Location D:\ }
 function dev { Set-Location D:\GolangProject }
@@ -752,9 +805,21 @@ function Open-Downloads { explorer.exe shell:Downloads }
 Set-Alias -Name bin -Value Recycle-Bin
 Set-Alias -Name dw -Value Open-Downloadsd
 
-Set-Alias -Name mf -Value New-MultipleItems
 Set-Alias -Name ">" -Value New-MultipleItems
 Set-Alias -Name touch -Value New-MultipleItems
+
+function Create-NewFileOpenVsCode {
+    param(
+        [string]$FileName
+    )
+    if (-not $FileName) {
+        $FileName = Read-Host "File name"
+    }
+    > $FileName
+    code $FileName
+}
+Set-Alias -Name mf -Value Create-NewFileOpenVsCode
+
 
 function Close-PowerShell {[System.Environment]::Exit(0)}
 Set-Alias -Name close -Value Close-PowerShell
@@ -786,13 +851,15 @@ function cpr { code $PROFILE }
 function Git-Status { git status $args }
 function Git-Log { git log $args }
 function Git-LsFiles { git ls-files $args }
+function Git-AddFiles { git add $args}
 function Git-AddAllFiles { git add .}
 function Git-Init { git init}
 function Git-LogOneLine { git log --oneline $args }
 Set-Alias -Name gils -Value Git-LsFiles
 Set-Alias -Name gis -Value Git-Status
 Set-Alias -Name gil -Value Git-Log
-Set-Alias -Name giad -Value Git-AddAllFiles
+Set-Alias -Name giad -Value Git-AddFiles
+Set-Alias -Name giadd -Value Git-AddAllFiles
 Set-Alias -Name giti -Value Git-Init
 Set-Alias -Name gil1 -Value Git-LogOneLine
 
@@ -844,7 +911,6 @@ function Git-Merge-SquashAndCommitAndDescription {
     }
 }
 Set-Alias gisqcm Git-Merge-SquashAndCommitAndDescription
-
 
 # lf icons
 $env:LF_ICONS = "tw=:st=:ow=:dt=:di=:fi=:ln=:or=:ex=:*.c=:*.cc=:*.clj=:*.coffee=:*.cpp=:*.txt=:*.css=:*.d=:*.dart=:*.erl=:*.exs=:*.fs=:*.go=:*.h=:*.hh=:*.hpp=:*.hs=:*.html=:*.java=:*.jl=:*.js=:*.json=:*.lua=:*.md=:*.php=:*.pl=:*.pro=:*.py=:*.rb=:*.rs=:*.scala=:*.ts=:*.vim=:*.cmd=:*.ps1=:*.sh=:*.bash=:*.zsh=:*.fish=:*.tar=:*.tgz=:*.arc=:*.arj=:*.taz=:*.lha=:*.lz4=:*.lzh=:*.lzma=:*.tlz=:*.txz=:*.db=:*.tzo=:*.t7z=:*.zip=:*.z=:*.dz=:*.gz=:*.lrz=:*.lz=:*.lzo=:*.xz=:*.zst=:*.tzst=:*.bz2=:*.bz=:*.tbz=:*.tbz2=:*.tz=:*.deb=:*.rpm=:*.jar=:*.war=:*.ear=:*.sar=:*.rar=:*.alz=:*.ace=:*.zoo=:*.cpio=:*.7z=:*.rz=:*.cab=:*.wim=:*.swm=:*.dwm=:*.esd=:*.jpg=:*.jpeg=:*.mjpg=:*.mjpeg=:*.gif=:*.bmp=:*.pbm=:*.pgm=:*.ppm=:*.tga=:*.xbm=:*.xpm=:*.tif=:*.tiff=:*.png=:*.svg=:*.ico=:*.svgz=:*.mng=:*.pcx=:*.mov=:*.mpg=:*.mpeg=:*.m2v=:*.mkv=:*.webm=:*.ogm=:*.mp4=:*.m4v=:*.mp4v=:*.vob=:*.qt=:*.nuv=:*.wmv=:*.asf=:*.rm=:*.rmvb=:*.flc=:*.avi=:*.fli=:*.flv=:*.gl=:*.dl=:*.xcf=:*.xwd=:*.yuv=:*.cgm=:*.emf=:*.ogv=:*.ogx=:*.aac=:*.au=:*.flac=:*.m4a=:*.mid=:*.midi=:*.mka=:*.mp3=:*.mpc=:*.ogg=:*.ra=:*.wav=:*.oga=:*.opus=:*.spx=:*.xspf=:*.pdf=:*.nix=:*.csv=:*.xlsx=󰈛:*.dll= :*.exe=󰣆 :*.xml=󰗀:*.gitignore=󰊢:*.ini=:*.config=:images=󰉏:
