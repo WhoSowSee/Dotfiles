@@ -3,7 +3,7 @@ export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
+setopt RM_STAR_SILENT # Не запрашивает подтверждение при rm -rf
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -114,7 +114,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' menu no
 
-export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=01;34:st=37;44:ex=01;32:*.7z=01;38;5;215:*.ace=01;31:*.alz=01;31:*.apk=01;38;5;72:*.arc=01;31:*.arj=01;31:*.bz=01;31:*.bz2=01;31:*.cab=01;31:*.cpio=01;31:*.crate=01;31:*.deb=01;31:*.drpm=01;31:*.dwm=01;31:*.dz=01;31:*.ear=01;31:*.egg=01;31:*.esd=01;31:*.gz=01;31:*.jar=01;33:*.lha=01;31:*.lrz=01;31:*.lz=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.lzo=01;31:*.pyz=01;31:*.rar=01;38;5;215:*.rpm=01;31:*.rz=01;31:*.sar=01;31:*.swm=01;31:*.t7z=01;38;5;215:*.tar=01;38;5;215:*.taz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tgz=01;31:*.tlz=01;31:*.txz=01;31:*.tz=01;31:*.tzo=01;31:*.tzst=01;31:*.udeb=01;31:*.war=01;31:*.whl=01;31:*.wim=01;31:*.xz=01;31:*.z=01;31:*.zip=01;38;5;215:*.zoo=01;31:*.zst=01;31:*.avif=01;35:*.jpg=01;38;5;104:*.ico=01;38;5;104:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;38;5;104:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=01;38;5;211:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.md=01;96:*.exe=01;31:*.go=01;38;5;68:*.txt=01;38;5;248:*.toml=01;38;5;152:*.lua=01;38;5;153:*.js=01;38;5;230:*.ts=01;38;5;230:*.jar=01;38;5;208:*.java=01;38;5;208:*.html=01;38;5;174:*.css=01;38;5;75:*.c=01;38;5;32:*.cpp=01;38;5;33:*.json=01;38;5;214:*.php=01;38;5;146:*.rs=01;38;5;167:*.sh=01;38;5;151:*.bash=01;38;5;151:*.zsh=01;38;5;151:*.ps1=01;38;5;111'
+export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=01;34:st=37;44:ex=01;32:*.7z=01;38;5;215:*.ace=01;31:*.alz=01;31:*.apk=01;38;5;72:*.arc=01;31:*.arj=01;31:*.bz=01;31:*.bz2=01;31:*.cab=01;31:*.cpio=01;31:*.crate=01;31:*.deb=01;31:*.drpm=01;31:*.dwm=01;31:*.dz=01;31:*.ear=01;31:*.egg=01;31:*.esd=01;31:*.gz=01;31:*.jar=01;33:*.lha=01;31:*.lrz=01;31:*.lz=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.lzo=01;31:*.pyz=01;31:*.rar=01;38;5;215:*.rpm=01;31:*.rz=01;31:*.sar=01;31:*.swm=01;31:*.t7z=01;38;5;215:*.tar=01;38;5;215:*.taz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tgz=01;31:*.tlz=01;31:*.txz=01;31:*.tz=01;31:*.tzo=01;31:*.tzst=01;31:*.udeb=01;31:*.war=01;31:*.whl=01;31:*.wim=01;31:*.xz=01;31:*.z=01;31:*.zip=01;38;5;215:*.zoo=01;31:*.zst=01;31:*.avif=01;35:*.jpg=01;38;5;104:*.ico=01;38;5;104:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;38;5;104:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=01;38;5;211:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.md=01;96:*.exe=01;31:*.go=01;38;5;68:*.txt=01;38;5;248:*.toml=01;38;5;152:*.lua=01;38;5;153:*.js=01;38;5;230:*.ts=01;38;5;230:*.jar=01;38;5;208:*.java=01;38;5;208:*.html=01;38;5;174:*.css=01;38;5;75:*.c=01;38;5;32:*.cpp=01;38;5;33:*.json=01;38;5;214:*.php=01;38;5;146:*.rs=01;38;5;167:*.sh=01;38;5;151:*.bash=01;38;5;151:*.zsh=01;38;5;151:*.ps1=01;38;5;111:*.ini=01:'
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
@@ -156,11 +156,16 @@ alias bin="cd /bin"
 
 alias cc="cd .."
 alias cls="clear"
+alias x="clear"
 alias spu="sudo pacman -Syu"
 alias spi="sudo pacman -S"
+alias spino="sudo pacman -S --noconfirm"
+alias spr="sudo pacman -Rsn"
+alias sprno="sudo pacman -Rsn --noconfirm"
 alias sps="sudo pacman -Ss"
 alias pq="pacman -Q"
 alias pqq="pacman -Qq"
+alias pqs='pacman -Q | grep'
 alias p="pacman"
 
 alias la='ls -alF'
@@ -223,59 +228,95 @@ function Remove-CurrentDirectoryToRecycleBin() {
 alias rw="Remove-CurrentDirectoryToRecycleBin"
 
 copy_recursively() {
-    local source="$1"
-    local destination_or_new_name="$2"
-    local new_name="$3"
-    if [[ ! -e "$source" ]]; then
-        echo "Исходный путь '$source' не существует" >&2
-        return 1
-    fi
-    local source_name=$(basename "$source")
-    local is_directory=false
-    [[ -d "$source" ]] && is_directory=true
-    local current_location="$PWD"
-    if [[ -n "$destination_or_new_name" && -z "$new_name" ]]; then
-        if [[ "$destination_or_new_name" == */* ]]; then
-            local destination="$destination_or_new_name"
-            new_name=""
-        else
-            local destination="$current_location"
-            new_name="$destination_or_new_name"
+    local currentLocation="$(pwd)"
+    local sources=()
+    local destination="$currentLocation"
+    local newName=""
+    local finalPathSpecified=false
+    local renameSpecified=false
+
+    while (($#)); do
+        case "$1" in
+            -f)
+                finalPathSpecified=true
+                shift
+                ;;
+            -r)
+                renameSpecified=true
+                shift
+                ;;
+            *)
+                sources+=("$1")
+                shift
+                ;;
+        esac
+    done
+    if [[ $renameSpecified == true && $finalPathSpecified == true ]]; then
+        if [[ ${#sources[@]} -lt 3 ]]; then
+            echo "При использовании флагов -r и -f необходимо указать один источник, директорию назначения и новое имя" >&2
+            return 1
         fi
-    elif [[ -n "$destination_or_new_name" && -n "$new_name" ]]; then
-        local destination="$destination_or_new_name"
-    else
-        local destination="$current_location"
+        newName="${sources[-1]}"
+        destination="${sources[-2]}"
+        sources=("${sources[@]:0:${#sources[@]}-2}")
+    elif [[ $renameSpecified == true ]]; then
+        if [[ ${#sources[@]} -lt 2 ]]; then
+            echo "При использовании флага -r необходимо указать один источник и новое имя" >&2
+            return 1
+        fi
+        newName="${sources[-1]}"
+        sources=("${sources[@]:0:${#sources[@]}-1}")
+    elif [[ $finalPathSpecified == true ]]; then
+        if [[ ${#sources[@]} -lt 2 ]]; then
+            echo "При использовании флага -f необходимо указать один источник и директорию назначения" >&2
+            return 1
+        fi
+        destination="${sources[-1]}"
+        sources=("${sources[@]:0:${#sources[@]}-1}")
     fi
-    if $is_directory && [[ -n "$new_name" && "$new_name" == *.* ]]; then
-        echo "Ошибка: Нельзя скопировать директорию '$source' и назвать её как файл '$new_name'" >&2
+    if [[ $renameSpecified == true && -d "$newName" ]]; then
+        echo "Новое имя $newName не может быть путем" >&2
         return 1
     fi
-    if [[ -f "$destination" ]]; then
-        echo "Ошибка: Указанный путь назначения '$destination' является файлом, а не директорией" >&2
-        return 1
+    if [[ ! -d "$destination" ]]; then
+        mkdir -p "$destination"
     fi
-    if [[ -n "$new_name" ]]; then
-        local final_destination="$destination/$new_name"
-    else
-        local final_destination="$destination/$source_name"
-    fi
-    if ! $is_directory && [[ -d "$destination" && -z "$new_name" ]]; then
-        final_destination="$destination/$source_name"
-    fi
-    if $is_directory; then
-        mkdir -p "$final_destination"
-        cp -R "$source/." "$final_destination"
-    else
-        mkdir -p "$(dirname "$final_destination")"
-        cp "$source" "$final_destination"
-    fi
-    if [[ $? -ne 0 ]]; then
-        echo "Ошибка при копировании" >&2
-        return 1
-    fi
+    local destinationFullPath="$(realpath "$destination")"
+    for source in "${sources[@]}"; do
+        if [[ ! -e "$source" ]]; then
+            echo "Исходный путь $source не существует" >&2
+            continue
+        fi
+        local sourceName="$(basename "$source")"
+        local sourceFullPath="$(realpath "$source")"
+        local finalDestination="$destination/$sourceName"
+        if [[ $renameSpecified == true && ${#sources[@]} -eq 1 ]]; then
+            finalDestination="$destination/$newName"
+        elif [[ $renameSpecified == true ]]; then
+            finalDestination="$destination/$newName/$sourceName"
+            mkdir -p "$destination/$newName"
+        fi
+        if [[ "$sourceFullPath" == "$destinationFullPath" ]]; then
+            echo "Нельзя копировать директорию $sourceFullPath саму в себя" >&2
+            continue
+        fi
+        if [[ "$destinationFullPath" == "$sourceFullPath"* ]]; then
+            echo "Нельзя копировать родительскую директорию $sourceFullPath в её поддиректорию $destinationFullPath" >&2
+            continue
+        fi
+        if [[ -d "$source" ]]; then
+            cp -r "$source" "$finalDestination"
+        else
+            cp "$source" "$finalDestination"
+        fi
+        if [[ $? -ne 0 ]]; then
+            echo "Ошибка при копировании $source в $finalDestination" >&2
+        fi
+    done
 }
-alias cpc='copy_recursively'
+alias cpc=copy_recursively
+
+
 
 function move_items_to_parent {
     local f=0 d=0 h=0
@@ -408,19 +449,31 @@ function fzf_preview_setup() {
     '
   done
 }
-fzf_preview_setup cd code micro nano z zi
 
-# Simple Version
-# function fzf_preview_setup() {
-#   for cmd in "$@"; do
-#     zstyle ":fzf-tab:complete:$cmd:*" fzf-preview '
-#       if [ -d "$realpath" ]; then
-#         ls --color=always "$realpath" | head -100
-#       else
-#         bat --color=always --style=numbers --line-range :100 "$realpath"
-#       fi
-#     '
-#   done
-# }
+fzf_preview_setup cd code micro nano z zi cp mv copy_recursively
+
+search_and_bat() {
+    local word_search=""
+    local ignore_case=""
+    while getopts "wi" opt; do
+        case $opt in
+            w) word_search="-w" ;;
+            i) ignore_case="-i" ;;
+            *) echo "Неверный флаг: -$OPTARG" >&2; return 1 ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+    if [[ $# -lt 2 ]]; then
+        echo "Использование: search_and_bat [-w] [-i] <искомый_текст> <файл>"
+        return 1
+    fi
+    local search_term="$1"
+    local file_path="$2"
+    grep -n $word_search $ignore_case "$search_term" "$file_path" |
+    while IFS=':' read -r line_number line_content; do
+        bat --line-range "$line_number:$line_number" "$file_path"
+    done
+}
+alias sbat='search_and_bat'
 
 source /home/whosowsee/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh

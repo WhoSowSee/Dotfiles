@@ -158,6 +158,9 @@ function Open-Obsidian {
                 else {
                     $fileName = [System.IO.Path]::GetFileNameWithoutExtension($fullPath)
                     $fileExtension = [System.IO.Path]::GetExtension($fullPath)
+                    if ($fileExtension -eq ".txt") {
+                        $fileExtension = ".md"
+                    }
                     $destPath = Join-Path $vaultPath ($fileName + $fileExtension)
                     if ($c.IsPresent) {
                         if (Test-Path $destPath) {
@@ -263,10 +266,10 @@ function Rename-Items {
         $FullOldPath = Resolve-Path $OldName -ErrorAction Stop
         $FullNewPath = Join-Path (Split-Path $FullOldPath) $NewName
         if (-not (Test-Path $FullOldPath)) {
-            throw "Исходный файл не существует"
+            throw "Исходный объект не существует"
         }
         if (Test-Path $FullNewPath) {
-            throw "Файл с новым именем уже существует"
+            throw "Объект с новым именем уже существует"
         }
         $Acl = Get-Acl $FullOldPath
         Rename-Item -Path $FullOldPath -NewName $NewName -ErrorAction Stop
@@ -282,6 +285,33 @@ function Rename-Items {
     }
 }
 Set-Alias -Name rn -Value Rename-Items
+
+function Rename-CurrentDirectory {
+    param (
+        [string]$NewName
+    )
+    $CurrentDirectory = Get-Location
+    $ParentDirectory = (Get-Item $CurrentDirectory).Parent.FullName
+    if (Test-Path -Path (Join-Path $ParentDirectory $NewName)) {
+        Write-Host "Директория с именем '$NewName' уже существует" -ForegroundColor Yellow
+        return
+    }
+    if (-not (Test-Path -Path $CurrentDirectory -PathType Container)) {
+        Write-Host "Недостаточно прав для переименования директории" -ForegroundColor Red
+        return
+    }
+    Set-Location $ParentDirectory
+    try {
+        Rename-Item -Path $CurrentDirectory -NewName $NewName
+    }
+    catch {
+        Write-Host "Произошла ошибка: $_" -ForegroundColor Red
+        return
+    }
+    $NewPath = Join-Path $ParentDirectory $NewName
+    Set-Location $NewPath
+}
+Set-Alias rnc Rename-CurrentDirectory
 
 function Remove-ItemToRecycleBin {
     param (
@@ -791,6 +821,7 @@ function dev { Set-Location D:\GolangProject }
 function devl { Set-Location D:\GolangProject\GoLearning }
 function dot { Set-Location D:\Dotfiles }
 function conf { Set-Location C:\Users\whosowsee\.config }
+function vault { Set-Location D:\ObsidianVault\Zettelkasten}
 
 
 # One-liners
@@ -843,6 +874,8 @@ Set-Alias -Name l -Value less
 Set-Alias -Name ex -Value explorer
 Set-Alias -Name open -Value start
 function y { wsl yazi }
+function lw { wsl zsh -ic ls }
+function llw { wsl zsh -ic lls }
 # function yz { wsl zsh -ic yy }
 function cpr { code $PROFILE }
 
