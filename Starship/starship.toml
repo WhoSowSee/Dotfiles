@@ -41,6 +41,13 @@ format = '(white)[$symbol$branch ]($style)'
 [git_status]
 style = 'fg:green'
 format = '([$all_status$ahead_behind]($style) )'
+modified = " "
+deleted = " "
+untracked = "󰌺 "
+staged = "+ "
+renamed = "󰑕 "
+conflicted = " "
+typechanged = "󱓙 "
 
 [git_metrics]
 disabled = false

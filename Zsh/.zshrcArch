@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf sudo zsh-completions fzf-tab)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions sudo fzf fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -121,6 +121,7 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # Imports
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/goto/goto.sh
 source ~/fzf-git.sh/fzf-git.sh
 eval "$(starship init zsh)"
 source <(fzf --zsh)
@@ -132,7 +133,7 @@ eval $(thefuck --alias fk)
 # autoload -Uz compinit && compinit
 
 # History
-HISTSIZE=15000
+HISTSIZE=30000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -166,6 +167,8 @@ alias sps="sudo pacman -Ss"
 alias pq="pacman -Q"
 alias pqq="pacman -Qq"
 alias pqs='pacman -Q | grep'
+alias pplq='pacman -Qq | fzf --preview "pacman -Qil {}" --layout=reverse --bind "enter:execute(pacman -Qil {} | less)"'
+alias ppls='pacman -Slq | fzf --preview "pacman -Si {}" --layout=reverse'
 alias p="pacman"
 
 alias la='ls -alF'
@@ -234,6 +237,7 @@ copy_recursively() {
     local newName=""
     local finalPathSpecified=false
     local renameSpecified=false
+    local copyContents=false
 
     while (($#)); do
         case "$1" in
@@ -245,15 +249,23 @@ copy_recursively() {
                 renameSpecified=true
                 shift
                 ;;
+            -c)
+                copyContents=true
+                shift
+                ;;
             *)
                 sources+=("$1")
                 shift
                 ;;
         esac
     done
+    if [[ $renameSpecified == true && $copyContents == true ]]; then
+        echo "Флаги -r и -c несовместимы" >&2
+        return 1
+    fi
     if [[ $renameSpecified == true && $finalPathSpecified == true ]]; then
         if [[ ${#sources[@]} -lt 3 ]]; then
-            echo "При использовании флагов -r и -f необходимо указать один источник, директорию назначения и новое имя" >&2
+            echo "При использовании флагов -r и -f необходимо указать источник, директорию назначения и новое имя" >&2
             return 1
         fi
         newName="${sources[-1]}"
@@ -261,14 +273,14 @@ copy_recursively() {
         sources=("${sources[@]:0:${#sources[@]}-2}")
     elif [[ $renameSpecified == true ]]; then
         if [[ ${#sources[@]} -lt 2 ]]; then
-            echo "При использовании флага -r необходимо указать один источник и новое имя" >&2
+            echo "При использовании флага -r необходимо указать источник и новое имя" >&2
             return 1
         fi
         newName="${sources[-1]}"
         sources=("${sources[@]:0:${#sources[@]}-1}")
     elif [[ $finalPathSpecified == true ]]; then
         if [[ ${#sources[@]} -lt 2 ]]; then
-            echo "При использовании флага -f необходимо указать один источник и директорию назначения" >&2
+            echo "При использовании флага -f необходимо указать источник и директорию назначения" >&2
             return 1
         fi
         destination="${sources[-1]}"
@@ -287,6 +299,10 @@ copy_recursively() {
             echo "Исходный путь $source не существует" >&2
             continue
         fi
+        if [[ $copyContents == true && ! -d "$source" ]]; then
+            echo "Флаг -c используется только для директорий" >&2
+            continue
+        fi
         local sourceName="$(basename "$source")"
         local sourceFullPath="$(realpath "$source")"
         local finalDestination="$destination/$sourceName"
@@ -300,12 +316,16 @@ copy_recursively() {
             echo "Нельзя копировать директорию $sourceFullPath саму в себя" >&2
             continue
         fi
-        if [[ "$destinationFullPath" == "$sourceFullPath"* ]]; then
+        if [[ "$destinationFullPath" == "$sourceFullPath/"* ]]; then
             echo "Нельзя копировать родительскую директорию $sourceFullPath в её поддиректорию $destinationFullPath" >&2
             continue
         fi
         if [[ -d "$source" ]]; then
-            cp -r "$source" "$finalDestination"
+            if [[ $copyContents == true ]]; then
+                cp -r "$source/"* "$destination"
+            else
+                cp -r "$source" "$finalDestination"
+            fi
         else
             cp "$source" "$finalDestination"
         fi
@@ -315,7 +335,6 @@ copy_recursively() {
     done
 }
 alias cpc=copy_recursively
-
 
 
 function move_items_to_parent {
