@@ -362,7 +362,7 @@ function Remove-ItemWithAdminRights ($path) {
 }
 Set-Alias -Name rradr -Value Remove-ItemWithAdminRights
 
-function Copy-Recursively {
+function Copy-Advanced {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true, Position=0, ValueFromRemainingArguments=$true)]
@@ -370,14 +370,22 @@ function Copy-Recursively {
         [Parameter(Mandatory=$false)]
         [switch]$f,
         [Parameter(Mandatory=$false)]
-        [switch]$r
+        [switch]$r,
+        [Parameter(Mandatory=$false)]
+        [switch]$c
     )
+
     $currentLocation = (Get-Location).Path
     $Sources = @()
     $Destination = $currentLocation
     $NewName = $null
     $successCount = 0
     $totalCount = 0
+
+    if ($r -and $c) {
+        Write-Host "Нельзя одновременно использовать флаги -r и -c" -ForegroundColor Red
+        return
+    }
     if ($r) {
         if ($f) {
             if ($Items.Count -ne 3) {
@@ -439,6 +447,8 @@ function Copy-Recursively {
                         New-Item -Path $finalDestination -ItemType Directory -Force | Out-Null
                     }
                     Copy-Item -Path "$Source\*" -Destination $finalDestination -Recurse -Force
+                } elseif ($c) {
+                    Copy-Item -Path "$Source\*" -Destination $Destination -Recurse -Force
                 } else {
                     Copy-Item -Path $Source -Destination $Destination -Recurse -Force
                 }
@@ -459,8 +469,7 @@ function Copy-Recursively {
         Write-Host "Успешно скопировано $successCount из $totalCount объектов" -ForegroundColor Yellow
     }
 }
-Set-Alias -Name cpc -Value Copy-Recursively
-
+Set-Alias -Name cpc -Value Copy-Advanced
 
 function whereis ($command) {
     Get-Command -Name $command -ErrorAction SilentlyContinue |
@@ -836,6 +845,9 @@ function Open-Downloads { explorer.exe shell:Downloads }
 Set-Alias -Name bin -Value Recycle-Bin
 Set-Alias -Name dw -Value Open-Downloadsd
 
+function Open-AllFilesInCode { code $(Get-ChildItem -File ) }
+Set-Alias -Name cf -Value Open-AllFilesInCode
+
 Set-Alias -Name ">" -Value New-MultipleItems
 Set-Alias -Name touch -Value New-MultipleItems
 
@@ -880,6 +892,43 @@ function llw { wsl zsh -ic lls }
 function cpr { code $PROFILE }
 
 
+function std {
+    param(
+        [int]$time = 15,
+        [switch]$n
+    )
+    if ($n) {
+        shutdown /s /f /t 0
+    } else {
+        shutdown /s /f /t $time
+    }
+}
+
+function reb {
+    param(
+        [int]$time = 15,
+        [switch]$n
+    )
+    if ($n) {
+        shutdown /r /f /t 0
+    } else {
+        shutdown /r /f /t $time
+    }
+}
+
+function bios {
+    param(
+        [int]$time = 15,
+        [switch]$n
+    )
+    if ($n) {
+        sudo shutdown /r /fw /f /t 0
+    } else {
+        sudo shutdown /r /fw /f /t $time
+    }
+}
+
+function cstd { shutdown /a }
 # Git
 function Git-Status { git status $args }
 function Git-Log { git log $args }
@@ -946,7 +995,7 @@ function Git-Merge-SquashAndCommitAndDescription {
 Set-Alias gisqcm Git-Merge-SquashAndCommitAndDescription
 
 # lf icons
-$env:LF_ICONS = "tw=:st=:ow=:dt=:di=:fi=:ln=:or=:ex=:*.c=:*.cc=:*.clj=:*.coffee=:*.cpp=:*.txt=:*.css=:*.d=:*.dart=:*.erl=:*.exs=:*.fs=:*.go=:*.h=:*.hh=:*.hpp=:*.hs=:*.html=:*.java=:*.jl=:*.js=:*.json=:*.lua=:*.md=:*.php=:*.pl=:*.pro=:*.py=:*.rb=:*.rs=:*.scala=:*.ts=:*.vim=:*.cmd=:*.ps1=:*.sh=:*.bash=:*.zsh=:*.fish=:*.tar=:*.tgz=:*.arc=:*.arj=:*.taz=:*.lha=:*.lz4=:*.lzh=:*.lzma=:*.tlz=:*.txz=:*.db=:*.tzo=:*.t7z=:*.zip=:*.z=:*.dz=:*.gz=:*.lrz=:*.lz=:*.lzo=:*.xz=:*.zst=:*.tzst=:*.bz2=:*.bz=:*.tbz=:*.tbz2=:*.tz=:*.deb=:*.rpm=:*.jar=:*.war=:*.ear=:*.sar=:*.rar=:*.alz=:*.ace=:*.zoo=:*.cpio=:*.7z=:*.rz=:*.cab=:*.wim=:*.swm=:*.dwm=:*.esd=:*.jpg=:*.jpeg=:*.mjpg=:*.mjpeg=:*.gif=:*.bmp=:*.pbm=:*.pgm=:*.ppm=:*.tga=:*.xbm=:*.xpm=:*.tif=:*.tiff=:*.png=:*.svg=:*.ico=:*.svgz=:*.mng=:*.pcx=:*.mov=:*.mpg=:*.mpeg=:*.m2v=:*.mkv=:*.webm=:*.ogm=:*.mp4=:*.m4v=:*.mp4v=:*.vob=:*.qt=:*.nuv=:*.wmv=:*.asf=:*.rm=:*.rmvb=:*.flc=:*.avi=:*.fli=:*.flv=:*.gl=:*.dl=:*.xcf=:*.xwd=:*.yuv=:*.cgm=:*.emf=:*.ogv=:*.ogx=:*.aac=:*.au=:*.flac=:*.m4a=:*.mid=:*.midi=:*.mka=:*.mp3=:*.mpc=:*.ogg=:*.ra=:*.wav=:*.oga=:*.opus=:*.spx=:*.xspf=:*.pdf=:*.nix=:*.csv=:*.xlsx=󰈛:*.dll= :*.exe=󰣆 :*.xml=󰗀:*.gitignore=󰊢:*.ini=:*.config=:images=󰉏:
+$env:LF_ICONS = "tw=:st=:ow=:dt=:di=:fi=:ln=:or=:ex=:*.c=:*.cc=:*.clj=:*.coffee=:*.cpp=:*.txt=:*.css=:*.d=:*.dart=:*.erl=:*.exs=:*.fs=:*.go=:*.h=:*.hh=:*.hpp=:*.hs=:*.html=:*.java=:*.jl=:*.js=:*.json=:*.lua=:*.md=:*.php=:*.pl=:*.pro=:*.py=:*.rb=:*.rs=:*.scala=:*.ts=:*.vim=:*.cmd=:*.ps1=:*.sh=:*.bash=:*.zsh=:*.fish=:*.tar=:*.tgz=:*.arc=:*.arj=:*.taz=:*.lha=:*.lz4=:*.lzh=:*.lzma=:*.tlz=:*.txz=:*.db=:*.tzo=:*.t7z=:*.zip=:*.z=:*.dz=:*.gz=:*.lrz=:*.lz=:*.lzo=:*.xz=:*.zst=:*.tzst=:*.bz2=:*.bz=:*.tbz=:*.tbz2=:*.tz=:*.deb=:*.rpm=:*.jar=:*.war=:*.ear=:*.sar=:*.rar=:*.alz=:*.ace=:*.zoo=:*.cpio=:*.7z=:*.rz=:*.cab=:*.wim=:*.swm=:*.dwm=:*.esd=:*.jpg=:*.jpeg=:*.mjpg=:*.mjpeg=:*.gif=󰵸:*.bmp=:*.pbm=:*.pgm=:*.ppm=:*.tga=:*.xbm=:*.xpm=:*.tif=:*.tiff=:*.png=:*.svg=󰜡:*.ico=:*.svgz=:*.mng=:*.pcx=:*.mov=:*.mpg=:*.mpeg=:*.m2v=:*.mkv=:*.webm=:*.ogm=:*.mp4=:*.m4v=:*.mp4v=:*.vob=:*.qt=:*.nuv=:*.wmv=:*.asf=:*.rm=:*.rmvb=:*.flc=:*.avi=:*.fli=:*.flv=:*.gl=:*.dl=:*.xcf=:*.xwd=:*.yuv=:*.cgm=:*.emf=:*.ogv=:*.ogx=:*.aac=:*.au=:*.flac=:*.m4a=:*.mid=:*.midi=:*.mka=:*.mp3=:*.mpc=:*.ogg=:*.ra=:*.wav=:*.oga=:*.opus=:*.spx=:*.xspf=:*.pdf=:*.nix=:*.csv=:*.xlsx=󰈛:*.dll= :*.exe=:*.xml=󰗀:*.gitignore=󰊢:*.ini=:*.config=:images=󰉏:*.iso=:*.apk=:*.kt=:*.ps1=:*.zsh=:*.sh=:*.sql=:*.toml=:
 "
 
 # WezTerm - Full path
