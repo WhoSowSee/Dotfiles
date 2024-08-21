@@ -1,0 +1,468 @@
+{
+  "Items": [
+    {
+      "Query": "pm install Quick Uninstaller",
+      "ExecutedDateTime": "2024-07-23T14:40:59.8482128+03:00"
+    },
+    {
+      "Query": "deel",
+      "ExecutedDateTime": "2024-07-23T15:58:22.649741+03:00"
+    },
+    {
+      "Query": "dee",
+      "ExecutedDateTime": "2024-07-23T19:07:36.2851217+03:00"
+    },
+    {
+      "Query": "eve",
+      "ExecutedDateTime": "2024-07-23T23:12:48.9912009+03:00"
+    },
+    {
+      "Query": "di",
+      "ExecutedDateTime": "2024-07-25T00:01:28.215649+03:00"
+    },
+    {
+      "Query": "Steam",
+      "ExecutedDateTime": "2024-07-25T00:14:54.2387455+03:00"
+    },
+    {
+      "Query": "settin",
+      "ExecutedDateTime": "2024-07-25T01:45:04.2432081+03:00"
+    },
+    {
+      "Query": "\u0422\u0435\u0440\u043C\u0438\u043D\u0430\u043B",
+      "ExecutedDateTime": "2024-07-25T01:53:11.1511515+03:00"
+    },
+    {
+      "Query": "ds",
+      "ExecutedDateTime": "2024-07-25T13:59:19.7309207+03:00"
+    },
+    {
+      "Query": "settings",
+      "ExecutedDateTime": "2024-07-25T13:59:52.986973+03:00"
+    },
+    {
+      "Query": "lc",
+      "ExecutedDateTime": "2024-07-25T20:09:40.8230283+03:00"
+    },
+    {
+      "Query": "Discord",
+      "ExecutedDateTime": "2024-07-25T20:09:47.8398084+03:00"
+    },
+    {
+      "Query": "dl",
+      "ExecutedDateTime": "2024-07-26T00:27:09.9298745+03:00"
+    },
+    {
+      "Query": "\u0422\u0435\u0440\u043C\u0438\u043D\u0430\u043B",
+      "ExecutedDateTime": "2024-07-29T01:02:38.9600033+03:00"
+    },
+    {
+      "Query": "Obs",
+      "ExecutedDateTime": "2024-07-31T15:03:58.90002+03:00"
+    },
+    {
+      "Query": "\u0422\u0435\u0440\u043C\u0438\u043D\u0430\u043B",
+      "ExecutedDateTime": "2024-07-31T23:08:55.4221741+03:00"
+    },
+    {
+      "Query": "\u0442\u043C",
+      "ExecutedDateTime": "2024-08-04T16:13:17.1813448+03:00"
+    },
+    {
+      "Query": "Syn",
+      "ExecutedDateTime": "2024-08-04T21:32:43.1559506+03:00"
+    },
+    {
+      "Query": "ds",
+      "ExecutedDateTime": "2024-08-04T23:08:17.7933812+03:00"
+    },
+    {
+      "Query": "we",
+      "ExecutedDateTime": "2024-08-06T12:55:53.6238638+03:00"
+    },
+    {
+      "Query": "wz",
+      "ExecutedDateTime": "2024-08-06T15:06:54.0056931+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-09T19:36:51.9899837+03:00"
+    },
+    {
+      "Query": "Discord",
+      "ExecutedDateTime": "2024-08-09T20:12:31.3218283+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-13T15:36:05.7068649+03:00"
+    },
+    {
+      "Query": "pm install Plugin Runner",
+      "ExecutedDateTime": "2024-08-13T15:36:35.731296+03:00"
+    },
+    {
+      "Query": "pm",
+      "ExecutedDateTime": "2024-08-13T15:39:30.0423686+03:00"
+    },
+    {
+      "Query": "\u003E ex",
+      "ExecutedDateTime": "2024-08-13T15:40:56.2146166+03:00"
+    },
+    {
+      "Query": "pm install Win Hotkey",
+      "ExecutedDateTime": "2024-08-13T15:43:40.364537+03:00"
+    },
+    {
+      "Query": "sett",
+      "ExecutedDateTime": "2024-08-13T15:43:53.0205727+03:00"
+    },
+    {
+      "Query": "pm install Obsidian Notes",
+      "ExecutedDateTime": "2024-08-13T15:45:06.8367149+03:00"
+    },
+    {
+      "Query": "pm install Shortcuts",
+      "ExecutedDateTime": "2024-08-13T15:45:37.2323489+03:00"
+    },
+    {
+      "Query": "pm install VS Code Workspaces",
+      "ExecutedDateTime": "2024-08-13T15:47:53.7041542+03:00"
+    },
+    {
+      "Query": "q add",
+      "ExecutedDateTime": "2024-08-13T15:48:33.8294548+03:00"
+    },
+    {
+      "Query": "q",
+      "ExecutedDateTime": "2024-08-13T15:48:40.1857806+03:00"
+    },
+    {
+      "Query": "q add",
+      "ExecutedDateTime": "2024-08-13T15:48:41.9277948+03:00"
+    },
+    {
+      "Query": "\u043D\u0430",
+      "ExecutedDateTime": "2024-08-13T15:53:54.3431367+03:00"
+    },
+    {
+      "Query": "pm update Calculator",
+      "ExecutedDateTime": "2024-08-13T15:55:10.6070154+03:00"
+    },
+    {
+      "Query": "settings",
+      "ExecutedDateTime": "2024-08-13T15:55:25.1686884+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-13T15:56:48.0260341+03:00"
+    },
+    {
+      "Query": "open",
+      "ExecutedDateTime": "2024-08-13T15:57:33.2165109+03:00"
+    },
+    {
+      "Query": "pm install Shortcuts",
+      "ExecutedDateTime": "2024-08-13T16:04:05.0219975+03:00"
+    },
+    {
+      "Query": "q",
+      "ExecutedDateTime": "2024-08-13T16:04:28.9610884+03:00"
+    },
+    {
+      "Query": "q add",
+      "ExecutedDateTime": "2024-08-13T16:04:34.8607656+03:00"
+    },
+    {
+      "Query": "q",
+      "ExecutedDateTime": "2024-08-13T16:12:57.7843952+03:00"
+    },
+    {
+      "Query": "q add",
+      "ExecutedDateTime": "2024-08-13T16:12:59.9782738+03:00"
+    },
+    {
+      "Query": "q",
+      "ExecutedDateTime": "2024-08-13T16:13:04.8369473+03:00"
+    },
+    {
+      "Query": "q list",
+      "ExecutedDateTime": "2024-08-13T16:13:06.4985322+03:00"
+    },
+    {
+      "Query": "q",
+      "ExecutedDateTime": "2024-08-13T16:13:16.0022069+03:00"
+    },
+    {
+      "Query": "q settings",
+      "ExecutedDateTime": "2024-08-13T16:13:23.3650385+03:00"
+    },
+    {
+      "Query": "q",
+      "ExecutedDateTime": "2024-08-13T16:13:29.1207795+03:00"
+    },
+    {
+      "Query": "q config",
+      "ExecutedDateTime": "2024-08-13T16:13:31.760896+03:00"
+    },
+    {
+      "Query": "q",
+      "ExecutedDateTime": "2024-08-13T16:14:50.5053985+03:00"
+    },
+    {
+      "Query": "q help",
+      "ExecutedDateTime": "2024-08-13T16:14:52.0231717+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-13T23:14:00.7666695+03:00"
+    },
+    {
+      "Query": "pm install Colors",
+      "ExecutedDateTime": "2024-08-13T23:20:11.7981619+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-15T19:53:30.9485512+03:00"
+    },
+    {
+      "Query": "\u0422\u0435\u0440\u043C\u0438\u043D\u0430\u043B",
+      "ExecutedDateTime": "2024-08-15T22:17:16.1235786+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-16T19:30:26.441555+03:00"
+    },
+    {
+      "Query": "Discord",
+      "ExecutedDateTime": "2024-08-16T20:05:24.9860512+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-17T17:55:53.7405511+03:00"
+    },
+    {
+      "Query": "7 % 3",
+      "ExecutedDateTime": "2024-08-18T17:22:19.098272+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-18T17:28:50.3035709+03:00"
+    },
+    {
+      "Query": "Vim",
+      "ExecutedDateTime": "2024-08-18T22:23:16.8777951+03:00"
+    },
+    {
+      "Query": "pm install QuickLook",
+      "ExecutedDateTime": "2024-08-19T23:20:51.9415421+03:00"
+    },
+    {
+      "Query": "pm install URL Shortener",
+      "ExecutedDateTime": "2024-08-19T23:22:43.3927837+03:00"
+    },
+    {
+      "Query": "us https://wiki.archlinux.org/title/Pacman_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)/Tips_and_tricks_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)",
+      "ExecutedDateTime": "2024-08-19T23:23:08.7827327+03:00"
+    },
+    {
+      "Query": "sett",
+      "ExecutedDateTime": "2024-08-20T00:27:56.443141+03:00"
+    },
+    {
+      "Query": "exitt",
+      "ExecutedDateTime": "2024-08-20T00:39:51.4707288+03:00"
+    },
+    {
+      "Query": "sett",
+      "ExecutedDateTime": "2024-08-20T00:48:27.4922484+03:00"
+    },
+    {
+      "Query": "set",
+      "ExecutedDateTime": "2024-08-20T00:49:21.0879429+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-20T00:54:20.6084665+03:00"
+    },
+    {
+      "Query": "set",
+      "ExecutedDateTime": "2024-08-20T00:54:28.3087466+03:00"
+    },
+    {
+      "Query": "C:\\Users\\w",
+      "ExecutedDateTime": "2024-08-20T01:27:00.5387271+03:00"
+    },
+    {
+      "Query": "C:\\Users\\whosowsee\\",
+      "ExecutedDateTime": "2024-08-20T01:27:07.7171251+03:00"
+    },
+    {
+      "Query": "C:\\Users\\whosowsee\\.con",
+      "ExecutedDateTime": "2024-08-20T01:27:17.7631496+03:00"
+    },
+    {
+      "Query": "seti",
+      "ExecutedDateTime": "2024-08-20T01:27:53.1457787+03:00"
+    },
+    {
+      "Query": "\u003E ex .",
+      "ExecutedDateTime": "2024-08-20T01:29:39.9830304+03:00"
+    },
+    {
+      "Query": "pm install QuickLook",
+      "ExecutedDateTime": "2024-08-20T01:31:03.6417975+03:00"
+    },
+    {
+      "Query": "sett",
+      "ExecutedDateTime": "2024-08-20T01:31:25.2350556+03:00"
+    },
+    {
+      "Query": "se",
+      "ExecutedDateTime": "2024-08-20T01:35:23.0221244+03:00"
+    },
+    {
+      "Query": "sett",
+      "ExecutedDateTime": "2024-08-20T01:38:02.1391582+03:00"
+    },
+    {
+      "Query": "we",
+      "ExecutedDateTime": "2024-08-20T01:42:00.7046131+03:00"
+    },
+    {
+      "Query": "set",
+      "ExecutedDateTime": "2024-08-20T01:43:14.1762345+03:00"
+    },
+    {
+      "Query": "pm install QuickLook",
+      "ExecutedDateTime": "2024-08-20T01:43:56.5732091+03:00"
+    },
+    {
+      "Query": "set",
+      "ExecutedDateTime": "2024-08-20T01:44:11.3801595+03:00"
+    },
+    {
+      "Query": "setti",
+      "ExecutedDateTime": "2024-08-20T17:27:06.9392017+03:00"
+    },
+    {
+      "Query": "settin",
+      "ExecutedDateTime": "2024-08-20T17:32:06.2293464+03:00"
+    },
+    {
+      "Query": "setti",
+      "ExecutedDateTime": "2024-08-20T17:41:12.9215322+03:00"
+    },
+    {
+      "Query": "set",
+      "ExecutedDateTime": "2024-08-20T17:43:33.9989178+03:00"
+    },
+    {
+      "Query": "seti",
+      "ExecutedDateTime": "2024-08-20T17:48:55.1481859+03:00"
+    },
+    {
+      "Query": "settings",
+      "ExecutedDateTime": "2024-08-20T18:06:25.9086714+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-20T18:07:10.3917594+03:00"
+    },
+    {
+      "Query": "wez",
+      "ExecutedDateTime": "2024-08-20T18:07:33.1841454+03:00"
+    },
+    {
+      "Query": "yan test",
+      "ExecutedDateTime": "2024-08-20T18:18:04.0945536+03:00"
+    },
+    {
+      "Query": "yan",
+      "ExecutedDateTime": "2024-08-20T18:18:12.4631193+03:00"
+    },
+    {
+      "Query": "yan test",
+      "ExecutedDateTime": "2024-08-20T18:18:28.4500897+03:00"
+    },
+    {
+      "Query": "yan testi",
+      "ExecutedDateTime": "2024-08-20T18:18:35.491261+03:00"
+    },
+    {
+      "Query": "yan wezterm",
+      "ExecutedDateTime": "2024-08-20T18:18:49.3684155+03:00"
+    },
+    {
+      "Query": "wezterm",
+      "ExecutedDateTime": "2024-08-20T18:19:05.6001385+03:00"
+    },
+    {
+      "Query": "settings",
+      "ExecutedDateTime": "2024-08-20T18:27:55.8981415+03:00"
+    },
+    {
+      "Query": "se",
+      "ExecutedDateTime": "2024-08-20T18:47:08.3263884+03:00"
+    },
+    {
+      "Query": "settigs",
+      "ExecutedDateTime": "2024-08-20T18:50:29.637239+03:00"
+    },
+    {
+      "Query": "se",
+      "ExecutedDateTime": "2024-08-20T18:56:46.2404332+03:00"
+    },
+    {
+      "Query": "settings",
+      "ExecutedDateTime": "2024-08-20T19:15:11.2672636+03:00"
+    },
+    {
+      "Query": "setti",
+      "ExecutedDateTime": "2024-08-20T20:35:29.7289039+03:00"
+    },
+    {
+      "Query": "Flow Launcher",
+      "ExecutedDateTime": "2024-08-20T21:13:46.5531403+03:00"
+    },
+    {
+      "Query": "setti",
+      "ExecutedDateTime": "2024-08-20T21:17:07.7225781+03:00"
+    },
+    {
+      "Query": "Discord",
+      "ExecutedDateTime": "2024-08-20T21:41:21.3552721+03:00"
+    },
+    {
+      "Query": "VMwa",
+      "ExecutedDateTime": "2024-08-21T01:47:13.8727307+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-21T15:22:50.1887982+03:00"
+    },
+    {
+      "Query": "Discord",
+      "ExecutedDateTime": "2024-08-21T15:59:48.4410395+03:00"
+    },
+    {
+      "Query": "Arc",
+      "ExecutedDateTime": "2024-08-21T16:00:05.6867219+03:00"
+    },
+    {
+      "Query": "pm install Youtube Downloader",
+      "ExecutedDateTime": "2024-08-21T19:55:10.1769248+03:00"
+    },
+    {
+      "Query": "Discord",
+      "ExecutedDateTime": "2024-08-21T20:08:35.0959642+03:00"
+    },
+    {
+      "Query": "WezTerm",
+      "ExecutedDateTime": "2024-08-21T21:56:32.8317762+03:00"
+    },
+    {
+      "Query": "reboot",
+      "ExecutedDateTime": "2024-08-21T22:59:15.8023692+03:00"
+    }
+  ]
+}

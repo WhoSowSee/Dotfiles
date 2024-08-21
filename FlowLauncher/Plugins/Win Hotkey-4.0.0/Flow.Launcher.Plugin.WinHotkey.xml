@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Flow.Launcher.Plugin.WinHotkey</name>
+    </assembly>
+    <members>
+        <member name="T:Flow.Launcher.Plugin.WinHotkey.WinHotkeySettings">
+            <summary>
+            WinHotkeySettings
+            </summary>
+        </member>
+        <member name="M:Flow.Launcher.Plugin.WinHotkey.WinHotkeySettings.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

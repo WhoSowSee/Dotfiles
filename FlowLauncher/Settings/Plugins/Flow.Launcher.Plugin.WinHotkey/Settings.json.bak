@@ -1,0 +1,6 @@
+{
+  "DoubleTapTimeout": "500",
+  "DoubleTap": false,
+  "InterrModifier": "LWin",
+  "Timeout": "200"
+}
