@@ -372,21 +372,35 @@ function Copy-Advanced {
         [Parameter(Mandatory=$false)]
         [switch]$r,
         [Parameter(Mandatory=$false)]
-        [switch]$c
+        [switch]$c,
+        [Parameter(Mandatory=$false)]
+        [switch]$j
     )
 
     $currentLocation = (Get-Location).Path
     $Sources = @()
     $Destination = $currentLocation
     $NewName = $null
+    $BasePath = $null
     $successCount = 0
     $totalCount = 0
-
     if ($r -and $c) {
         Write-Host "Нельзя одновременно использовать флаги -r и -c" -ForegroundColor Red
         return
     }
-    if ($r) {
+    if ($j) {
+        if ($Items.Count -lt 2) {
+            Write-Host "При использовании флага -j необходимо указать базовый путь и источник" -ForegroundColor Red
+            return
+        }
+        $BasePath = $Items[0]
+        $Sources = $Items[1..($Items.Count-1)]
+        if ($f) {
+            $Destination = $Sources[-1]
+            $Sources = $Sources[0..($Sources.Count-2)]
+        }
+    }
+    elseif ($r) {
         if ($f) {
             if ($Items.Count -ne 3) {
                 Write-Host "При использовании флагов -r и -f необходимо указать источник, директорию назначения и новое имя" -ForegroundColor Red
@@ -404,7 +418,8 @@ function Copy-Advanced {
             $NewName = $Items[1]
             $Destination = $currentLocation
         }
-    } elseif ($f) {
+    }
+    elseif ($f) {
         if ($Items.Count -lt 2) {
             Write-Host "При использовании флага -f необходимо указать источник и директорию назначения" -ForegroundColor Red
             return
@@ -413,6 +428,14 @@ function Copy-Advanced {
         $Sources = $Items[0..($Items.Count-2)]
     } else {
         $Sources = $Items
+    }
+    if ($BasePath) {
+        if (-not (Test-Path $BasePath)) {
+            Write-Host "Базовый путь '$BasePath' не существует" -ForegroundColor Red
+            return
+        }
+        $BasePath = (Resolve-Path $BasePath).Path
+        $Sources = $Sources | ForEach-Object { Join-Path $BasePath $_ }
     }
     if ($Sources -contains $currentLocation) {
         Write-Host "Копирование текущей директории без флага -f запрещено" -ForegroundColor Red
